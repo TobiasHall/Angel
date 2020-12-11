@@ -30,12 +30,12 @@
                 </StackPanel>
 
                     <WrapPanel Grid.Column="1" Margin="20" HorizontalAlignment="Center">
-                        <Button Content="Nytt spel" Style="{StaticResource RoundButtonTemplate}"></Button>
-                        <Button Content="Huvudmenyn" Style="{StaticResource RoundButtonTemplate}"></Button>
+                        <Button Content="Nytt spel" Style="{StaticResource RoundButtonTemplate}" Command="{Binding NewGameCommand}"></Button>
+                        <Button Content="Huvudmenyn" Style="{StaticResource RoundButtonTemplate}" Command="{Binding MainMenuCommand}"></Button>
                     </WrapPanel>
                 
                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                    <Label HorizontalAlignment="Center" Content="{Binding player.Name, FallbackValue=Fräddrik}" FontSize="38"></Label>
+                    <Label HorizontalAlignment="Center" Content="{Binding player.Nickname, FallbackValue=Fräddrik}" FontSize="38"></Label>
                     <Label HorizontalAlignment="Center" Content="{Binding GameTimer, FallbackValue=00:29:59}" FontSize="28"></Label>
                     <Label HorizontalAlignment="Center" Content="Fiskar: 0" FontSize="28"></Label>
                     <Label HorizontalAlignment="Center" Content="Total vikt: 0" FontSize="28"></Label>

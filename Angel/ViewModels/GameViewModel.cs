@@ -22,7 +22,9 @@ namespace Angel
 
         public GameViewModel(Player player)
         {
-            player.Nickname = "Fräddrik1";
+            MainMenuCommand = new RelayCommand(GetMainMenuView, CanExecute);
+            NewGameCommand = new RelayCommand(GetGameView, CanExecute);
+
             this.player = player;
             StartNewGame();
             StartCountdown();
@@ -59,6 +61,11 @@ namespace Angel
                 //Metod för att sluta spelet
             }
 
+        }
+
+        private void GetGameView(object parameter)
+        {            
+            Main.Content = new GameView(player);
         }
     }
 }

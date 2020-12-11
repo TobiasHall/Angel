@@ -9,7 +9,6 @@ namespace Angel
     {
         #region Commands
         public ICommand ChoosePlayerCommand { get; set; }
-        public ICommand ExitGameCommand { get; set; }
         #endregion
         public MainMenuViewModel()
         {
@@ -41,9 +40,6 @@ namespace Angel
         //    }
         //}
 
-        private void CloseApplication(object parameter)
-        {
-            Main.Close();
-        }
+        
     }
 }

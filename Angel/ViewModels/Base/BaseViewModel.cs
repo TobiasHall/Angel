@@ -13,9 +13,18 @@ namespace Angel
         public MainWindow Main = (MainWindow)Application.Current.MainWindow;
         #region Commands
         public ICommand MainMenuCommand { get; set; }
-        public ICommand ViewTopHighscoreCommand { get; set; }
-        public ICommand ViewTopFrequentPlayersCommand { get; set; }
-        public ICommand MuteCommand { get; set; }
+        public ICommand NewGameCommand { get; set; }
+        public ICommand ExitGameCommand { get; set; }
+
+
+
+
+
+
+
+        //public ICommand ViewTopHighscoreCommand { get; set; }
+        //public ICommand ViewTopFrequentPlayersCommand { get; set; }
+        //public ICommand MuteCommand { get; set; }
         #endregion
 
         #region NavigationMethods
@@ -23,10 +32,11 @@ namespace Angel
         {
             Main.Content = new MainMenuView();
         }
-        //public void GetGameView(object parameter)
-        //{
-        //    Main.Content = new GameView(Player player);
-        //}
+        public void CloseApplication(object parameter)
+        {
+            Main.Close();
+        }
+        
 
         //public void GetHighscorePage(object parameter)
         //{
