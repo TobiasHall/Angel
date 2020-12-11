@@ -1,0 +1,317 @@
+﻿<UserControl x:Class="Angel.GameView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Angel"
+             mc:Ignorable="d" 
+             d:DesignHeight="740" d:DesignWidth="1000"
+             Background="{DynamicResource BackgroundIMG}">
+    <Grid>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="380"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+
+
+            <Grid Grid.Row="0" Name="TopGrid" AllowDrop="True" Drop="PanelDrop">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" VerticalAlignment="center">
+                    <Button Margin="5" Content="Tursnus" Style="{StaticResource RoundButtonTemplate}"></Button>
+                    <Button Margin="5" Content="Ta en kaffe" Style="{StaticResource RoundButtonTemplate}"></Button>
+                </StackPanel>
+
+                    <WrapPanel Grid.Column="1" Margin="20" HorizontalAlignment="Center">
+                        <Button Content="Nytt spel" Style="{StaticResource RoundButtonTemplate}"></Button>
+                        <Button Content="Huvudmenyn" Style="{StaticResource RoundButtonTemplate}"></Button>
+                    </WrapPanel>
+                
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <Label HorizontalAlignment="Center" Content="{Binding player.Name, FallbackValue=Fräddrik}" FontSize="38"></Label>
+                    <Label HorizontalAlignment="Center" Content="{Binding GameTimer, FallbackValue=00:29:59}" FontSize="28"></Label>
+                    <Label HorizontalAlignment="Center" Content="Fiskar: 0" FontSize="28"></Label>
+                    <Label HorizontalAlignment="Center" Content="Total vikt: 0" FontSize="28"></Label>
+                </StackPanel>
+
+
+                
+
+                <WrapPanel Grid.Column="1" VerticalAlignment="Bottom">                        
+                <Image Margin="0,0,400,0" Height="100" Source="/Resources/Images/collection-bag.png"></Image>
+                        <Rectangle Uid="100" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding ImageUri2[0]}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle Uid="101" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding ImageUri2[1]}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle Uid="102" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding ImageUri2[2]}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle Uid="103" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding ImageUri2[3]}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle Uid="104" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding ImageUri2[4]}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle Uid="105" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding ImageUri2[5]}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle Uid="106" Width="60" Height="50" Margin="6" MouseDown="Rectangle_MouseDown">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding ImageUri2[6]}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle Uid="107" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding ImageUri2[7]}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </WrapPanel>
+                
+                
+
+
+                <StackPanel VerticalAlignment="Center" Grid.Column="2">
+                    <Label HorizontalAlignment="Left" Content="Öring: 0" FontSize="28"></Label>
+                    <Label HorizontalAlignment="Left" Content="Röding: 0" FontSize="28"></Label>
+                    <Label HorizontalAlignment="Left" Content="Abborre: 0" FontSize="28"></Label>
+                    <Label HorizontalAlignment="Left" Content="Gädda: 0" FontSize="28"></Label>
+                    <Label HorizontalAlignment="Left" Content="Mört: 0" FontSize="28"></Label>
+                </StackPanel>
+
+            </Grid>
+
+            <StackPanel Grid.Row="1">
+                <WrapPanel HorizontalAlignment="Center">
+                    <Grid AllowDrop="True" Uid="0" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="1" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="2" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="3" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="4" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="5" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="6" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="7" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="8" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="9" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                </WrapPanel>
+                <WrapPanel HorizontalAlignment="Center">
+                    <Grid AllowDrop="True" Uid="10" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="11" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="12" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="13" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="14" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="15" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="16" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="17" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="18" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="19" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                </WrapPanel>
+                <WrapPanel HorizontalAlignment="Center">
+                    <Grid AllowDrop="True" Uid="20" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="21" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="22" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="23" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="24" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="25" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="26" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="27" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="28" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="29" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                </WrapPanel>
+                <WrapPanel HorizontalAlignment="Center">
+                    <Grid AllowDrop="True" Uid="30" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="31" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="32" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="33" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="34" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="35" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="36" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="37" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="38" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid AllowDrop="True" Uid="39" Height="60" Width="80" Margin="9" Drop="PanelDrop">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                        </Grid.Background>
+                    </Grid>
+                </WrapPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

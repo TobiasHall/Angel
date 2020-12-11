@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="Angel.MainMenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Angel"
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"             
+             mc:Ignorable="d" 
+             d:DesignHeight="740" d:DesignWidth="1000"
+             Background="{DynamicResource BackgroundIMG}">    
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="600">
+            <Image gif:ImageBehavior.AnimatedSource="/Resources/Images/logo.gif"/>
+
+            <Button Content="Ta en fisketur"
+                    Margin="0,10,0,0"
+                    Command="{Binding ChoosePlayerCommand}"
+                    Style="{StaticResource RoundButtonTemplate}"
+                    FontSize="25" 
+                    Width="300" />
+
+            <Button Content="Topplista"
+                    Margin="0,10,0,0"
+                    Command="{Binding ViewTopHighscoreCommand}" 
+                    Style="{StaticResource RoundButtonTemplate}" 
+                    FontSize="25"
+                    Width="300"/>
+
+            <Button Content="Avsluta"
+                    Margin="0,10,0,0"
+                    Command="{Binding ExitGameCommand}" 
+                    Style="{StaticResource RoundButtonTemplate}" 
+                    FontSize="25"
+                    Width="300"/>
+        </StackPanel>
+
+        <!--<StackPanel HorizontalAlignment="Left" 
+                    VerticalAlignment="Bottom">
+
+            <ToggleButton 
+                    Content="Mute"
+                    Margin="10,-100,0,0"
+                    Command="{Binding MuteCommand}" 
+                    Style="{StaticResource MuteButtonTemplate}"/>
+        </StackPanel>-->
+    </Grid>
+</UserControl>
