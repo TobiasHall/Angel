@@ -23,10 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Extensions\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Resources\Images\bg-lake.jpg" />
     <Resource Include="Resources\Images\collection-bag.png" />
     <Resource Include="Resources\Images\fish.png" />

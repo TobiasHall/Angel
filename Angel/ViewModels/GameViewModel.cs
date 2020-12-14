@@ -14,6 +14,8 @@ namespace Angel
         public Uri ImageUri { get; set; } = new Uri(@"/Resources/Images/worm.png", UriKind.Relative);
         public Uri[] ImageUri2 { get; set; } = new Uri[8] {new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/fish.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative)};
         public Dictionary<int, int> PositionOfHook { get; set; } = new Dictionary<int, int>();
+        //public List<int> HookOnIce { get; set; }
+        
 
         DispatcherTimer timer;
         int countdownTimer = 1800;
@@ -47,7 +49,7 @@ namespace Angel
                 GameTimer = String.Format("00:{0:D2}:{1:D2}", countdownTimer / 60, countdownTimer % 60);
                 CatchFishTrigger++;
 
-                if (CatchFishTrigger == 60)
+                if (CatchFishTrigger == 10)
                 {
                     //Test av ImageUri
                     ImageUri = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);

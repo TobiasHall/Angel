@@ -18,14 +18,13 @@ namespace Angel
     /// </summary>
     public partial class Hook : UserControl
     {
+        public Uri ImageUri33 { get; set; }
+        public int IceDrillHolePosition { get; set; }
+        public bool HasFishOnHook { get; set; }
+        public bool HasNoMaggotOnHook { get; set; }
 
 
-        public string Name { get; set; } = "Hej hopp";
-        public int HookID { get; set; }
-        public Uri ImageUri33 { get; set; } 
 
-
-        
 
         public Hook()
         {

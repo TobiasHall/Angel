@@ -77,7 +77,8 @@ namespace Angel
 
             
                 //TODO: Fixa så att man kan flytta runt på brädan och att PositionOfHook uppdateras korrekt
-                model.PositionOfHook.AddOrUpdate(int.Parse(panel.Uid), int.Parse(element.Uid));
+                model.PositionOfHook.AddOrUpdate(int.Parse(element.Uid), int.Parse(panel.Uid));
+                //model.HookOnIce.Add(int.Parse(panel.Uid));
             }
             else
             {
