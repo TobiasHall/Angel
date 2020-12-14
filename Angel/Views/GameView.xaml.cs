@@ -23,7 +23,7 @@ namespace Angel
         {
             InitializeComponent();
             model = new GameViewModel(player);
-            DataContext = model;
+            DataContext = model;            
         }
 
         //protected override void OnMouseMove(MouseEventArgs e)
@@ -76,7 +76,7 @@ namespace Angel
                 panel.Children.Add(element);
 
             
-                //TODO: Fixa så att man kan flytta runt på brädan och att PositionOfHook uppdateras korrekt
+                
                 model.PositionOfHook.AddOrUpdate(int.Parse(element.Uid), int.Parse(panel.Uid));
                 //model.HookOnIce.Add(int.Parse(panel.Uid));
             }

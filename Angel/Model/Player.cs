@@ -7,17 +7,25 @@ namespace Angel
     public class Player
     {
         public int Id { get; set; }
-        public string Nickname { get; set; }
+        public string Nickname { get; private set; }
         public int Score { get; set; }
 
         public Player()
         {
 
         }
-        public Player(int id, string nickname)
+        public string SetPlayerNickname(string nickname)
         {
-            Id = id;
-            Nickname = nickname;
+            if (nickname == null)
+            {
+                Nickname = "Fräddrik";
+                return Nickname;
+            }
+            else
+            {
+                Nickname = nickname;
+                return Nickname;
+            }
         }
     }
 }

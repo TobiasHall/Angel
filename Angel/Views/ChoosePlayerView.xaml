@@ -174,7 +174,10 @@
             <ComboBox Width="270"
                       Height="30"
                       Background="Black"
-                      Foreground="#b2cce5">
+                      Foreground="black"
+                      ItemsSource="{Binding GameTimeOptions}"
+                      SelectedItem="{Binding SelectedGameTime}"
+                      IsSynchronizedWithCurrentItem="True">
                 
             </ComboBox>
             

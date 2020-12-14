@@ -10,25 +10,55 @@ namespace Angel
     public class ChoosePlayerViewModel : BaseViewModel
     {
         public string Nickname { get; set; }
+        public string SelectedGameTime { get; set; }
+        public List<string> GameTimeOptions { get; set; }
 
         public ChoosePlayerViewModel()
         {
             NewGameCommand = new RelayCommand(GetGameView, CanExecute);
-            MainMenuCommand = new RelayCommand(GetMainMenuView, CanExecute);        
+            MainMenuCommand = new RelayCommand(GetMainMenuView, CanExecute);
+
+            SetGameTimeOptions();
+        }
+        private void SetGameTimeOptions()
+        {
+            GameTimeOptions = new List<string>();
+            
+            string startValue, one, two, three;
+            startValue = "TT:MM:SS";
+            one = String.Format("{0:D2}:{1:D2}:{2:D2}", 0, 30, 0 );
+            two = String.Format("{0:D2}:{1:D2}:{2:D2}", 1, 0, 0 );
+            three = String.Format("{0:D2}:{1:D2}:{2:D2}", 2, 0, 0 );
+            SelectedGameTime = startValue;
+
+            GameTimeOptions.Add(startValue);
+            GameTimeOptions.Add(one);
+            GameTimeOptions.Add(two);
+            GameTimeOptions.Add(three);
         }
         private void GetGameView(object parameter)
         {
             Player player = new Player();
-
-            if (Nickname == null)
+            player.SetPlayerNickname(Nickname);
+            int gameTimer = SetGameTimer();
+            
+            Main.Content = new GameView(player);
+        }
+        private int SetGameTimer()
+        {
+            if (SelectedGameTime == "00:30:00")
             {
-                player.Nickname = "Fräddrik";
+                return 3 *60;
+            }
+            else if (SelectedGameTime == "01:00:00")
+            {
+                return 60 * 60;
             }
             else
             {
-                player.Nickname = Nickname;
+                return 120 * 60;
             }
-            Main.Content = new GameView(player);
         }
+        
     }
 }
