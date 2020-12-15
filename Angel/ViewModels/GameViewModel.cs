@@ -12,7 +12,7 @@ namespace Angel
         public string GameTimer { get; set; } = "00:30:00";
         public int NrOfHooks { get; set; } = 0;
         public Uri ImageUri { get; set; } = new Uri(@"/Resources/Images/worm.png", UriKind.Relative);
-        public Uri[] ImageUri2 { get; set; } = new Uri[8] {new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative)};
+        public Uri[] ImageUri2 { get; set; } = new Uri[8] {new Uri(@"/Resources/Images/fish.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative)};
         public Dictionary<int, int> PositionOfHook { get; set; } = new Dictionary<int, int>();
         //public List<int> HookOnIce { get; set; }
         
@@ -55,6 +55,7 @@ namespace Angel
                     ImageUri = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
                     //Trigga metod som slår ut angeldon
                     CatchFish(PositionOfHook);
+                    CatchFishTrigger = 0;
                 }
             }
             else

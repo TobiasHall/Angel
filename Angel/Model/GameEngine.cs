@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using static Angel.ShuffleList;
+using static Angel.ShuffleListExtension;
+using static Angel.Fish;
 
 namespace Angel
 {
@@ -10,12 +11,14 @@ namespace Angel
         private static readonly Random random = new Random();
         private static List<int> luckyHoles;
         private static int numberOfHooks = 8;
-        private static int luckyHolePercentBonus = 30;
+        private static int luckyHolePercentBonus = 50;
+        private static List<Fish> fishes = new List<Fish>();
 
 
 
         private static List<int> hookIdHasLucyHoleBonus = new List<int>();
-        private static int[] hitPercentage = new int[8];
+        private static List<int> hitPercentage = new List<int>();
+        private static List<int> activeHoleInShuffleList = new List<int>();
 
 
         public static void StartNewGame()
@@ -41,16 +44,20 @@ namespace Angel
         public static void CatchFish(Dictionary<int, int> positionOfHook)
         {            
             CheckLuckyHoleBonus(positionOfHook);
-            //CheckIfFishOnHook()
-            List<int> activeHoleInShuffleList = new List<int>();
-            foreach (var item in positionOfHook)
-            {
-                activeHoleInShuffleList.Add(item.Value);
-            }
-            activeHoleInShuffleList.Shuffle();
+            SetHitPercentaget();
+            GetShuffledActiveHoles(positionOfHook);
+            GoFish();
 
-            
 
+
+            ClearProps();
+        }
+
+        private static void ClearProps()
+        {
+            hookIdHasLucyHoleBonus = new List<int>();
+            hitPercentage = new List<int>();
+            activeHoleInShuffleList = new List<int>();
         }
 
         private static void CheckLuckyHoleBonus(Dictionary<int, int> positionOfHook)
@@ -63,15 +70,43 @@ namespace Angel
                 }
             }
         }
+        private static void GetShuffledActiveHoles(Dictionary<int, int> positionOfHook)
+        {
+            foreach (var item in positionOfHook)
+            {
+                activeHoleInShuffleList.Add(item.Value);
+            }
+            activeHoleInShuffleList.Shuffle();            
+        }
 
         
 
-        private static void CheckIfFishOnHook()
+        private static void SetHitPercentaget()
         {
-
-            for (int i = 0; i < hitPercentage.Length; i++)
+            int number = HooksWithChanceOfFish();
+            for (int i = 0; i < number; i++)
             {
-                hitPercentage[i] = random.Next(1, 101);
+                hitPercentage.Add(random.Next(1, 101));
+            }
+
+        }
+        private static int HooksWithChanceOfFish()
+        {
+            return random.Next(4, 9);
+        }
+        private static void GoFish()
+        {
+            for (int i = 0; i < hitPercentage.Count; i++)
+            {
+                if (hookIdHasLucyHoleBonus.Contains(activeHoleInShuffleList[i]))
+                {
+                    hitPercentage[i] += luckyHolePercentBonus;
+                }
+                if (hitPercentage[i] > 80)
+                {
+                    Fish fish = new Fish();
+                    fishes.Add(fish);
+                }
             }
 
         }

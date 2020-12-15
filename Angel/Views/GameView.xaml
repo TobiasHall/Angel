@@ -44,49 +44,49 @@
 
                 
 
-                <WrapPanel Grid.Column="1" VerticalAlignment="Bottom">                        
-                <Image Margin="0,0,400,0" Height="100" Source="/Resources/Images/collection-bag.png"></Image>                    
+                <WrapPanel Grid.Column="1" VerticalAlignment="Bottom">
+                    <Image Margin="0,0,400,0" Height="100" Source="/Resources/Images/collection-bag.png"></Image>
                     <Rectangle Uid="100" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="{Binding ImageUri2[0]}"/>
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <Rectangle Uid="101" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="{Binding ImageUri2[1]}"/>
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <Rectangle Uid="102" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="{Binding ImageUri2[2]}"/>
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <Rectangle Uid="103" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="{Binding ImageUri2[3]}"/>
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <Rectangle Uid="104" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="{Binding ImageUri2[4]}"/>
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <Rectangle Uid="105" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="{Binding ImageUri2[5]}"/>
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <Rectangle Uid="106" Width="60" Height="50" Margin="6" MouseDown="Rectangle_MouseDown">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="{Binding ImageUri2[6]}"/>
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <Rectangle Uid="107" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="{Binding ImageUri2[7]}"/>
-                            </Rectangle.Fill>
-                        </Rectangle>
-                    </WrapPanel>
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="{Binding ImageUri2[0]}"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Rectangle Uid="101" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="{Binding ImageUri2[1]}"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Rectangle Uid="102" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="{Binding ImageUri2[2]}"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Rectangle Uid="103" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="{Binding ImageUri2[3]}"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Rectangle Uid="104" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="{Binding ImageUri2[4]}"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Rectangle Uid="105" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="{Binding ImageUri2[5]}"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Rectangle Uid="106" Width="60" Height="50" Margin="6" MouseDown="Rectangle_MouseDown">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="{Binding ImageUri2[6]}"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Rectangle Uid="107" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="{Binding ImageUri2[7]}"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </WrapPanel>
                 
                 
 

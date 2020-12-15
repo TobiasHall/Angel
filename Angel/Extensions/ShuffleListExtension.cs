@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Angel
 {
-    public static class ShuffleList
+    public static class ShuffleListExtension
     {
         private static Random rng = new Random();
 

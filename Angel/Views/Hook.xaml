@@ -9,7 +9,7 @@
     <Grid x:Name="master">
         <Rectangle Margin="5">
             <Rectangle.Fill>
-                <ImageBrush ImageSource="{Binding ImageUri}"/>
+                <ImageBrush ImageSource="{Binding ImageUri2[0]}"/>
             </Rectangle.Fill>
         </Rectangle>
     </Grid>
