@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using static Angel.ShuffleListExtension;
 using static Angel.Fish;
+using System.Linq;
 
 namespace Angel
 {
@@ -15,7 +16,8 @@ namespace Angel
         private static List<Fish> fishes = new List<Fish>();
 
 
-
+        private static Dictionary<int, int> positionOfHook222 = new Dictionary<int, int>();
+        private static Dictionary<int, int> returnDictionary;
         private static List<int> hookIdHasLucyHoleBonus = new List<int>();
         private static List<int> hitPercentage = new List<int>();
         private static List<int> activeHoleInShuffleList = new List<int>();
@@ -42,8 +44,12 @@ namespace Angel
             return myNumber;
         }        
 
-        public static void CatchFish(Dictionary<int, int> positionOfHook)
-        {            
+        public static Dictionary<int, int> CatchFish(Dictionary<int, int> positionOfHook)
+        {
+            ClearProps();
+            
+
+            positionOfHook222 = positionOfHook.Shuffle();
             CheckLuckyHoleBonus(positionOfHook);
             SetHitPercentaget();
             GetShuffledActiveHoles(positionOfHook);
@@ -51,7 +57,7 @@ namespace Angel
 
 
 
-            ClearProps();
+            return returnDictionary;
         }
 
         private static void ClearProps()
@@ -59,6 +65,8 @@ namespace Angel
             hookIdHasLucyHoleBonus = new List<int>();
             hitPercentage = new List<int>();
             activeHoleInShuffleList = new List<int>();
+            troutBonus = 0;
+            returnDictionary = new Dictionary<int, int>();
         }
 
         private static void CheckLuckyHoleBonus(Dictionary<int, int> positionOfHook)
@@ -99,7 +107,7 @@ namespace Angel
         {
             for (int i = 0; i < hitPercentage.Count; i++)
             {
-                if (hookIdHasLucyHoleBonus.Contains(activeHoleInShuffleList[i]))
+                if (hookIdHasLucyHoleBonus.Contains(positionOfHook222.ElementAt(i).Value))
                 {
                     hitPercentage[i] += luckyHolePercentBonus;
                 }
@@ -107,6 +115,7 @@ namespace Angel
                 {
                     Fish fish = new Fish(troutBonus);
                     fishes.Add(fish);
+                    returnDictionary.Add(positionOfHook222.ElementAt(i).Key, positionOfHook222.ElementAt(i).Value);
                 }
             }
 
