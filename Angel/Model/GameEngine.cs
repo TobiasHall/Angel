@@ -19,6 +19,7 @@ namespace Angel
         private static List<int> hookIdHasLucyHoleBonus = new List<int>();
         private static List<int> hitPercentage = new List<int>();
         private static List<int> activeHoleInShuffleList = new List<int>();
+        private static int troutBonus = 0;
 
 
         public static void StartNewGame()
@@ -104,7 +105,7 @@ namespace Angel
                 }
                 if (hitPercentage[i] > 80)
                 {
-                    Fish fish = new Fish();
+                    Fish fish = new Fish(troutBonus);
                     fishes.Add(fish);
                 }
             }
