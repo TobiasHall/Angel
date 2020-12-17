@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -70,15 +71,24 @@ namespace Angel
             Panel panel = (Panel)sender;
             UIElement element = (UIElement)e.Data.GetData("Object");
             Panel parent = (Panel)VisualTreeHelper.GetParent(element);
-            if (panel.Name != "TopGrid")
+            if (panel.Name != "TopGrid" && panel.Name != "DropWrap")
             {
                 parent.Children.Remove(element);
-                panel.Children.Add(element);
-
-            
-                
+                panel.Children.Add(element);                
                 model.PositionOfHook.AddOrUpdate(int.Parse(element.Uid), int.Parse(panel.Uid));
+                //model.PositionOfHook2.AddOrUpdate2((Hook)element, 2);
+
                 //model.HookOnIce.Add(int.Parse(panel.Uid));
+            }
+            else if (panel.Name == "DropWrap")
+            {
+                //Hook test = (Hook)element;
+                model.PositionOfHook2.AddOrUpdate2((Hook)element, 2);
+
+                parent.Children.Remove(element);
+                panel.Children.Add(element);
+                model.PositionOfHook.Remove(int.Parse(element.Uid));
+
             }
             else
             {

@@ -17,16 +17,28 @@
 
 
 
-            <Grid Grid.Row="0" Name="TopGrid" AllowDrop="True" Drop="PanelDrop">
+            <Grid Grid.Row="0" Name="TopGrid" AllowDrop="True">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="220"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="220"/>
                 </Grid.ColumnDefinitions>
+                    <StackPanel HorizontalAlignment="Center" Margin="0,10,0,0">
+                        <Label HorizontalAlignment="Center" Content="Din poäng:" FontSize="28"></Label>
+                        <Label HorizontalAlignment="Center" Content="{Binding TotalScore, FallbackValue=0}" FontSize="28"></Label>
+                    </StackPanel>
 
                 <StackPanel Grid.Column="0" VerticalAlignment="center">
-                    <Button Margin="5" Content="Tursnus" Style="{StaticResource RoundButtonTemplate}"></Button>
-                    <Button Margin="5" Content="Ta en kaffe" Style="{StaticResource RoundButtonTemplate}"></Button>
+                    <Button Margin="5" Content="Tursnus" Style="{StaticResource RoundButtonTemplate}" Command="{Binding LuckySnuffBtn}" IsEnabled="{Binding LuckySnuffBtnEnabled}"></Button>
+                    <Button Margin="5" Content="Ta en kaffe" Style="{StaticResource RoundButtonTemplate}" Command="{Binding CupOfCoffeBtn}" IsEnabled="{Binding CupOfCoffeBtnEnabled}"></Button>
+                    <WrapPanel HorizontalAlignment="Center">
+                        <Label FontSize="24" Content="Tursnus kvar: "></Label>
+                        <Label FontSize="24" Content="{Binding LuckySnuffLabel, FallbackValue=3}"></Label>
+                    </WrapPanel>
+                    <WrapPanel HorizontalAlignment="Center">
+                        <Label FontSize="24" Content="Kaffe kvar: "></Label>
+                        <Label FontSize="24" Content="{Binding CupOfCoffeLabel, FallbackValue=5}"></Label>
+                    </WrapPanel>
                 </StackPanel>
 
                     <WrapPanel Grid.Column="1" Margin="20" HorizontalAlignment="Center">
@@ -37,23 +49,30 @@
                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
                     <Label HorizontalAlignment="Center" Content="{Binding player.Nickname, FallbackValue=Fräddrik}" FontSize="38"></Label>
                     <Label HorizontalAlignment="Center" Content="{Binding GameTimer, FallbackValue=00:29:59}" FontSize="28"></Label>
-                    <Label HorizontalAlignment="Center" Content="Fiskar: 0" FontSize="28"></Label>
-                    <Label HorizontalAlignment="Center" Content="Total vikt: 0" FontSize="28"></Label>
+                    <WrapPanel HorizontalAlignment="Center">
+                        <Label Content="Totalt fiskar:" FontSize="28"></Label>
+                        <Label Content="{Binding TotalFishes, FallbackValue=0}" FontSize="28"></Label>
+                    </WrapPanel>
+                    <WrapPanel HorizontalAlignment="Center">
+                        <Label Content="Total vikt:" FontSize="28"></Label>
+                        <Label Content="{Binding TotalWeight, FallbackValue=0}" FontSize="28"></Label>
+                        <Label Content="g" FontSize="28"></Label>
+                    </WrapPanel>
                 </StackPanel>
 
 
-                
 
-                <WrapPanel Grid.Column="1" VerticalAlignment="Bottom">
+
+                <WrapPanel Name="DropWrap" Grid.Column="1" VerticalAlignment="Bottom" Drop="PanelDrop">
                     <Image Margin="0,0,400,0" Height="100" Source="/Resources/Images/collection-bag.png"></Image>
                     <Rectangle Uid="100" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
                         <Rectangle.Fill>
-                            <ImageBrush ImageSource="{Binding ImageUri2[0]}"/>
+                            <ImageBrush ImageSource="{Binding HookId100}"/>
                         </Rectangle.Fill>
                     </Rectangle>
                     <Rectangle Uid="101" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
                         <Rectangle.Fill>
-                            <ImageBrush ImageSource="{Binding ImageUri2[1]}"/>
+                            <ImageBrush ImageSource="{Binding HookId101}"/>
                         </Rectangle.Fill>
                     </Rectangle>
                     <Rectangle Uid="102" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
@@ -92,17 +111,39 @@
 
 
                 <StackPanel VerticalAlignment="Center" Grid.Column="2">
-                    <Label HorizontalAlignment="Left" Content="Öring: 0" FontSize="28"></Label>
-                    <Label HorizontalAlignment="Left" Content="Röding: 0" FontSize="28"></Label>
-                    <Label HorizontalAlignment="Left" Content="Abborre: 0" FontSize="28"></Label>
-                    <Label HorizontalAlignment="Left" Content="Gädda: 0" FontSize="28"></Label>
-                    <Label HorizontalAlignment="Left" Content="Mört: 0" FontSize="28"></Label>
+                    
+                    <WrapPanel HorizontalAlignment="Center">
+                        <Label Content="Öring:" FontSize="24"></Label>
+                        <Label Content="{Binding NrOfTrout, FallbackValue=0}" FontSize="24"></Label>
+                        <Label Content="st" FontSize="24"></Label>
+                    </WrapPanel>
+                    <WrapPanel HorizontalAlignment="Center">
+                        <Label Content="Röding:" FontSize="24"></Label>
+                        <Label Content="{Binding NrOfChar, FallbackValue=0}" FontSize="24"></Label>
+                        <Label Content="st" FontSize="24"></Label>
+                    </WrapPanel>
+                    <WrapPanel HorizontalAlignment="Center">
+                        <Label Content="Abbore:" FontSize="24"></Label>
+                        <Label Content="{Binding NrOfPerc, FallbackValue=0}" FontSize="24"></Label>
+                        <Label Content="st" FontSize="24"></Label>
+                    </WrapPanel>
+                    <WrapPanel HorizontalAlignment="Center">
+                        <Label Content="Gädda:" FontSize="24"></Label>
+                        <Label Content="{Binding NrOfPike, FallbackValue=0}" FontSize="24"></Label>
+                        <Label Content="st" FontSize="24"></Label>
+                    </WrapPanel>
+                    <WrapPanel HorizontalAlignment="Center">
+                        <Label Content="Mört:" FontSize="24"></Label>
+                        <Label Content="{Binding NrOfDace, FallbackValue=0}" FontSize="24"></Label>
+                        <Label Content="st" FontSize="24"></Label>
+                    </WrapPanel>
                 </StackPanel>
 
             </Grid>
 
             <StackPanel Grid.Row="1">
                 <WrapPanel HorizontalAlignment="Center">
+                    <local:Hook Uid="10000" MouseDown="Rectangle_MouseDown"/>
                     <Grid AllowDrop="True" Uid="1" Height="60" Width="80" Margin="9" Drop="PanelDrop">
                         <Grid.Background>
                             <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>

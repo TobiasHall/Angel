@@ -8,7 +8,7 @@ namespace Angel
     {
         public int FishId { get; set; }
         public string Species { get; set; }
-        public double Weight { get; set; }
+        public int Weight { get; set; }
 
         private static readonly Random random = new Random();
 
@@ -20,7 +20,7 @@ namespace Angel
         {
             FishId = RandomizeSpecies(troutBonus);
             Species = SetFishSpecies(FishId);
-            Weight = SetWightOfFish(FishId);
+            Weight = SetWeightOfFish(FishId);
         }
         private int RandomizeSpecies(int troutBonus)
         {
@@ -55,7 +55,7 @@ namespace Angel
                 default: throw new ArgumentOutOfRangeException();
             }
         }
-        private double SetWightOfFish(int fishId)
+        private int SetWeightOfFish(int fishId)
         {
             switch (fishId)
             {

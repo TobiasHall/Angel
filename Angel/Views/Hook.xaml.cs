@@ -25,15 +25,21 @@ namespace Angel
         public bool HasNoMaggotOnHook { get; set; }
 
 
+        private HookViewModel model;
 
+        
 
         public Hook()
         {
             InitializeComponent();
 
+            model = new HookViewModel();
+            DataContext = model;
+
+
             Height = 60;
             Width = 60;
-            SetID();
+            //SetID();
         }
 
         int counter = 0;
