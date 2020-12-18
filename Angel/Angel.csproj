@@ -7,6 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Cursors\fish.cur" />
+    <None Remove="Resources\Cursors\hook.cur" />
+    <None Remove="Resources\Cursors\worm.cur" />
     <None Remove="Resources\Images\bg-lake.jpg" />
     <None Remove="Resources\Images\collection-bag.png" />
     <None Remove="Resources\Images\fish.png" />
@@ -23,6 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Cursors\fish.cur" />
+    <Resource Include="Resources\Cursors\hook.cur" />
+    <Resource Include="Resources\Cursors\worm.cur" />
     <Resource Include="Resources\Images\bg-lake.jpg" />
     <Resource Include="Resources\Images\collection-bag.png" />
     <Resource Include="Resources\Images\fish.png" />

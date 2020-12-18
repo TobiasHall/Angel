@@ -21,6 +21,9 @@ namespace Angel
         private static List<Fish> fishes = new List<Fish>();
         private static List<Fish> tempFishes = new List<Fish>();
 
+        private static int minChanseForFish = 4;
+        private static int maxChanseForFish = 8;
+
 
         private static Dictionary<int, int> positionOfHook222 = new Dictionary<int, int>();
         private static Dictionary<int, int> returnDictionary;
@@ -141,7 +144,7 @@ namespace Angel
         }
         private static int HooksWithChanceOfFish()
         {
-            return random.Next(4, 9);
+            return random.Next(minChanseForFish, maxChanseForFish+1);
         }
         private static void GoFish()
         {
@@ -178,16 +181,6 @@ namespace Angel
 
 
 
-
-
-
-
-
-        //Test av hook i dictinary
-        public static Dictionary<Hook, int> TestAvDict(Dictionary<Hook, int> hejhej)
-        {
-            return hejhej;
-        }
 
 
     }

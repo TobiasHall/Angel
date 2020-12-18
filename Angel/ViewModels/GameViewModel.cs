@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using static Angel.GameEngine;
 
@@ -11,6 +15,23 @@ namespace Angel
 {
     public class GameViewModel : BaseViewModel
     {
+        private BitmapImage _ImageSource;
+        public BitmapImage ImageSource
+        {
+            get { return this._ImageSource; }
+            set { this._ImageSource = value; this.OnPropertyChanged("ImageSource"); }
+        }
+
+        public int HookCounter { get; set; } = 100;
+
+
+
+
+
+
+
+
+
         public ICommand LuckySnuffBtn { get; set; }
         public ICommand CupOfCoffeBtn { get; set; }
         public bool LuckySnuffBtnEnabled { get; set; } = true;
@@ -30,12 +51,13 @@ namespace Angel
         public Player player { get; set; }
         public string GameTimer { get; set; } = "00:30:00";
         public int NrOfHooks { get; set; } = 0;
-        public Uri HookId100 { get; set; } = new Uri(@"/Resources/Images/worm.png", UriKind.Relative);
-        public Uri HookId101 { get; set; } = new Uri(@"/Resources/Images/worm.png", UriKind.Relative);
+        public Uri HookId100 { get; set; } = new Uri(@"/Resources/Images/hook.png", UriKind.Relative);
+        public Uri FishImage { get; set; } = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
+        public ImageSource MyProperty { get; set; }
         public Uri ImageUri { get; set; } = new Uri(@"/Resources/Images/worm.png", UriKind.Relative);
         public Uri[] ImageUri2 { get; set; } = new Uri[8] {new Uri("/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative)};
         public Dictionary<int, int> PositionOfHook { get; set; } = new Dictionary<int, int>();
-        public Dictionary<Hook, int> PositionOfHook2 { get; set; } = new Dictionary<Hook, int>();
+        
         //public List<int> HookOnIce { get; set; }
         public Dictionary<int, int> HookHasFish { get; set; } = new Dictionary<int, int>();
 
@@ -59,6 +81,14 @@ namespace Angel
 
 
             StartCountdown();
+
+
+
+            string imagePath = "\\Resources\\Images\\fish.png";
+            this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
+
+
+
         }
         public void SetImage(object parameter)
         {
@@ -92,61 +122,7 @@ namespace Angel
                 GameTimer = countdownTimer.ToString();
                 GameTimer = String.Format("00:{0:D2}:{1:D2}", countdownTimer / 60, countdownTimer % 60);
                 CatchFishTrigger++;
-
-                if (CatchFishTrigger == 10)
-                {
-                    //Test av att ha Hook i en dictionary
-                    foreach (var item in TestAvDict(PositionOfHook2))
-                    {
-                        Hook hook = item.Key;
-                        hook.ImageUri33 = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
-                    }
-
-
-
-                    //Test av ImageUri
-                    ImageUri = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
-                    HookId100 = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
-                    HookId101 = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
-
-                    var hooksWithFish = CatchFish(PositionOfHook);
-
-
-                    var fishToLabel = GetFishFromLastRound();
-                    foreach (var fish in fishToLabel)
-                    {
-                        TotalFishes++;
-                        TotalWeight += fish.Weight;
-                        if (fish.FishId == (int)FishEnum.Dace)
-                        {
-
-                        }
-                        else if (fish.FishId == (int)FishEnum.Pike)
-                        {
-
-                        }
-                        else if (fish.FishId == (int)FishEnum.Perch)
-                        {
-
-                        }
-                        else if (fish.FishId == (int)FishEnum.Char)
-                        {
-
-                        }
-                        else
-                        {
-
-                        }
-                    }
-                    TotalScore = GetScore();
-
-
-                    
-                    //UpdateHookImage(hooksWithFish);
-                    //AddHookWithFishToList(hooksWithFish);
-                    CatchFishTrigger = 0;
-                    GetBasketOfFish();
-                }
+                CheckIfCatchFishTrigger();
             }
             else
             {
@@ -155,6 +131,28 @@ namespace Angel
             }
 
         }
+
+        private void CheckIfCatchFishTrigger()
+        {
+            if (CatchFishTrigger == 10)
+            {
+                string imagePath = "\\Resources\\Images\\worm.png";
+                this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
+
+                
+                Dictionary<int, int> hooksWithFish = CatchFish(PositionOfHook);
+                List<Fish> fishToLabel = GetFishFromLastRound();
+                UpdateLabelsInView(fishToLabel);
+
+
+
+                //UpdateHookImage(hooksWithFish);
+                //AddHookWithFishToList(hooksWithFish);
+                CatchFishTrigger = 0;
+                GetBasketOfFish();
+            }
+        }
+
         //Behövs egentligen inte
         private void AddHookWithFishToList(Dictionary<int, int> hooksWithFish)
         {
@@ -215,6 +213,35 @@ namespace Angel
         private void GetGameView(object parameter)
         {            
             Main.Content = new GameView(player);
+        }
+        private void UpdateLabelsInView(List<Fish> fishToLabel)
+        {
+            foreach (var fish in fishToLabel)
+            {
+                TotalFishes++;
+                TotalWeight += fish.Weight;
+                if (fish.FishId == (int)FishEnum.Dace)
+                {
+                    NrOfDace++;
+                }
+                else if (fish.FishId == (int)FishEnum.Pike)
+                {
+                    NrOfPike++;
+                }
+                else if (fish.FishId == (int)FishEnum.Perch)
+                {
+                    NrOfPerc++;
+                }
+                else if (fish.FishId == (int)FishEnum.Char)
+                {
+                    NrOfChar++;
+                }
+                else
+                {
+                    NrOfTrout++;
+                }
+            }
+            TotalScore = GetScore();
         }
     }
 }

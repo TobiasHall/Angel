@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using System.Windows.Resources;
 using System.Windows.Shapes;
 
 namespace Angel
@@ -55,12 +56,13 @@ namespace Angel
             }
             else if (e.Effects.HasFlag(DragDropEffects.Move))
             {
-                Mouse.SetCursor(Cursors.ArrowCD);
+                StreamResourceInfo sriCurs = Application.GetResourceStream(new Uri(@"Resources/Cursors/worm.cur", UriKind.Relative));
+                Mouse.SetCursor(new Cursor(sriCurs.Stream));
             }
-            else
-            {
-                Mouse.SetCursor(Cursors.No);
-            }
+            //else
+            //{
+            //    Mouse.SetCursor(Cursors.No);
+            //}
 
             e.Handled = true;
         }
@@ -77,13 +79,23 @@ namespace Angel
                 panel.Children.Add(element);                
                 model.PositionOfHook.AddOrUpdate(int.Parse(element.Uid), int.Parse(panel.Uid));
                 //model.PositionOfHook2.AddOrUpdate2((Hook)element, 2);
-
+                if (element is Image)
+                {
+                    var hej = (Image)element;
+                    
+                }
                 //model.HookOnIce.Add(int.Parse(panel.Uid));
             }
             else if (panel.Name == "DropWrap")
             {
                 //Hook test = (Hook)element;
-                model.PositionOfHook2.AddOrUpdate2((Hook)element, 2);
+                //model.PositionOfHook2.AddOrUpdate2((Hook)element, 2);
+
+                //Fungerar på en bild
+                //string imagePath = "\\Resources\\Images\\worm.png";
+                //model.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
+
+
 
                 parent.Children.Remove(element);
                 panel.Children.Add(element);
