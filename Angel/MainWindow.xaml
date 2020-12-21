@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Angel"
         mc:Ignorable="d"
-        Title="Angel" Height="740" Width="1000" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Angel" Height="640" Width="1000" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Frame x:Name="Main" NavigationUIVisibility="Hidden"/>
     </Grid>

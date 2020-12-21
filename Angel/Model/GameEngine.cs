@@ -165,7 +165,7 @@ namespace Angel
         }
         private static void GoFish()
         {
-            if (activeHoleInShuffleList.Count < hitPercentage.Count)
+            if (activeHoleInShuffleList.Count <= hitPercentage.Count)
             {
                 for (int i = 0; i < activeHoleInShuffleList.Count; i++)
                 {
