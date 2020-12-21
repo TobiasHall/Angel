@@ -124,11 +124,28 @@ namespace Angel
         }
         private static void GetShuffledActiveHoles(Dictionary<int, int> positionOfHook)
         {
-            foreach (var item in positionOfHook)
+            if (positionOfHook.Count < hitPercentage.Count && positionOfHook.Count > 1)
             {
-                activeHoleInShuffleList.Add(item.Value);
+                for (int i = 0; i < positionOfHook.Count; i++)
+                {
+                    activeHoleInShuffleList.Add(positionOfHook.ElementAt(i).Value);
+                }
+                activeHoleInShuffleList.Shuffle();            
             }
-            activeHoleInShuffleList.Shuffle();            
+            else if (positionOfHook.Count > hitPercentage.Count)
+            {
+                for (int i = 0; i < hitPercentage.Count; i++)
+                {
+                    activeHoleInShuffleList.Add(positionOfHook.ElementAt(i).Value);
+                }
+                activeHoleInShuffleList.Shuffle();
+            }
+
+
+            //foreach (var item in positionOfHook)
+            //{
+            //    activeHoleInShuffleList.Add(item.Value);
+            //}
         }
 
         
@@ -148,21 +165,40 @@ namespace Angel
         }
         private static void GoFish()
         {
-            for (int i = 0; i < hitPercentage.Count; i++)
+            if (activeHoleInShuffleList.Count < hitPercentage.Count)
             {
-                if (hookIdHasLucyHoleBonus.Contains(positionOfHook222.ElementAt(i).Value))
+                for (int i = 0; i < activeHoleInShuffleList.Count; i++)
                 {
-                    hitPercentage[i] += luckyHolePercentBonus;
-                }
-                if (hitPercentage[i] > 80)
-                {
-                    Fish fish = new Fish(troutBonus);
-                    fishes.Add(fish);
-                    tempFishes.Add(fish);
-                    returnDictionary.Add(positionOfHook222.ElementAt(i).Key, positionOfHook222.ElementAt(i).Value);
+                    if (hookIdHasLucyHoleBonus.Contains(positionOfHook222.ElementAt(i).Value))
+                    {
+                        hitPercentage[i] += luckyHolePercentBonus;
+                    }
+                    if (hitPercentage[i] > 80)
+                    {
+                        Fish fish = new Fish(troutBonus);
+                        fishes.Add(fish);
+                        tempFishes.Add(fish);
+                        returnDictionary.Add(positionOfHook222.ElementAt(i).Key, positionOfHook222.ElementAt(i).Value);
+                    }
                 }
             }
-
+            else if (activeHoleInShuffleList.Count > hitPercentage.Count)
+            {
+                for (int i = 0; i < hitPercentage.Count; i++)
+                {
+                    if (hookIdHasLucyHoleBonus.Contains(positionOfHook222.ElementAt(i).Value))
+                    {
+                        hitPercentage[i] += luckyHolePercentBonus;
+                    }
+                    if (hitPercentage[i] > 80)
+                    {
+                        Fish fish = new Fish(troutBonus);
+                        fishes.Add(fish);
+                        tempFishes.Add(fish);
+                        returnDictionary.Add(positionOfHook222.ElementAt(i).Key, positionOfHook222.ElementAt(i).Value);
+                    }
+                }
+            }
         }
         public static List<Fish> GetBasketOfFish()
         {

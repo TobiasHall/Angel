@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -53,14 +54,15 @@ namespace Angel
         public int NrOfHooks { get; set; } = 0;
         public Uri HookId100 { get; set; } = new Uri(@"/Resources/Images/hook.png", UriKind.Relative);
         public Uri FishImage { get; set; } = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
-        public ImageSource MyProperty { get; set; }
-        public Uri ImageUri { get; set; } = new Uri(@"/Resources/Images/worm.png", UriKind.Relative);
-        public Uri[] ImageUri2 { get; set; } = new Uri[8] {new Uri("/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative)};
+        
+        //public Uri ImageUri { get; set; } = new Uri(@"/Resources/Images/worm.png", UriKind.Relative);
+        //public Uri[] ImageUri2 { get; set; } = new Uri[8] {new Uri("/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative)};
         public Dictionary<int, int> PositionOfHook { get; set; } = new Dictionary<int, int>();
         
         //public List<int> HookOnIce { get; set; }
         public Dictionary<int, int> HookHasFish { get; set; } = new Dictionary<int, int>();
 
+        public ObservableCollection<Uri> ImageUri { get; set; } = new ObservableCollection<Uri>() { new Uri("/Resources/Images/worm.png", UriKind.Relative), new Uri("/Resources/Images/worm.png", UriKind.Relative), new Uri("/Resources/Images/worm.png", UriKind.Relative), new Uri("/Resources/Images/worm.png", UriKind.Relative), new Uri("/Resources/Images/worm.png", UriKind.Relative), new Uri("/Resources/Images/worm.png", UriKind.Relative), new Uri("/Resources/Images/worm.png", UriKind.Relative), new Uri("/Resources/Images/worm.png", UriKind.Relative), };
 
         DispatcherTimer timer;
         int countdownTimer = 1800;
@@ -73,6 +75,7 @@ namespace Angel
             NewGameCommand = new RelayCommand(GetGameView, CanExecute);
             LuckySnuffBtn = new RelayCommand(UseLuckySnuff, CanExecute);
             CupOfCoffeBtn = new RelayCommand(UseCupOfCoffe, CanExecute);
+            
 
             this.player = player;
             StartNewGame();
@@ -143,10 +146,9 @@ namespace Angel
                 Dictionary<int, int> hooksWithFish = CatchFish(PositionOfHook);
                 List<Fish> fishToLabel = GetFishFromLastRound();
                 UpdateLabelsInView(fishToLabel);
+                                
 
-
-
-                //UpdateHookImage(hooksWithFish);
+                UpdateHookImage(hooksWithFish);
                 //AddHookWithFishToList(hooksWithFish);
                 CatchFishTrigger = 0;
                 GetBasketOfFish();
@@ -172,35 +174,35 @@ namespace Angel
                 switch (hookKey)
                 {
                     case 100:
-                        ImageUri2[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);                        
+                        ImageUri[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);                        
                         PositionOfHook.Remove(hookKey);
                         break;
                     case 101:
-                        ImageUri2[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
+                        ImageUri[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
                         PositionOfHook.Remove(hookKey);
                         break;
                     case 102:
-                        ImageUri2[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
+                        ImageUri[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
                         PositionOfHook.Remove(hookKey);
                         break;
                     case 103:
-                        ImageUri2[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
+                        ImageUri[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
                         PositionOfHook.Remove(hookKey);
                         break;
                     case 104:
-                        ImageUri2[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
+                        ImageUri[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
                         PositionOfHook.Remove(hookKey);
                         break;
                     case 105:
-                        ImageUri2[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
+                        ImageUri[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
                         PositionOfHook.Remove(hookKey);
                         break;
                     case 106:
-                        ImageUri2[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
+                        ImageUri[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
                         PositionOfHook.Remove(hookKey);
                         break;
                     case 107:
-                        ImageUri2[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
+                        ImageUri[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
                         PositionOfHook.Remove(hookKey);
                         break;
                     default:
