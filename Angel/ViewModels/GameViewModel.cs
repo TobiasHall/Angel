@@ -23,6 +23,13 @@ namespace Angel
             set { this._ImageSource = value; this.OnPropertyChanged("ImageSource"); }
         }
 
+        //public BitmapImage TestTest { get; set; } = new BitmapImage(new Uri("\\Resources\\Images\\fish.png", UriKind.Relative));
+
+
+        public ObservableCollection<BitmapImage> TestTest { get; set; } = new ObservableCollection<BitmapImage>() { new BitmapImage(new Uri("\\Resources\\Images\\fish.png", UriKind.Relative)), new BitmapImage(new Uri("\\Resources\\Images\\fish.png", UriKind.Relative)), new BitmapImage(new Uri("\\Resources\\Images\\fish.png", UriKind.Relative)), new BitmapImage(new Uri("\\Resources\\Images\\fish.png", UriKind.Relative)), new BitmapImage(new Uri("\\Resources\\Images\\fish.png", UriKind.Relative)), new BitmapImage(new Uri("\\Resources\\Images\\fish.png", UriKind.Relative)), new BitmapImage(new Uri("\\Resources\\Images\\fish.png", UriKind.Relative)), new BitmapImage(new Uri("\\Resources\\Images\\fish.png", UriKind.Relative)), };
+
+
+
         public int HookCounter { get; set; } = 100;
 
 
@@ -153,12 +160,14 @@ namespace Angel
 
         private void CheckIfCatchFishTrigger()
         {
-            if (CatchFishTrigger == (gameTimer / 10))
-            {
+            //if (CatchFishTrigger == (gameTimer / 10))
+                if (CatchFishTrigger == 10)
+                {                
                 string imagePath = "\\Resources\\Images\\worm.png";
                 this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
 
-                
+                TestTest[0] = new BitmapImage(new Uri("\\Resources\\Images\\worm.png", UriKind.Relative));
+
                 Dictionary<int, int> hooksWithFish = CatchFish(PositionOfHook);
                 List<Fish> fishToLabel = GetFishFromLastRound();
                 UpdateLabelsInView(fishToLabel);

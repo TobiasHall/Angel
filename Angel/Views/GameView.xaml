@@ -58,6 +58,9 @@
 
                 <WrapPanel Name="DropWrap" Grid.Column="1" VerticalAlignment="Bottom" Drop="PanelDrop">
                     <Image Margin="0,0,400,0" Height="100" Source="/Resources/Images/collection-bag.png"></Image>
+                    <local:Hook Uid="200" MouseDown="Rectangle_MouseDown">
+                        <Image Height="50" Width="60" Source="{Binding TestTest[0]}"/>
+                    </local:Hook>
                     <Rectangle Uid="100" Width="50" Height="40" Margin="5" MouseDown="Rectangle_MouseDown">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="{Binding ImageUri[0]}"/>
