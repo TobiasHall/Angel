@@ -21,10 +21,10 @@ namespace Angel
     public partial class GameView : UserControl
     {
         private GameViewModel model;
-        public GameView(Player player)
+        public GameView(Player player, int gameTimer)
         {
             InitializeComponent();
-            model = new GameViewModel(player);
+            model = new GameViewModel(player, gameTimer);
             DataContext = model;            
         }
 

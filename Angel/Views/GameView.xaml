@@ -48,7 +48,7 @@
                 
                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
                     <Label HorizontalAlignment="Center" Content="{Binding player.Nickname, FallbackValue=Fräddrik}" FontSize="38"></Label>
-                    <Label HorizontalAlignment="Center" Content="{Binding GameTimer, FallbackValue=00:29:59}" FontSize="28"></Label>
+                    <Label HorizontalAlignment="Center" Content="{Binding GameTimer, FallbackValue=00:00:00}" FontSize="28"></Label>
                     
                     
                 </StackPanel>
@@ -58,42 +58,42 @@
 
                 <WrapPanel Name="DropWrap" Grid.Column="1" VerticalAlignment="Bottom" Drop="PanelDrop">
                     <Image Margin="0,0,400,0" Height="100" Source="/Resources/Images/collection-bag.png"></Image>
-                    <Rectangle Uid="100" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
+                    <Rectangle Uid="100" Width="50" Height="40" Margin="5" MouseDown="Rectangle_MouseDown">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="{Binding ImageUri[0]}"/>
                         </Rectangle.Fill>
                     </Rectangle>
-                    <Rectangle Uid="101" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
+                    <Rectangle Uid="101" Width="50" Height="40" Margin="5" MouseDown="Rectangle_MouseDown">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="{Binding ImageUri[1]}"/>
                         </Rectangle.Fill>
                     </Rectangle>
-                    <Rectangle Uid="102" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
+                    <Rectangle Uid="102" Width="50" Height="40" Margin="5" MouseDown="Rectangle_MouseDown">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="{Binding ImageUri[2]}"/>
                         </Rectangle.Fill>
                     </Rectangle>
-                    <Rectangle Uid="103" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
+                    <Rectangle Uid="103" Width="50" Height="40" Margin="5" MouseDown="Rectangle_MouseDown">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="{Binding ImageUri[3]}"/>
                         </Rectangle.Fill>
                     </Rectangle>
-                    <Rectangle Uid="104" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
+                    <Rectangle Uid="104" Width="50" Height="40" Margin="5" MouseDown="Rectangle_MouseDown">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="{Binding ImageUri[4]}"/>
                         </Rectangle.Fill>
                     </Rectangle>
-                    <Rectangle Uid="105" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
+                    <Rectangle Uid="105" Width="50" Height="40" Margin="5" MouseDown="Rectangle_MouseDown">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="{Binding ImageUri[5]}"/>
                         </Rectangle.Fill>
                     </Rectangle>
-                    <Rectangle Uid="106" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
+                    <Rectangle Uid="106" Width="50" Height="40" Margin="5" MouseDown="Rectangle_MouseDown">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="{Binding ImageUri[6]}"/>
                         </Rectangle.Fill>
                     </Rectangle>
-                    <Rectangle Uid="107" Width="60" Height="50" Margin="5" MouseDown="Rectangle_MouseDown">
+                    <Rectangle Uid="107" Width="50" Height="40" Margin="5" MouseDown="Rectangle_MouseDown">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="{Binding ImageUri[7]}"/>
                         </Rectangle.Fill>

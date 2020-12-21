@@ -50,7 +50,7 @@ namespace Angel
 
 
         public Player player { get; set; }
-        public string GameTimer { get; set; } = "00:30:00";
+        public string GameTimer { get; set; } = "TT:MM:SS";
         public int NrOfHooks { get; set; } = 0;
         public Uri HookId100 { get; set; } = new Uri(@"/Resources/Images/hook.png", UriKind.Relative);
         public Uri FishImage { get; set; } = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
@@ -65,17 +65,23 @@ namespace Angel
         public ObservableCollection<Uri> ImageUri { get; set; } = new ObservableCollection<Uri>() { new Uri("/Resources/Images/worm.png", UriKind.Relative), new Uri("/Resources/Images/worm.png", UriKind.Relative), new Uri("/Resources/Images/worm.png", UriKind.Relative), new Uri("/Resources/Images/worm.png", UriKind.Relative), new Uri("/Resources/Images/worm.png", UriKind.Relative), new Uri("/Resources/Images/worm.png", UriKind.Relative), new Uri("/Resources/Images/worm.png", UriKind.Relative), new Uri("/Resources/Images/worm.png", UriKind.Relative), };
 
         DispatcherTimer timer;
+        int gameTimer = 1800;
         int countdownTimer = 1800;
         int CatchFishTrigger;
 
 
-        public GameViewModel(Player player)
+        public GameViewModel(Player player, int gameTimer)
         {
             MainMenuCommand = new RelayCommand(GetMainMenuView, CanExecute);
             NewGameCommand = new RelayCommand(GetGameView, CanExecute);
             LuckySnuffBtn = new RelayCommand(UseLuckySnuff, CanExecute);
             CupOfCoffeBtn = new RelayCommand(UseCupOfCoffe, CanExecute);
+            this.gameTimer = gameTimer;
+            countdownTimer = gameTimer;
+
+          
             
+
 
             this.player = player;
             StartNewGame();
@@ -123,7 +129,17 @@ namespace Angel
             {
                 countdownTimer--;
                 GameTimer = countdownTimer.ToString();
-                GameTimer = String.Format("00:{0:D2}:{1:D2}", countdownTimer / 60, countdownTimer % 60);
+                if (countdownTimer < 3600)
+                {
+                    GameTimer = String.Format("{0:D2}:{1:D2}:{2:D2}", countdownTimer / 3600, countdownTimer / 60, countdownTimer % 60);
+                }
+                else
+                {
+                    GameTimer = String.Format("{0:D2}:{1:D2}:{2:D2}", countdownTimer/3600, countdownTimer/120, countdownTimer % 60);
+                }
+                
+
+
                 CatchFishTrigger++;
                 CheckIfCatchFishTrigger();
             }
@@ -137,7 +153,7 @@ namespace Angel
 
         private void CheckIfCatchFishTrigger()
         {
-            if (CatchFishTrigger == 10)
+            if (CatchFishTrigger == (gameTimer / 10))
             {
                 string imagePath = "\\Resources\\Images\\worm.png";
                 this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
@@ -214,7 +230,7 @@ namespace Angel
 
         private void GetGameView(object parameter)
         {            
-            Main.Content = new GameView(player);
+            Main.Content = new GameView(player, gameTimer);
         }
         private void UpdateLabelsInView(List<Fish> fishToLabel)
         {

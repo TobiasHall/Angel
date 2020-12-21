@@ -24,8 +24,7 @@ namespace Angel
         {
             GameTimeOptions = new List<string>();
             
-            string startValue, one, two, three;
-            startValue = "TT:MM:SS";
+            string , one, two, three;            
             one = String.Format("{0:D2}t:{1:D2}m:{2:D2}s", 0, 30, 0 );
             two = String.Format("{0:D2}t:{1:D2}m:{2:D2}s", 1, 0, 0 );
             three = String.Format("{0:D2}t:{1:D2}m:{2:D2}s", 2, 0, 0 );
@@ -42,21 +41,21 @@ namespace Angel
             player.SetPlayerNickname(Nickname);
             int gameTimer = SetGameTimer();
             
-            Main.Content = new GameView(player);
+            Main.Content = new GameView(player, gameTimer);
         }
         private int SetGameTimer()
         {
-            if (SelectedGameTime == "00:30:00")
+            if (SelectedGameTime == "02t:00m:00s")
             {
-                return 3 *60;
+                return 120 *60;
             }
-            else if (SelectedGameTime == "01:00:00")
+            else if (SelectedGameTime == "01t:00m:00s")
             {
                 return 60 * 60;
             }
             else
             {
-                return 120 * 60;
+                return 30 * 60;
             }
         }
         
