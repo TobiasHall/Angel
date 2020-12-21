@@ -147,40 +147,41 @@
     <!--#endregion-->
     <Grid>
         <StackPanel Width="600" VerticalAlignment="Center" HorizontalAlignment="Center">
-            
+
             <Label Content="Skriv ditt bonnlurksnamn"
                    HorizontalAlignment="Center"
                    FontWeight="Bold"  
                    Foreground="#3B82A3" 
-                   FontSize="36" 
-                   Margin="0,30,0,0"/>
+                   FontSize="45"/>
 
             <TextBox Text="{Binding Nickname}"
-                     Background="Black"
-                     Foreground="#b2cce5" 
+                     Background="White"
+                     Foreground="Black" 
                      TextWrapping="Wrap" 
                      TextAlignment="Center"
                      BorderThickness="1" 
-                     BorderBrush="White"
-                     FontSize="20" 
-                     Height="30"
+                     BorderBrush="#3B82A3"                     
+                     FontSize="30" 
+                     Height="50"
                      Width="270"/>
             <Label Content="Längd på fisketur"
                    HorizontalAlignment="Center"
                    FontWeight="Bold"  
-                   Foreground="White" 
-                   FontSize="24" 
-                   Margin="0,30,0,0"/>
+                   Foreground="#3B82A3" 
+                   FontSize="38"/>
             <ComboBox Width="270"
-                      Height="30"
+                      
+                      FontSize="30"
+                      Height="50"
                       Background="Black"
                       Foreground="black"
+                      BorderBrush="#3B82A3"
                       ItemsSource="{Binding GameTimeOptions}"
                       SelectedItem="{Binding SelectedGameTime}"
-                      IsSynchronizedWithCurrentItem="True">
-                
-            </ComboBox>
-            
+                      IsSynchronizedWithCurrentItem="True"/>
+
+
+
             <Button Content="Gå och fiska"
                     Command="{Binding NewGameCommand}" 
                     Style="{StaticResource RoundButtonTemplate}" 
@@ -191,8 +192,10 @@
                 Command="{Binding MainMenuCommand}"
                 Style="{StaticResource RoundButtonTemplate}"
                 FontSize="15" 
-                Width="94"
-                Height="30">
+                Width="120"
+                Height="35"
+                    
+                    Margin="0,10,0,0">
             </Button>
         </StackPanel>
     </Grid>

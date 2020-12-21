@@ -29,12 +29,12 @@ namespace Angel
             one = String.Format("{0:D2}:{1:D2}:{2:D2}", 0, 30, 0 );
             two = String.Format("{0:D2}:{1:D2}:{2:D2}", 1, 0, 0 );
             three = String.Format("{0:D2}:{1:D2}:{2:D2}", 2, 0, 0 );
-            SelectedGameTime = startValue;
+            //SelectedGameTime = startValue;
 
-            GameTimeOptions.Add(startValue);
-            GameTimeOptions.Add(one);
-            GameTimeOptions.Add(two);
-            GameTimeOptions.Add(three);
+            //GameTimeOptions.Add(startValue);
+            GameTimeOptions.Add(one + $" ({startValue})");
+            GameTimeOptions.Add(two + $" ({startValue})");
+            GameTimeOptions.Add(three + $" ({startValue})");
         }
         private void GetGameView(object parameter)
         {
