@@ -26,15 +26,15 @@ namespace Angel
             
             string startValue, one, two, three;
             startValue = "TT:MM:SS";
-            one = String.Format("{0:D2}:{1:D2}:{2:D2}", 0, 30, 0 );
-            two = String.Format("{0:D2}:{1:D2}:{2:D2}", 1, 0, 0 );
-            three = String.Format("{0:D2}:{1:D2}:{2:D2}", 2, 0, 0 );
+            one = String.Format("{0:D2}t:{1:D2}m:{2:D2}s", 0, 30, 0 );
+            two = String.Format("{0:D2}t:{1:D2}m:{2:D2}s", 1, 0, 0 );
+            three = String.Format("{0:D2}t:{1:D2}m:{2:D2}s", 2, 0, 0 );
             //SelectedGameTime = startValue;
 
             //GameTimeOptions.Add(startValue);
-            GameTimeOptions.Add(one + $" ({startValue})");
-            GameTimeOptions.Add(two + $" ({startValue})");
-            GameTimeOptions.Add(three + $" ({startValue})");
+            GameTimeOptions.Add(one);
+            GameTimeOptions.Add(two);
+            GameTimeOptions.Add(three);
         }
         private void GetGameView(object parameter)
         {
