@@ -16,27 +16,6 @@ namespace Angel
 {
     public class GameViewModel : BaseViewModel
     {
-        private BitmapImage _ImageSource;
-        public BitmapImage ImageSource
-        {
-            get { return this._ImageSource; }
-            set { this._ImageSource = value; this.OnPropertyChanged("ImageSource"); }
-        }
-
-        //public BitmapImage TestTest { get; set; } = new BitmapImage(new Uri("\\Resources\\Images\\fish.png", UriKind.Relative));
-
-
-        public ObservableCollection<BitmapImage> TestTest { get; set; } = new ObservableCollection<BitmapImage>() { new BitmapImage(new Uri("\\Resources\\Images\\fish.png", UriKind.Relative)), new BitmapImage(new Uri("\\Resources\\Images\\fish.png", UriKind.Relative)), new BitmapImage(new Uri("\\Resources\\Images\\fish.png", UriKind.Relative)), new BitmapImage(new Uri("\\Resources\\Images\\fish.png", UriKind.Relative)), new BitmapImage(new Uri("\\Resources\\Images\\fish.png", UriKind.Relative)), new BitmapImage(new Uri("\\Resources\\Images\\fish.png", UriKind.Relative)), new BitmapImage(new Uri("\\Resources\\Images\\fish.png", UriKind.Relative)), new BitmapImage(new Uri("\\Resources\\Images\\fish.png", UriKind.Relative)), };
-
-
-
-        public int HookCounter { get; set; } = 100;
-
-
-        public Hook TestAvKrok { get; set; }
-        public List<Hook> TestAvKrok2 { get; set; } = new List<Hook>();
-
-
         public Dictionary<int, Hook> Hooks { get; set; } = new Dictionary<int, Hook>();
         public List<Fish> CollectedFishes { get; private set; } = new List<Fish>();
         public string CollectedFishSpeciesLbl { get; set; }
@@ -65,18 +44,8 @@ namespace Angel
 
         public Player player { get; set; }
         public string GameTimer { get; set; } = "TT:MM:SS";
-        public int NrOfHooks { get; set; } = 0;
-        public Uri HookId100 { get; set; } = new Uri(@"/Resources/Images/hook.png", UriKind.Relative);
-        public Uri FishImage { get; set; } = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
-        
-        //public Uri ImageUri { get; set; } = new Uri(@"/Resources/Images/worm.png", UriKind.Relative);
-        //public Uri[] ImageUri2 { get; set; } = new Uri[8] {new Uri("/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative), new Uri(@"/Resources/Images/worm.png", UriKind.Relative)};
-        public Dictionary<int, int> PositionOfHook { get; set; } = new Dictionary<int, int>();
-        
-        //public List<int> HookOnIce { get; set; }
-        public Dictionary<int, int> HookHasFish { get; set; } = new Dictionary<int, int>();
+        //public Dictionary<int, int> PositionOfHook { get; set; } = new Dictionary<int, int>();
 
-        public ObservableCollection<Uri> ImageUri { get; set; } = new ObservableCollection<Uri>() { new Uri("/Resources/Images/worm.png", UriKind.Relative), new Uri("/Resources/Images/worm.png", UriKind.Relative), new Uri("/Resources/Images/worm.png", UriKind.Relative), new Uri("/Resources/Images/worm.png", UriKind.Relative), new Uri("/Resources/Images/worm.png", UriKind.Relative), new Uri("/Resources/Images/worm.png", UriKind.Relative), new Uri("/Resources/Images/worm.png", UriKind.Relative), new Uri("/Resources/Images/worm.png", UriKind.Relative), };
 
         DispatcherTimer timer;
         int gameTimer = 1800;
@@ -92,30 +61,11 @@ namespace Angel
             CupOfCoffeBtn = new RelayCommand(UseCupOfCoffe, CanExecute);
             this.gameTimer = gameTimer;
             countdownTimer = gameTimer;
-
-          
-            
-
-
             this.player = player;
-            StartNewGame();
             LuckySnuffLabel = ExtraChanseOnTroutChansesLeft();
             CupOfCoffeLabel = ExtraChanseToCatchFishLeft();
-
-
+            StartNewGame();
             StartCountdown();
-
-
-
-            string imagePath = "\\Resources\\Images\\fish.png";
-            this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
-
-
-
-        }
-        public void SetImage(object parameter)
-        {
-            
         }
         public void CollectFish(Fish fish)
         {
