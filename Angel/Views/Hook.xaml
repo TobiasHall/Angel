@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Angel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        
+    <Grid x:Name="master">
+        <Image Height="50" Width="60" Name="imgDynamic"/>
     </Grid>
 </UserControl>

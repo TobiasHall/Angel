@@ -18,7 +18,7 @@ namespace Angel
         private static List<int> luckyHoles;
         private static int numberOfHooks = 8;
         private static int luckyHolePercentBonus = 50;
-        private static List<Fish> fishes = new List<Fish>();
+        private static List<Fish> fishes;
         private static List<Fish> tempFishes = new List<Fish>();
 
         private static int minChanseForFish = 4;
@@ -27,6 +27,7 @@ namespace Angel
 
         private static Dictionary<int, int> positionOfHook222 = new Dictionary<int, int>();
         private static Dictionary<int, int> returnDictionary;
+        private static Dictionary<int, Hook> returnDictionary2;
         private static List<int> hookIdHasLucyHoleBonus = new List<int>();
         private static List<int> hitPercentage = new List<int>();
         private static List<int> activeHoleInShuffleList = new List<int>();
@@ -83,13 +84,13 @@ namespace Angel
             }
             while (luckyHoles.Contains(myNumber));
             return myNumber;
-        }        
+        }
 
         public static Dictionary<int, int> CatchFish(Dictionary<int, int> positionOfHook)
         {
-            
+
             ClearProps();
-            
+
 
             positionOfHook222 = positionOfHook.Shuffle();
             CheckLuckyHoleBonus(positionOfHook);
@@ -101,6 +102,42 @@ namespace Angel
 
             return returnDictionary;
         }
+        //TODO: Fixa så att det Dict med Hook följer med och att fiskar som retuneras blir rätt
+        public static Dictionary<int, Hook> CatchFish(Dictionary<int, Hook> positionOfHook)
+        {
+
+            ClearProps();
+
+            Dictionary<int, int> testDict = new Dictionary<int, int>();
+            foreach (var item in positionOfHook)
+            {
+                testDict.Add(item.Key, item.Value.PositionOnIce);
+            }
+
+
+
+            positionOfHook222 = testDict.Shuffle();
+            CheckLuckyHoleBonus(testDict);
+            SetHitPercentaget();
+            GetShuffledActiveHoles(testDict);
+            GoFish();
+
+            int counter = 0;
+            if (returnDictionary != null)
+            {
+                foreach (var item in returnDictionary)
+                {
+                    Hook hook = positionOfHook.ElementAt(counter).Value;
+                    hook.Fish = fishes[counter];
+                    returnDictionary2.Add(item.Key, hook);
+                    counter++;
+                }
+                counter = 0;
+            }
+
+
+            return returnDictionary2;
+        }
 
         private static void ClearProps()
         {
@@ -110,6 +147,10 @@ namespace Angel
             troutBonus = 0;
             returnDictionary = new Dictionary<int, int>();
             tempFishes = new List<Fish>();
+            fishes = new List<Fish>();
+
+            returnDictionary2 = new Dictionary<int, Hook>();
+
         }
 
         private static void CheckLuckyHoleBonus(Dictionary<int, int> positionOfHook)

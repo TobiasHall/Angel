@@ -49,8 +49,13 @@
                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
                     <Label HorizontalAlignment="Center" Content="{Binding player.Nickname, FallbackValue=Fräddrik}" FontSize="38"></Label>
                     <Label HorizontalAlignment="Center" Content="{Binding GameTimer, FallbackValue=00:00:00}" FontSize="28"></Label>
-                    
-                    
+                    <WrapPanel HorizontalAlignment="Center">
+                        <Label HorizontalAlignment="Center" Content="{Binding CollectedFishSpeciesLbl, FallbackValue=Öring:}" FontSize="28"></Label>
+                        <Label HorizontalAlignment="Center" Content="{Binding CollectedFishWeightLbl, FallbackValue=1000}" FontSize="28"></Label>
+                        <Label HorizontalAlignment="Center" Content="g" FontSize="28"></Label>
+                    </WrapPanel>
+
+
                 </StackPanel>
 
 
@@ -58,8 +63,11 @@
 
                 <WrapPanel Name="DropWrap" Grid.Column="1" VerticalAlignment="Bottom" Drop="PanelDrop">
                     <Image Margin="0,0,400,0" Height="100" Source="/Resources/Images/collection-bag.png"></Image>
-                    <local:Hook Uid="200" MouseDown="Rectangle_MouseDown">
-                        <Image Height="50" Width="60" Source="{Binding TestTest[0]}"/>
+                    <!--<local:Hook x:Name="Hook1" Uid="200">
+                        --><!--<Image Height="50" Width="60" Source="{Binding TestTest[0]}"/>--><!--
+                    </local:Hook>
+                    <local:Hook Uid="201" MouseDown="Rectangle_MouseDown">
+                        --><!--<Image Height="50" Width="60" Source="{Binding TestTest[0]}"/>--><!--
                     </local:Hook>
                     <Rectangle Uid="100" Width="50" Height="40" Margin="5" MouseDown="Rectangle_MouseDown">
                         <Rectangle.Fill>
@@ -100,7 +108,7 @@
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="{Binding ImageUri[7]}"/>
                         </Rectangle.Fill>
-                    </Rectangle>
+                    </Rectangle>-->
                 </WrapPanel>
                 
                 

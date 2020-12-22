@@ -33,7 +33,14 @@ namespace Angel
         public int HookCounter { get; set; } = 100;
 
 
+        public Hook TestAvKrok { get; set; }
+        public List<Hook> TestAvKrok2 { get; set; } = new List<Hook>();
 
+
+        public Dictionary<int, Hook> Hooks { get; set; } = new Dictionary<int, Hook>();
+        public List<Fish> CollectedFishes { get; private set; } = new List<Fish>();
+        public string CollectedFishSpeciesLbl { get; set; }
+        public int CollectedFishWeightLbl { get; set; }
 
 
 
@@ -52,7 +59,7 @@ namespace Angel
         public int NrOfChar { get; set; }
         public int NrOfTrout { get; set; }
         public int TotalFishes { get; set; }
-        public int TotalWeight { get; set; }
+        public int TotalWeight { get; set; } = 0;
         public int TotalScore { get; set; }
 
 
@@ -110,6 +117,14 @@ namespace Angel
         {
             
         }
+        public void CollectFish(Fish fish)
+        {
+            if (fish != null)
+            {
+                CollectedFishes.Add(fish);
+                UpdateLabelsInView(fish);
+            }
+        }
         private void UseLuckySnuff(object parameter)
         {
             LuckySnuffBtnEnabled = ExtraChanseOnTrout();
@@ -162,112 +177,152 @@ namespace Angel
         {
             //if (CatchFishTrigger == (gameTimer / 10))
                 if (CatchFishTrigger == 10)
-                {                
-                string imagePath = "\\Resources\\Images\\worm.png";
-                this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
+                {
+                
+                //Dictionary<int, int> hooksWithFish = CatchFish(PositionOfHook);
+                Dictionary<int, Hook> hooksWithFish2 = CatchFish(Hooks);
 
-                TestTest[0] = new BitmapImage(new Uri("\\Resources\\Images\\worm.png", UriKind.Relative));
+                if (hooksWithFish2 != null)
+                {
+                    foreach (var fishDict in hooksWithFish2)
+                    {
+                        foreach (var wormDict in Hooks)
+                        {
+                            if (fishDict.Key == wormDict.Key)
+                            {
+                                wormDict.Value.Fish = fishDict.Value.Fish;
+                                string imagePath2 = "\\Resources\\Images\\fish.png";
+                                wormDict.Value.imgDynamic.Source = new BitmapImage(new Uri(imagePath2, UriKind.Relative));
+                                wormDict.Value.HasWorm = false;
+                                Hooks.Remove(wormDict.Key);
+                                break;
+                            }
+                        }
+                    }
+                }
 
-                Dictionary<int, int> hooksWithFish = CatchFish(PositionOfHook);
+
+
+
                 List<Fish> fishToLabel = GetFishFromLastRound();
-                UpdateLabelsInView(fishToLabel);
+                //UpdateLabelsInView(fishToLabel);
                                 
 
-                UpdateHookImage(hooksWithFish);
+                //UpdateHookImage(hooksWithFish);
                 //AddHookWithFishToList(hooksWithFish);
                 CatchFishTrigger = 0;
                 GetBasketOfFish();
             }
         }
 
-        //Behövs egentligen inte
-        private void AddHookWithFishToList(Dictionary<int, int> hooksWithFish)
-        {
-            foreach (var item in hooksWithFish)
-            {
-                HookHasFish.Add(item.Key, item.Value);
-            }
-        }
+        //private void UpdateHookImage(Dictionary<int, int> hooksWithFish)
+        //{
+        //    for (int i = 0; i < hooksWithFish.Count; i++)
+        //    {
+        //        string hookId = hooksWithFish.ElementAt(i).Key.ToString();
+        //        int arrayKey = int.Parse(hookId[2].ToString());
+        //        int hookKey = hooksWithFish.ElementAt(i).Key;
+        //        switch (hookKey)
+        //        {
+        //            case 100:
+        //                ImageUri[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);                        
+        //                PositionOfHook.Remove(hookKey);
+        //                break;
+        //            case 101:
+        //                ImageUri[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
+        //                PositionOfHook.Remove(hookKey);
+        //                break;
+        //            case 102:
+        //                ImageUri[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
+        //                PositionOfHook.Remove(hookKey);
+        //                break;
+        //            case 103:
+        //                ImageUri[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
+        //                PositionOfHook.Remove(hookKey);
+        //                break;
+        //            case 104:
+        //                ImageUri[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
+        //                PositionOfHook.Remove(hookKey);
+        //                break;
+        //            case 105:
+        //                ImageUri[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
+        //                PositionOfHook.Remove(hookKey);
+        //                break;
+        //            case 106:
+        //                ImageUri[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
+        //                PositionOfHook.Remove(hookKey);
+        //                break;
+        //            case 107:
+        //                ImageUri[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
+        //                PositionOfHook.Remove(hookKey);
+        //                break;
+        //            default:
+        //                break;
+        //        }
 
-        private void UpdateHookImage(Dictionary<int, int> hooksWithFish)
-        {
-            for (int i = 0; i < hooksWithFish.Count; i++)
-            {
-                string hookId = hooksWithFish.ElementAt(i).Key.ToString();
-                int arrayKey = int.Parse(hookId[2].ToString());
-                int hookKey = hooksWithFish.ElementAt(i).Key;
-                switch (hookKey)
-                {
-                    case 100:
-                        ImageUri[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);                        
-                        PositionOfHook.Remove(hookKey);
-                        break;
-                    case 101:
-                        ImageUri[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
-                        PositionOfHook.Remove(hookKey);
-                        break;
-                    case 102:
-                        ImageUri[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
-                        PositionOfHook.Remove(hookKey);
-                        break;
-                    case 103:
-                        ImageUri[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
-                        PositionOfHook.Remove(hookKey);
-                        break;
-                    case 104:
-                        ImageUri[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
-                        PositionOfHook.Remove(hookKey);
-                        break;
-                    case 105:
-                        ImageUri[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
-                        PositionOfHook.Remove(hookKey);
-                        break;
-                    case 106:
-                        ImageUri[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
-                        PositionOfHook.Remove(hookKey);
-                        break;
-                    case 107:
-                        ImageUri[arrayKey] = new Uri(@"/Resources/Images/fish.png", UriKind.Relative);
-                        PositionOfHook.Remove(hookKey);
-                        break;
-                    default:
-                        break;
-                }
-
-            }
-        }
+        //    }
+        //}
 
         private void GetGameView(object parameter)
         {            
             Main.Content = new GameView(player, gameTimer);
         }
-        private void UpdateLabelsInView(List<Fish> fishToLabel)
+        //private void UpdateLabelsInView(List<Fish> fishToLabel)
+        //{
+        //    foreach (var fish in fishToLabel)
+        //    {
+        //        TotalFishes++;
+        //        TotalWeight += fish.Weight;
+        //        if (fish.FishId == (int)FishEnum.Dace)
+        //        {
+        //            NrOfDace++;
+        //        }
+        //        else if (fish.FishId == (int)FishEnum.Pike)
+        //        {
+        //            NrOfPike++;
+        //        }
+        //        else if (fish.FishId == (int)FishEnum.Perch)
+        //        {
+        //            NrOfPerc++;
+        //        }
+        //        else if (fish.FishId == (int)FishEnum.Char)
+        //        {
+        //            NrOfChar++;
+        //        }
+        //        else
+        //        {
+        //            NrOfTrout++;
+        //        }
+        //    }
+        //    //TotalScore = GetScore();
+        //}
+        private void UpdateLabelsInView(Fish fish)
         {
-            foreach (var fish in fishToLabel)
+            
+            if (fish.FishId == (int)FishEnum.Dace)
             {
-                TotalFishes++;
-                TotalWeight += fish.Weight;
-                if (fish.FishId == (int)FishEnum.Dace)
-                {
-                    NrOfDace++;
-                }
-                else if (fish.FishId == (int)FishEnum.Pike)
-                {
-                    NrOfPike++;
-                }
-                else if (fish.FishId == (int)FishEnum.Perch)
-                {
-                    NrOfPerc++;
-                }
-                else if (fish.FishId == (int)FishEnum.Char)
-                {
-                    NrOfChar++;
-                }
-                else
-                {
-                    NrOfTrout++;
-                }
+                NrOfDace++;
             }
+            else if (fish.FishId == (int)FishEnum.Pike)
+            {
+                NrOfPike++;
+            }
+            else if (fish.FishId == (int)FishEnum.Perch)
+            {
+                NrOfPerc++;
+            }
+            else if (fish.FishId == (int)FishEnum.Char)
+            {
+                NrOfChar++;
+            }
+            else
+            {
+                NrOfTrout++;
+            }
+            TotalFishes++;
+            TotalWeight += fish.Weight;
+            CollectedFishSpeciesLbl = fish.Species;
+            CollectedFishWeightLbl = fish.Weight;
             TotalScore = GetScore();
         }
     }
