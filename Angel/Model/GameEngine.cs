@@ -9,72 +9,32 @@ namespace Angel
 {
     class GameEngine
     {
-        private static int score;
+        public static int numbersOfExtraChansOnTrout { get; private set; } = 3;
+        public static int numbersOfExtraChansToCatchFish { get; private set; } = 5;
+        public static int Score { get; private set; }
+        
         private static readonly Random random = new Random();
-        private static int numbersOfExtraChansOnTrout;
-        private static int numbersOfExtraChansToCatchFish;
+        private static int bonusPercentOnFish;
+        private static int bonusPercentOnTrout;
 
 
-        private static List<int> luckyHoles;
-        private static int numberOfHooks = 8;
-        private static int luckyHolePercentBonus = 50;
+        private static List<int> luckyHoles;        
+        private static int luckyHolePercentBonus = 20;
         private static List<Fish> fishes;
-        private static List<Fish> tempFishes = new List<Fish>();
 
         private static int minChanseForFish = 4;
         private static int maxChanseForFish = 8;
-
-
-        private static Dictionary<int, int> positionOfHook222 = new Dictionary<int, int>();
-        private static Dictionary<int, int> returnDictionary;
-        private static Dictionary<int, Hook> returnDictionary2;
-        private static List<int> hookIdHasLucyHoleBonus = new List<int>();
-        private static List<int> hitPercentage = new List<int>();
-        private static List<int> activeHoleInShuffleList = new List<int>();
-        private static int troutBonus = 0;
         
         public static void StartNewGame()
         {
-            numbersOfExtraChansOnTrout = 3;
-            numbersOfExtraChansToCatchFish = 5;
             luckyHoles = new List<int>();
+            fishes = new List<Fish>();
+
             for (int i = 0; i < 5; i++)
             {
                 luckyHoles.Add(UniqueRandomInt(1, 41));
             }            
         }
-        public static bool ExtraChanseOnTrout()
-        {
-            numbersOfExtraChansOnTrout--;
-            if (numbersOfExtraChansOnTrout != 0)
-            {
-                return true;
-            }
-            return false;
-        }
-        public static int ExtraChanseOnTroutChansesLeft()
-        {
-            return numbersOfExtraChansOnTrout;
-        }
-        public static bool ExtraChanseToCatchFish()
-        {
-            numbersOfExtraChansToCatchFish--;
-            if (numbersOfExtraChansToCatchFish != 0)
-            {
-                return true;
-            }
-            return false;
-        }
-        public static int ExtraChanseToCatchFishLeft()
-        {
-            return numbersOfExtraChansToCatchFish;
-        }
-        public static int GetScore()
-        {
-            return score;
-        }
-        
-
         private static int UniqueRandomInt(int min, int max)
         {
             int myNumber;
@@ -85,169 +45,75 @@ namespace Angel
             while (luckyHoles.Contains(myNumber));
             return myNumber;
         }
-
-        public static Dictionary<int, int> CatchFish(Dictionary<int, int> positionOfHook)
+        public static bool ExtraChanseOnTrout()
         {
-
-            ClearProps();
-
-
-            positionOfHook222 = positionOfHook.Shuffle();
-            CheckLuckyHoleBonus(positionOfHook);
-            SetHitPercentaget();
-            GetShuffledActiveHoles(positionOfHook);
-            GoFish();
-
-
-
-            return returnDictionary;
-        }
-        //TODO: Fixa så att det Dict med Hook följer med och att fiskar som retuneras blir rätt
-        public static Dictionary<int, Hook> CatchFish(Dictionary<int, Hook> positionOfHook)
-        {
-
-            ClearProps();
-
-            Dictionary<int, int> testDict = new Dictionary<int, int>();
-            foreach (var item in positionOfHook)
+            numbersOfExtraChansOnTrout--;
+            if (numbersOfExtraChansOnTrout != 0)
             {
-                testDict.Add(item.Key, item.Value.PositionOnIce);
+                bonusPercentOnTrout = 33;
+                return true;
             }
-
-
-
-            positionOfHook222 = testDict.Shuffle();
-            CheckLuckyHoleBonus(testDict);
-            SetHitPercentaget();
-            GetShuffledActiveHoles(testDict);
-            GoFish();
-
-            int counter = 0;
-            if (returnDictionary != null)
-            {
-                foreach (var item in returnDictionary)
-                {
-                    Hook hook = positionOfHook.ElementAt(counter).Value;
-                    hook.Fish = fishes[counter];
-                    returnDictionary2.Add(item.Key, hook);
-                    counter++;
-                }
-                counter = 0;
-            }
-
-
-            return returnDictionary2;
+            return false;
         }
-
-        private static void ClearProps()
+        public static bool ExtraChanseToCatchFish()
         {
-            hookIdHasLucyHoleBonus = new List<int>();
-            hitPercentage = new List<int>();
-            activeHoleInShuffleList = new List<int>();
-            troutBonus = 0;
-            returnDictionary = new Dictionary<int, int>();
-            tempFishes = new List<Fish>();
-            fishes = new List<Fish>();
-
-            returnDictionary2 = new Dictionary<int, Hook>();
-
-        }
-
-        private static void CheckLuckyHoleBonus(Dictionary<int, int> positionOfHook)
-        {            
-            foreach (var hookPos in positionOfHook)
+            numbersOfExtraChansToCatchFish--;
+            if (numbersOfExtraChansToCatchFish != 0)
             {
-                if (luckyHoles.Contains(hookPos.Value))
+                bonusPercentOnFish = 10;
+                return true;
+            }
+            return false;
+        }
+                
+        public static void CatchFish(List<Hook> hooks)
+        {
+            hooks.Shuffle();
+            //Kolla turhål
+            foreach (Hook hook in hooks)
+            {
+                if (luckyHoles.Contains(hook.PositionOnIce))
                 {
-                    hookIdHasLucyHoleBonus.Add(hookPos.Key);
+                    hook.PlacedOnLucyHole = true;
                 }
             }
-        }
-        private static void GetShuffledActiveHoles(Dictionary<int, int> positionOfHook)
-        {
-            if (positionOfHook.Count < hitPercentage.Count && positionOfHook.Count > 1)
+            //Slumpar antal krokar med chans
+            int hooksWithChanse = random.Next(minChanseForFish, maxChanseForFish + 1);
+            if (hooks.Count < hooksWithChanse)
             {
-                for (int i = 0; i < positionOfHook.Count; i++)
+                hooksWithChanse = hooks.Count;
+            }
+            //Slumpar fram fiskar
+            //List<Hook> tempHooks = new List<Hook>();
+            for (int i = 0; i < hooksWithChanse; i++)
+            {
+                int hit = random.Next(1, 101);
+                hit += bonusPercentOnFish;
+                if (hooks[i].PlacedOnLucyHole)
                 {
-                    activeHoleInShuffleList.Add(positionOfHook.ElementAt(i).Value);
+                    hit += luckyHolePercentBonus;
                 }
-                activeHoleInShuffleList.Shuffle();            
-            }
-            else if (positionOfHook.Count > hitPercentage.Count)
-            {
-                for (int i = 0; i < hitPercentage.Count; i++)
+                if (hit > 80)
                 {
-                    activeHoleInShuffleList.Add(positionOfHook.ElementAt(i).Value);
-                }
-                activeHoleInShuffleList.Shuffle();
-            }
-
-
-            //foreach (var item in positionOfHook)
-            //{
-            //    activeHoleInShuffleList.Add(item.Value);
-            //}
-        }
-
-        
-
-        private static void SetHitPercentaget()
-        {
-            int number = HooksWithChanceOfFish();
-            for (int i = 0; i < number; i++)
-            {
-                hitPercentage.Add(random.Next(1, 101));
-            }
-
-        }
-        private static int HooksWithChanceOfFish()
-        {
-            return random.Next(minChanseForFish, maxChanseForFish+1);
-        }
-        private static void GoFish()
-        {
-            if (activeHoleInShuffleList.Count <= hitPercentage.Count)
-            {
-                for (int i = 0; i < activeHoleInShuffleList.Count; i++)
-                {
-                    if (hookIdHasLucyHoleBonus.Contains(positionOfHook222.ElementAt(i).Value))
-                    {
-                        hitPercentage[i] += luckyHolePercentBonus;
-                    }
-                    if (hitPercentage[i] > 80)
-                    {
-                        Fish fish = new Fish(troutBonus);
-                        fishes.Add(fish);
-                        tempFishes.Add(fish);
-                        returnDictionary.Add(positionOfHook222.ElementAt(i).Key, positionOfHook222.ElementAt(i).Value);
-                    }
+                    Fish fish = new Fish(bonusPercentOnTrout);
+                    fishes.Add(fish);
+                    hooks[i].Fish = fish;
+                    //tempHooks.Add(hooks[i]);
                 }
             }
-            else if (activeHoleInShuffleList.Count > hitPercentage.Count)
-            {
-                for (int i = 0; i < hitPercentage.Count; i++)
-                {
-                    if (hookIdHasLucyHoleBonus.Contains(positionOfHook222.ElementAt(i).Value))
-                    {
-                        hitPercentage[i] += luckyHolePercentBonus;
-                    }
-                    if (hitPercentage[i] > 80)
-                    {
-                        Fish fish = new Fish(troutBonus);
-                        fishes.Add(fish);
-                        tempFishes.Add(fish);
-                        returnDictionary.Add(positionOfHook222.ElementAt(i).Key, positionOfHook222.ElementAt(i).Value);
-                    }
-                }
-            }
+
+            ClearBonus();
+            //return tempHooks;
+        }
+
+        private static void ClearBonus()
+        {
+            bonusPercentOnFish = 0;
+            bonusPercentOnTrout = 0;
         }
         public static List<Fish> GetBasketOfFish()
         {
             return fishes;
-        }
-        public static List<Fish> GetFishFromLastRound()
-        {
-            return tempFishes;
         }
 
 

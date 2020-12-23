@@ -15,8 +15,6 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-
-
             <Grid Grid.Row="0" Name="TopGrid" AllowDrop="True">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200"/>
@@ -54,14 +52,9 @@
                         <Label HorizontalAlignment="Center" Content="{Binding CollectedFishWeightLbl, FallbackValue=1000}" FontSize="28"></Label>
                         <Label HorizontalAlignment="Center" Content="g" FontSize="28"></Label>
                     </WrapPanel>
-
-
                 </StackPanel>
 
-
-
-
-                <WrapPanel Name="FishAndHookDropZone" Grid.Column="1" VerticalAlignment="Bottom" Drop="PanelDrop">
+                <WrapPanel Uid="0" Name="FishAndHookDropZone" Grid.Column="1" VerticalAlignment="Bottom" Drop="PanelDrop">
                     <Image Margin="0,0,0,0" Source="/Resources/Images/fish-and-worm.png"></Image>                    
                 </WrapPanel>
                 
@@ -106,7 +99,6 @@
                         <Label Content="g" FontWeight="Bold" FontSize="24"></Label>
                     </WrapPanel>
                 </StackPanel>
-
             </Grid>
 
             <StackPanel Grid.Row="1">

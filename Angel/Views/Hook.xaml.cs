@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using System.Windows.Resources;
 using System.Windows.Shapes;
 
 namespace Angel
@@ -21,23 +22,13 @@ namespace Angel
     {
         public int HookId { get; set; }
         public int PositionOnIce { get; set; }
-        public bool HasWorm { get; set; } = true;
-        //public bool HasFish { get; set; }
+        public bool PlacedOnLucyHole { get; set; }
+        public bool HasWorm { get; set; } = true;        
         public Fish Fish { get; set; }
-        //private BitmapImage _ImageSource;
-        //public BitmapImage ImageSource
-        //{
-        //    get { return this._ImageSource; }
-        //    set { this._ImageSource = value; this.OnPropertyChanged("ImageSource"); }
-        //}
-
-
-
+        
         public Hook()
         {
             InitializeComponent();
-
-
             string imagePath = "\\Resources\\Images\\worm.png";
             imgDynamic.Source = new BitmapImage(new Uri(imagePath, UriKind.Relative));
         }
@@ -53,16 +44,34 @@ namespace Angel
                 DragDrop.DoDragDrop(this, data, DragDropEffects.Move);
             }
         }
+        protected override void OnGiveFeedback(GiveFeedbackEventArgs e)
+        {
+            base.OnGiveFeedback(e);
+            // These Effects values are set in the drop target's
+            // DragOver event handler.
 
+            var hook = (Hook)e.OriginalSource;
+            if (e.Effects.HasFlag(DragDropEffects.Move) && hook.Fish == null)
+            {
+                StreamResourceInfo sriCurs = Application.GetResourceStream(new Uri(@"Resources/Cursors/worm.cur", UriKind.Relative));
+                Mouse.SetCursor(new Cursor(sriCurs.Stream));
+            }
+            else if (e.Effects.HasFlag(DragDropEffects.Move) && hook.Fish != null)
+            {
+                StreamResourceInfo sriCurs = Application.GetResourceStream(new Uri(@"Resources/Cursors/fish.cur", UriKind.Relative));
+                Mouse.SetCursor(new Cursor(sriCurs.Stream));
+            }
+            //else
+            //{
+            //    Mouse.SetCursor(Cursors.No);
+            //}
 
+            e.Handled = true;
+        }
 
-        //private void OnPropertyChanged(string v)
-        //{
-        //    // throw new NotImplementedException();
-        //    if (PropertyChanged != null)
-        //        PropertyChanged(this, new PropertyChangedEventArgs(v));
-        //}
-
-        //public event PropertyChangedEventHandler PropertyChanged;
+        public override string ToString()
+        {
+            return $"ID:{HookId}, Pos:{PositionOnIce}";
+        }        
     }
 }

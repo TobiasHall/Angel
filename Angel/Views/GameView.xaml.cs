@@ -26,8 +26,7 @@ namespace Angel
             InitializeComponent();
             model = new GameViewModel(player, gameTimer);
             DataContext = model;
-            CreateHooks();
-            
+            CreateHooks();            
         }
         private void CreateHooks()
         {
@@ -41,30 +40,7 @@ namespace Angel
                 counter++;
             }
         }
-        protected override void OnGiveFeedback(GiveFeedbackEventArgs e)
-        {
-            base.OnGiveFeedback(e);
-            // These Effects values are set in the drop target's
-            // DragOver event handler.
-
-            var hook = (Hook)e.OriginalSource;            
-            if (e.Effects.HasFlag(DragDropEffects.Move) && hook.Fish == null)
-            {
-                StreamResourceInfo sriCurs = Application.GetResourceStream(new Uri(@"Resources/Cursors/worm.cur", UriKind.Relative));
-                Mouse.SetCursor(new Cursor(sriCurs.Stream));
-            }
-            else if (e.Effects.HasFlag(DragDropEffects.Move) && hook.Fish != null)
-            {
-                StreamResourceInfo sriCurs = Application.GetResourceStream(new Uri(@"Resources/Cursors/fish.cur", UriKind.Relative));
-                Mouse.SetCursor(new Cursor(sriCurs.Stream));
-            }
-            //else
-            //{
-            //    Mouse.SetCursor(Cursors.No);
-            //}
-
-            e.Handled = true;
-        }
+        
         private void PanelDrop(object sender, DragEventArgs e)
         {
 
@@ -75,42 +51,39 @@ namespace Angel
             {
                 parent.Children.Remove(element);
                 panel.Children.Add(element);
-                element.PositionOnIce = int.Parse(panel.Uid);
-                model.Hooks.AddOrUpdate(element.HookId, element);
+                
+                if (model.Hook2.Contains(element))
+                {
+                    element.PositionOnIce = int.Parse(panel.Uid);
+                }
+                else
+                {
+                    element.PositionOnIce = int.Parse(panel.Uid);
+                    model.Hook2.Add(element);
+                }               
             }
             else if (panel.Name == "FishAndHookDropZone")
             {
-                element.HasWorm = true;
-                string imagePath = "\\Resources\\Images\\worm.png";
-                element.imgDynamic.Source = new BitmapImage(new Uri(imagePath, UriKind.Relative));
-
-                model.CollectFish(element.Fish);                
-                element.Fish = null;
-
-                parent.Children.Remove(element);
-                panel.Children.Add(element);
-
-                if (model.Hooks.ContainsKey(element.HookId))
+                if (model.Hook2.Contains(element))
                 {
-                    model.Hooks.Remove(element.HookId);
+                    model.Hook2.Remove(element);
+                }
+                else
+                {
+                    element.HasWorm = true;
+                    element.imgDynamic.Source = new BitmapImage(new Uri("\\Resources\\Images\\worm.png", UriKind.Relative));
+                    model.CollectFish(element.Fish);
                 }
 
+                element.PositionOnIce = int.Parse(panel.Uid);                    
+                parent.Children.Remove(element);
+                panel.Children.Add(element);
             }
             else
             {
                 parent.Children.Remove(element);
                 panel.Children.Add(element);
             }
-
-
-        }
-
-        private void Rectangle_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            DataObject data = new DataObject();
-            data.SetData("Object", sender);
-            DragDrop.DoDragDrop((DependencyObject)sender, data, DragDropEffects.Move);
-
         }
     }
 }
