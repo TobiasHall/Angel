@@ -51,12 +51,12 @@ namespace Angel
             NewGameCommand = new RelayCommand(GetGameView, CanExecute);
             LuckySnuffBtn = new RelayCommand(UseLuckySnuff, CanExecute);
             CupOfCoffeBtn = new RelayCommand(UseCupOfCoffe, CanExecute);
+            StartNewGame();
             this.gameTimer = gameTimer;
             countdownTimer = gameTimer;
             this.player = player;
             LuckySnuffLabel = numbersOfExtraChansOnTrout;
             CupOfCoffeLabel = numbersOfExtraChansToCatchFish;
-            StartNewGame();
             StartCountdown();
         }
         private void GetGameView(object parameter)

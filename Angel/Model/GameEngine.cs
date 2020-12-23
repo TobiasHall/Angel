@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using static Angel.ShuffleListExtension;
+using static Angel.ShuffleExtension;
 using static Angel.Fish;
 using System.Linq;
 
@@ -30,6 +30,10 @@ namespace Angel
             luckyHoles = new List<int>();
             fishes = new List<Fish>();
 
+            numbersOfExtraChansOnTrout = 3;
+            numbersOfExtraChansToCatchFish = 5;
+            Score = 0;
+
             for (int i = 0; i < 5; i++)
             {
                 luckyHoles.Add(UniqueRandomInt(1, 41));
@@ -50,7 +54,8 @@ namespace Angel
             numbersOfExtraChansOnTrout--;
             if (numbersOfExtraChansOnTrout != 0)
             {
-                bonusPercentOnTrout = 33;
+                //Just nu är 1 = 20%
+                bonusPercentOnTrout += 2;
                 return true;
             }
             return false;
@@ -60,7 +65,7 @@ namespace Angel
             numbersOfExtraChansToCatchFish--;
             if (numbersOfExtraChansToCatchFish != 0)
             {
-                bonusPercentOnFish = 10;
+                bonusPercentOnFish += 20;
                 return true;
             }
             return false;
@@ -88,11 +93,11 @@ namespace Angel
             for (int i = 0; i < hooksWithChanse; i++)
             {
                 int hit = random.Next(1, 101);
-                hit += bonusPercentOnFish;
+                hit += bonusPercentOnFish;                
                 if (hooks[i].PlacedOnLucyHole)
                 {
                     hit += luckyHolePercentBonus;
-                }
+                }                
                 if (hit > 80)
                 {
                     Fish fish = new Fish(bonusPercentOnTrout);

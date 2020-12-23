@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Angel
 {
-    public static class ShuffleListExtension
+    public static class ShuffleExtension
     {
         private static Random rng = new Random();
 
