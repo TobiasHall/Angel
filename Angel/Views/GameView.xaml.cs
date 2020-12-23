@@ -21,44 +21,28 @@ namespace Angel
     public partial class GameView : UserControl
     {
         private GameViewModel model;
-        private int counter = 100;
         public GameView(Player player, int gameTimer)
         {
             InitializeComponent();
             model = new GameViewModel(player, gameTimer);
             DataContext = model;
-
+            CreateHooks();
+            
+        }
+        private void CreateHooks()
+        {
+            int counter = 100;
             for (int i = 0; i < 8; i++)
             {
                 Hook hook = new Hook();
                 hook.Uid = counter.ToString();
-                hook.HookId = counter;                
-                DropWrap.Children.Add(hook);
+                hook.HookId = counter;
+                FishAndHookDropZone.Children.Add(hook);
                 counter++;
             }
-
-            //DropWrap.Children.Add(hook);
         }
-
-        //protected override void OnMouseMove(MouseEventArgs e)
-        //{
-        //    if (e.LeftButton == MouseButtonState.Pressed)
-        //    {
-
-        //        DataObject data = new DataObject();
-        //        data.SetData("Object", this);
-        //        DragDrop.DoDragDrop(this, data, DragDropEffects.Move);
-        //    }
-        //}
-
         protected override void OnGiveFeedback(GiveFeedbackEventArgs e)
         {
-            //StreamResourceInfo sriCurs = ConvertPegToStream(e);
-            //if (e.Effects.HasFlag(DragDropEffects.Move))
-            //{
-            //    Mouse.SetCursor(new Cursor(sriCurs.Stream));
-            //}
-
             base.OnGiveFeedback(e);
             // These Effects values are set in the drop target's
             // DragOver event handler.
@@ -81,69 +65,20 @@ namespace Angel
 
             e.Handled = true;
         }
-
-        //private void PanelDrop(object sender, DragEventArgs e)
-        //{
-
-        //    Panel panel = (Panel)sender;
-        //    UIElement element = (UIElement)e.Data.GetData("Object");
-        //    Panel parent = (Panel)VisualTreeHelper.GetParent(element);
-        //    if (panel.Name != "TopGrid" && panel.Name != "DropWrap")
-        //    {
-        //        parent.Children.Remove(element);
-        //        panel.Children.Add(element);                
-        //        model.PositionOfHook.AddOrUpdate(int.Parse(element.Uid), int.Parse(panel.Uid));
-        //        //model.PositionOfHook2.AddOrUpdate2((Hook)element, 2);
-        //        if (element is Image)
-        //        {
-        //            var hej = (Image)element;
-                    
-        //        }
-        //        var testAvBildByte = (Hook)element;
-        //        model.TestAvKrok = testAvBildByte;
-        //        testAvBildByte.HookId = int.Parse(element.Uid);
-        //        model.TestAvKrok2.Add(testAvBildByte);
-        //        //testAvBildByte.imgDynamic.Source = new BitmapImage(new Uri("\\Resources\\Images\\worm.png", UriKind.Relative));
-        //        //model.HookOnIce.Add(int.Parse(panel.Uid));
-        //    }
-        //    else if (panel.Name == "DropWrap")
-        //    {
-        //        //Hook test = (Hook)element;
-        //        //model.PositionOfHook2.AddOrUpdate2((Hook)element, 2);
-
-        //        //Fungerar på en bild
-        //        //string imagePath = "\\Resources\\Images\\worm.png";
-        //        //model.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
-
-
-
-        //        parent.Children.Remove(element);
-        //        panel.Children.Add(element);
-        //        model.PositionOfHook.Remove(int.Parse(element.Uid));
-
-        //    }
-        //    else
-        //    {
-        //        parent.Children.Remove(element);
-        //        panel.Children.Add(element);
-        //    }
-
-
-        //}
         private void PanelDrop(object sender, DragEventArgs e)
         {
 
             Panel panel = (Panel)sender;
             Hook element = (Hook)e.Data.GetData("Object");
             Panel parent = (Panel)VisualTreeHelper.GetParent(element);
-            if (panel.Name != "TopGrid" && panel.Name != "DropWrap" && element.HasWorm == true)
+            if (panel.Name != "TopGrid" && panel.Name != "FishAndHookDropZone" && element.HasWorm == true)
             {
                 parent.Children.Remove(element);
                 panel.Children.Add(element);
                 element.PositionOnIce = int.Parse(panel.Uid);
                 model.Hooks.AddOrUpdate(element.HookId, element);
             }
-            else if (panel.Name == "DropWrap")
+            else if (panel.Name == "FishAndHookDropZone")
             {
                 element.HasWorm = true;
                 string imagePath = "\\Resources\\Images\\worm.png";
@@ -154,6 +89,11 @@ namespace Angel
 
                 parent.Children.Remove(element);
                 panel.Children.Add(element);
+
+                if (model.Hooks.ContainsKey(element.HookId))
+                {
+                    model.Hooks.Remove(element.HookId);
+                }
 
             }
             else

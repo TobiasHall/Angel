@@ -61,54 +61,8 @@
 
 
 
-                <WrapPanel Name="DropWrap" Grid.Column="1" VerticalAlignment="Bottom" Drop="PanelDrop">
-                    <Image Margin="0,0,400,0" Height="100" Source="/Resources/Images/collection-bag.png"></Image>
-                    <!--<local:Hook x:Name="Hook1" Uid="200">
-                        --><!--<Image Height="50" Width="60" Source="{Binding TestTest[0]}"/>--><!--
-                    </local:Hook>
-                    <local:Hook Uid="201" MouseDown="Rectangle_MouseDown">
-                        --><!--<Image Height="50" Width="60" Source="{Binding TestTest[0]}"/>--><!--
-                    </local:Hook>
-                    <Rectangle Uid="100" Width="50" Height="40" Margin="5" MouseDown="Rectangle_MouseDown">
-                        <Rectangle.Fill>
-                            <ImageBrush ImageSource="{Binding ImageUri[0]}"/>
-                        </Rectangle.Fill>
-                    </Rectangle>
-                    <Rectangle Uid="101" Width="50" Height="40" Margin="5" MouseDown="Rectangle_MouseDown">
-                        <Rectangle.Fill>
-                            <ImageBrush ImageSource="{Binding ImageUri[1]}"/>
-                        </Rectangle.Fill>
-                    </Rectangle>
-                    <Rectangle Uid="102" Width="50" Height="40" Margin="5" MouseDown="Rectangle_MouseDown">
-                        <Rectangle.Fill>
-                            <ImageBrush ImageSource="{Binding ImageUri[2]}"/>
-                        </Rectangle.Fill>
-                    </Rectangle>
-                    <Rectangle Uid="103" Width="50" Height="40" Margin="5" MouseDown="Rectangle_MouseDown">
-                        <Rectangle.Fill>
-                            <ImageBrush ImageSource="{Binding ImageUri[3]}"/>
-                        </Rectangle.Fill>
-                    </Rectangle>
-                    <Rectangle Uid="104" Width="50" Height="40" Margin="5" MouseDown="Rectangle_MouseDown">
-                        <Rectangle.Fill>
-                            <ImageBrush ImageSource="{Binding ImageUri[4]}"/>
-                        </Rectangle.Fill>
-                    </Rectangle>
-                    <Rectangle Uid="105" Width="50" Height="40" Margin="5" MouseDown="Rectangle_MouseDown">
-                        <Rectangle.Fill>
-                            <ImageBrush ImageSource="{Binding ImageUri[5]}"/>
-                        </Rectangle.Fill>
-                    </Rectangle>
-                    <Rectangle Uid="106" Width="50" Height="40" Margin="5" MouseDown="Rectangle_MouseDown">
-                        <Rectangle.Fill>
-                            <ImageBrush ImageSource="{Binding ImageUri[6]}"/>
-                        </Rectangle.Fill>
-                    </Rectangle>
-                    <Rectangle Uid="107" Width="50" Height="40" Margin="5" MouseDown="Rectangle_MouseDown">
-                        <Rectangle.Fill>
-                            <ImageBrush ImageSource="{Binding ImageUri[7]}"/>
-                        </Rectangle.Fill>
-                    </Rectangle>-->
+                <WrapPanel Name="FishAndHookDropZone" Grid.Column="1" VerticalAlignment="Bottom" Drop="PanelDrop">
+                    <Image Margin="0,0,0,0" Source="/Resources/Images/fish-and-worm.png"></Image>                    
                 </WrapPanel>
                 
                 
