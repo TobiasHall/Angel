@@ -6,9 +6,8 @@ namespace Angel
 {
     public class Player
     {
-        public int Id { get; set; }
-        public string Nickname { get; private set; }
-        public int Score { get; set; }
+        public string Nickname { get; set; }
+        public int Score { get; private set; }
 
         public Player()
         {

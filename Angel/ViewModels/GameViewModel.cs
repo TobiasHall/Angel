@@ -34,9 +34,8 @@ namespace Angel
         public int TotalFishes { get; set; }
         public int TotalWeight { get; set; } = 0;
         public int TotalScore { get; set; }
+        public Player player { get; set; }
         public string GameTimer { get; set; } = "TT:MM:SS";
-
-        private Player player { get; set; }
         
         DispatcherTimer timer;
         int gameTimer = 1800;

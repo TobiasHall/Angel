@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
+using static Angel.MockData;
 
 namespace Angel
 {
@@ -41,7 +42,7 @@ namespace Angel
             player.SetPlayerNickname(Nickname);
             int gameTimer = SetGameTimer();
             
-            Main.Content = new GameView(player, gameTimer);
+            Main.Content = new GameView(MockPlayer, MockGameTime);
         }
         private int SetGameTimer()
         {

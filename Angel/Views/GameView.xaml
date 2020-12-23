@@ -45,7 +45,7 @@
                     </WrapPanel>
                 
                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                    <Label HorizontalAlignment="Center" Content="{Binding player.Nickname, FallbackValue=Fräddrik}" FontSize="38"></Label>
+                    <Label HorizontalAlignment="Center" Content="{Binding player.Nickname, FallbackValue=Inget valt}" FontSize="38"></Label>
                     <Label HorizontalAlignment="Center" Content="{Binding GameTimer, FallbackValue=00:00:00}" FontSize="28"></Label>
                     <WrapPanel HorizontalAlignment="Center">
                         <Label HorizontalAlignment="Center" Content="{Binding CollectedFishSpeciesLbl, FallbackValue=Öring:}" FontSize="28"></Label>
