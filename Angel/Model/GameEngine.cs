@@ -88,8 +88,7 @@ namespace Angel
             {
                 hooksWithChanse = hooks.Count;
             }
-            //Slumpar fram fiskar
-            //List<Hook> tempHooks = new List<Hook>();
+            //Slumpar fram fiskar            
             for (int i = 0; i < hooksWithChanse; i++)
             {
                 int hit = random.Next(1, 101);
@@ -102,13 +101,35 @@ namespace Angel
                 {
                     Fish fish = new Fish(bonusPercentOnTrout);
                     fishes.Add(fish);
-                    hooks[i].Fish = fish;
-                    //tempHooks.Add(hooks[i]);
+                    hooks[i].Fish = fish;                
+                    //AddtoScore(fish);
                 }
             }
+            ClearBonus();            
+        }
 
-            ClearBonus();
-            //return tempHooks;
+        public static void AddToScore(Fish fish)
+        {
+            switch (fish.FishId)
+            {
+                case (int)FishEnum.Dace:
+                    Score += (int)(fish.Weight * 0.55);
+                    break;
+                case (int)FishEnum.Pike:
+                    Score += (int)(fish.Weight * 0.55);
+                    break;
+                case (int)FishEnum.Perch:
+                    Score += (int)(fish.Weight * 1.05);
+                    break;
+                case (int)FishEnum.Char:
+                    Score += (int)(fish.Weight * 1.55);
+                    break;
+                case (int)FishEnum.Trout:
+                    Score += (int)(fish.Weight * 2.05);
+                    break;
+                default: 
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         private static void ClearBonus()

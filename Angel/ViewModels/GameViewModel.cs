@@ -68,6 +68,7 @@ namespace Angel
             if (fish != null)
             {
                 CollectedFishes.Add(fish);
+                AddToScore(fish);
                 UpdateLabelsInView(fish);
                 fish = null;
             }
@@ -94,6 +95,7 @@ namespace Angel
 
         private void timer_Tick(object sender, EventArgs e)
         {
+            //TODO: Fixa så att den inte slår ut på noll
             if (countdownTimer != 0)
             {
                 countdownTimer--;

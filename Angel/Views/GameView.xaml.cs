@@ -73,6 +73,7 @@ namespace Angel
                     element.HasWorm = true;
                     element.imgDynamic.Source = new BitmapImage(new Uri("\\Resources\\Images\\worm.png", UriKind.Relative));
                     model.CollectFish(element.Fish);
+                    element.Fish = null;
                 }
 
                 element.PositionOnIce = int.Parse(panel.Uid);                    
