@@ -24,19 +24,28 @@ namespace Angel
         }
         private int RandomizeSpecies(int troutBonus)
         {
-            if (troutBonus == 0)
+            int randomNumber = random.Next(1, 101);
+            randomNumber += troutBonus;
+            if (randomNumber < 31)
             {
-                return random.Next(0, 5);
+                return (int)FishEnum.Dace;
+            }
+            else if (randomNumber >= 31 && randomNumber <41)
+            {
+                return (int)FishEnum.Pike;
+            }
+            else if (randomNumber >= 41 && randomNumber < 71)
+            {
+                return (int)FishEnum.Perch;
+            }
+            else if (randomNumber >= 71 && randomNumber < 91)
+            {
+                return (int)FishEnum.Char;
             }
             else
             {
-                FishId = random.Next(0, (5+troutBonus));
-                if (FishId > (int)FishEnum.Trout)
-                {
-                    FishId = (int)FishEnum.Trout;
-                }
-                return FishId;
-            }
+                return (int)FishEnum.Trout;
+            }            
         }
         private string SetFishSpecies(int fishId)
         {
@@ -64,11 +73,11 @@ namespace Angel
                 case (int)FishEnum.Pike:
                     return random.Next(1000, 3001);
                 case (int)FishEnum.Perch:
-                    return random.Next(500, 1001);
-                case (int)FishEnum.Char:
                     return random.Next(300, 801);
+                case (int)FishEnum.Char:
+                    return random.Next(500, 1001);
                 case (int)FishEnum.Trout:
-                    return random.Next(800, 2001);
+                    return random.Next(900, 2201);
                 default: throw new ArgumentOutOfRangeException();
             }
         }

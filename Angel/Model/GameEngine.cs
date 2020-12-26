@@ -36,15 +36,21 @@ namespace Angel
 
             for (int i = 0; i < 5; i++)
             {
-                luckyHoles.Add(UniqueRandomInt(1, 41));
+                luckyHoles.Add(UniqueRandomInt(1, 40));
             }            
         }
-        private static int UniqueRandomInt(int min, int max)
+        /// <summary>
+        /// Randomizes and returns a unique int value
+        /// </summary>
+        /// <param name="includedMin"></param>
+        /// <param name="includedMax"></param>
+        /// <returns></returns>
+        private static int UniqueRandomInt(int includedMin, int includedMax)
         {
             int myNumber;
             do
             {
-                myNumber = random.Next(min, max);
+                myNumber = random.Next(includedMin, (includedMax + 1));
             }
             while (luckyHoles.Contains(myNumber));
             return myNumber;
@@ -54,8 +60,7 @@ namespace Angel
             numbersOfExtraChansOnTrout--;
             if (numbersOfExtraChansOnTrout != 0)
             {
-                //Just nu är 1 = 20%
-                bonusPercentOnTrout += 2;
+                bonusPercentOnTrout += 33;
                 return true;
             }
             return false;
@@ -100,6 +105,7 @@ namespace Angel
                 if (hit > 80)
                 {
                     Fish fish = new Fish(bonusPercentOnTrout);
+                    //Behövs nog inte. Ev om jag vill att den ska kika på hur många fiskar som slet sig
                     fishes.Add(fish);
                     hooks[i].Fish = fish;                
                     //AddtoScore(fish);
@@ -113,19 +119,19 @@ namespace Angel
             switch (fish.FishId)
             {
                 case (int)FishEnum.Dace:
-                    Score += (int)(fish.Weight * 0.55);
+                    Score += (int)(fish.Weight * 0.57);
                     break;
                 case (int)FishEnum.Pike:
-                    Score += (int)(fish.Weight * 0.55);
+                    Score += (int)(fish.Weight * 0.57);
                     break;
                 case (int)FishEnum.Perch:
-                    Score += (int)(fish.Weight * 1.05);
+                    Score += (int)(fish.Weight * 1.07);
                     break;
                 case (int)FishEnum.Char:
-                    Score += (int)(fish.Weight * 1.55);
+                    Score += (int)(fish.Weight * 1.57);
                     break;
                 case (int)FishEnum.Trout:
-                    Score += (int)(fish.Weight * 2.05);
+                    Score += (int)(fish.Weight * 2.07);
                     break;
                 default: 
                     throw new ArgumentOutOfRangeException();
