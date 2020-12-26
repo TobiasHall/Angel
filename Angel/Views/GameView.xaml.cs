@@ -73,13 +73,10 @@ namespace Angel
                 }
                 else
                 {
-                    element.HasWorm = true;
-                    element.imgDynamic.Source = new BitmapImage(new Uri(imagePathWorm, UriKind.Relative));
                     model.CollectFish(element.Fish);
-                    element.Fish = null;
                 }
 
-                element.PositionOnIce = int.Parse(panel.Uid);                    
+                element.SetBaseValue(int.Parse(panel.Uid));                
                 parent.Children.Remove(element);
                 panel.Children.Add(element);
             }

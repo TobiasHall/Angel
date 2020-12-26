@@ -32,6 +32,15 @@ namespace Angel
             imgDynamic.Source = new BitmapImage(new Uri("\\Resources\\Images\\worm.png", UriKind.Relative));
         }
 
+        public void SetBaseValue(int positionOnIce)
+        {
+            PositionOnIce = positionOnIce;
+            PlacedOnLucyHole = false;
+            HasWorm = true;
+            Fish = null;
+            imgDynamic.Source = new BitmapImage(new Uri("\\Resources\\Images\\worm.png", UriKind.Relative));
+        }
+
 
 
         protected override void OnMouseMove(MouseEventArgs e)
