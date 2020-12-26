@@ -96,7 +96,7 @@
                     <WrapPanel HorizontalAlignment="Center">
                         <Label Content="Vikt:" FontWeight="Bold"  FontSize="24"></Label>
                         <Label Content="{Binding TotalWeight, FallbackValue=0}" FontWeight="Bold"  FontSize="24"></Label>
-                        <Label Content="g" FontWeight="Bold" FontSize="24"></Label>
+                        <Label Content="kg" FontWeight="Bold" FontSize="24"></Label>
                     </WrapPanel>
                 </StackPanel>
             </Grid>

@@ -16,7 +16,7 @@ namespace Angel
 {
     public class GameViewModel : BaseViewModel
     {
-        public List<Hook> Hook2 { get; set; } = new List<Hook>();        
+        public List<Hook> Hooks { get; set; } = new List<Hook>();        
         public List<Fish> CollectedFishes { get; private set; } = new List<Fish>();
         public string CollectedFishSpeciesLbl { get; set; }
         public int CollectedFishWeightLbl { get; set; }
@@ -32,7 +32,7 @@ namespace Angel
         public int NrOfChar { get; set; }
         public int NrOfTrout { get; set; }
         public int TotalFishes { get; set; }
-        public int TotalWeight { get; set; } = 0;
+        public double TotalWeight { get; set; } = 0;
         public int TotalScore { get; set; }
         public Player player { get; set; }
         public string GameTimer { get; set; } = "TT:MM:SS";
@@ -126,19 +126,19 @@ namespace Angel
         {
             if (CatchFishTrigger == (gameTimer / 10))
             {
-                CatchFish(Hook2);
-                for (int i = 0; i < Hook2.Count; i++)
+                CatchFish(Hooks);
+                for (int i = 0; i < Hooks.Count; i++)
                 {
-                    if (Hook2[i].Fish != null)
+                    if (Hooks[i].Fish != null)
                     {
-                        Hook2[i].imgDynamic.Source = new BitmapImage(new Uri(imagePathFish, UriKind.Relative));
-                        Hook2[i].HasWorm = false;
-                        Hook2.Remove(Hook2[i]);
+                        Hooks[i].imgDynamic.Source = new BitmapImage(new Uri(imagePathFish, UriKind.Relative));
+                        Hooks[i].HasWorm = false;
+                        Hooks.Remove(Hooks[i]);
                     }
-                    else if (Hook2[i].HasWorm == false)
+                    else if (Hooks[i].HasWorm == false)
                     {
-                        Hook2[i].imgDynamic.Source = new BitmapImage(new Uri(imagePathHook, UriKind.Relative));
-                        Hook2.Remove(Hook2[i]);
+                        Hooks[i].imgDynamic.Source = new BitmapImage(new Uri(imagePathHook, UriKind.Relative));
+                        Hooks.Remove(Hooks[i]);
                     }
                 }
                 CatchFishTrigger = 0;
@@ -167,8 +167,8 @@ namespace Angel
             {
                 NrOfTrout++;
             }
-            TotalFishes++;
-            TotalWeight += fish.Weight;
+            TotalFishes++;            
+            TotalWeight += Math.Round((double)fish.Weight / 1000, 2);            
             CollectedFishSpeciesLbl = fish.Species;
             CollectedFishWeightLbl = fish.Weight;
             TotalScore = Score;

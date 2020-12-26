@@ -21,6 +21,9 @@ namespace Angel
     public partial class GameView : UserControl
     {
         private GameViewModel model;
+        string imagePathWorm = "\\Resources\\Images\\worm.png";
+        string imagePathFish = "\\Resources\\Images\\fish.png";
+        string imagePathHook = "\\Resources\\Images\\hook.png";
         public GameView(Player player, int gameTimer)
         {
             InitializeComponent();
@@ -52,26 +55,26 @@ namespace Angel
                 parent.Children.Remove(element);
                 panel.Children.Add(element);
                 
-                if (model.Hook2.Contains(element))
+                if (model.Hooks.Contains(element))
                 {
                     element.PositionOnIce = int.Parse(panel.Uid);
                 }
                 else
                 {
                     element.PositionOnIce = int.Parse(panel.Uid);
-                    model.Hook2.Add(element);
+                    model.Hooks.Add(element);
                 }               
             }
             else if (panel.Name == "FishAndHookDropZone")
             {
-                if (model.Hook2.Contains(element))
+                if (model.Hooks.Contains(element))
                 {
-                    model.Hook2.Remove(element);
+                    model.Hooks.Remove(element);
                 }
                 else
                 {
                     element.HasWorm = true;
-                    element.imgDynamic.Source = new BitmapImage(new Uri("\\Resources\\Images\\worm.png", UriKind.Relative));
+                    element.imgDynamic.Source = new BitmapImage(new Uri(imagePathWorm, UriKind.Relative));
                     model.CollectFish(element.Fish);
                     element.Fish = null;
                 }

@@ -28,9 +28,8 @@ namespace Angel
         
         public Hook()
         {
-            InitializeComponent();
-            string imagePath = "\\Resources\\Images\\worm.png";
-            imgDynamic.Source = new BitmapImage(new Uri(imagePath, UriKind.Relative));
+            InitializeComponent();            
+            imgDynamic.Source = new BitmapImage(new Uri("\\Resources\\Images\\worm.png", UriKind.Relative));
         }
 
 
@@ -76,7 +75,7 @@ namespace Angel
 
         public override string ToString()
         {
-            return $"ID:{HookId}, Pos:{PositionOnIce}";
+            return $"ID:{HookId}, Pos:{PositionOnIce}, Fish:{Fish}";
         }        
     }
 }
