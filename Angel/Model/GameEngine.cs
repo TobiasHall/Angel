@@ -22,8 +22,8 @@ namespace Angel
         private static int luckyHolePercentBonus = 20;
         private static List<Fish> fishes;
 
-        private static int minChanseForFish = 4;
-        private static int maxChanseForFish = 8;
+        private static int minChanseForFish = 3;
+        private static int maxChanseForFish = 6;
         
         public static void StartNewGame()
         {
@@ -102,13 +102,17 @@ namespace Angel
                 {
                     hit += luckyHolePercentBonus;
                 }                
-                if (hit > 80)
+                if (hit > 85)
                 {
                     Fish fish = new Fish(bonusPercentOnTrout);
                     //Behövs nog inte. Ev om jag vill att den ska kika på hur många fiskar som slet sig
                     fishes.Add(fish);
                     hooks[i].Fish = fish;                
                     //AddtoScore(fish);
+                }
+                else if (hit > 75 && hit <=85)
+                {
+                    hooks[i].HasWorm = false;
                 }
             }
             ClearBonus();            

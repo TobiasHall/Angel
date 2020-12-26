@@ -51,14 +51,19 @@ namespace Angel
             // DragOver event handler.
 
             var hook = (Hook)e.OriginalSource;
-            if (e.Effects.HasFlag(DragDropEffects.Move) && hook.Fish == null)
-            {
-                StreamResourceInfo sriCurs = Application.GetResourceStream(new Uri(@"Resources/Cursors/worm.cur", UriKind.Relative));
-                Mouse.SetCursor(new Cursor(sriCurs.Stream));
-            }
-            else if (e.Effects.HasFlag(DragDropEffects.Move) && hook.Fish != null)
+            if (e.Effects.HasFlag(DragDropEffects.Move) && hook.Fish != null)
             {
                 StreamResourceInfo sriCurs = Application.GetResourceStream(new Uri(@"Resources/Cursors/fish.cur", UriKind.Relative));
+                Mouse.SetCursor(new Cursor(sriCurs.Stream));
+            }
+            else if (e.Effects.HasFlag(DragDropEffects.Move) && hook.HasWorm == false)
+            {
+                StreamResourceInfo sriCurs = Application.GetResourceStream(new Uri(@"Resources/Cursors/hook.cur", UriKind.Relative));
+                Mouse.SetCursor(new Cursor(sriCurs.Stream));
+            }
+            else if (e.Effects.HasFlag(DragDropEffects.Move) && hook.Fish == null)
+            {
+                StreamResourceInfo sriCurs = Application.GetResourceStream(new Uri(@"Resources/Cursors/worm.cur", UriKind.Relative));
                 Mouse.SetCursor(new Cursor(sriCurs.Stream));
             }
             //else

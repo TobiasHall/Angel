@@ -36,7 +36,8 @@ namespace Angel
         public int TotalScore { get; set; }
         public Player player { get; set; }
         public string GameTimer { get; set; } = "TT:MM:SS";
-        
+        public bool IceHolesIsEnabled { get; set; } = true;
+
         DispatcherTimer timer;
         int gameTimer = 1800;
         int countdownTimer = 1800;
@@ -44,6 +45,7 @@ namespace Angel
 
         string imagePathWorm = "\\Resources\\Images\\worm.png";
         string imagePathFish = "\\Resources\\Images\\fish.png";
+        string imagePathHook = "\\Resources\\Images\\hook.png";
 
         public GameViewModel(Player player, int gameTimer)
         {
@@ -113,8 +115,9 @@ namespace Angel
             }
             else
             {
-                timer.Stop();
                 //Metod för att sluta spelet
+                timer.Stop();
+                IceHolesIsEnabled = false;
             }
 
         }
@@ -130,6 +133,11 @@ namespace Angel
                     {
                         Hook2[i].imgDynamic.Source = new BitmapImage(new Uri(imagePathFish, UriKind.Relative));
                         Hook2[i].HasWorm = false;
+                        Hook2.Remove(Hook2[i]);
+                    }
+                    else if (Hook2[i].HasWorm == false)
+                    {
+                        Hook2[i].imgDynamic.Source = new BitmapImage(new Uri(imagePathHook, UriKind.Relative));
                         Hook2.Remove(Hook2[i]);
                     }
                 }
