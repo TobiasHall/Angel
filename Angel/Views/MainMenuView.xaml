@@ -14,14 +14,14 @@
 
             <Button Content="Ta en fisketur"
                     Margin="0,10,0,0"
-                    Command="{Binding ChoosePlayerCommand}"
+                    Command="{Binding PlayerViewCommand}"
                     Style="{StaticResource RoundButtonTemplate}"
                     FontSize="25" 
                     Width="300" />
 
             <Button Content="Topplista"
                     Margin="0,10,0,0"
-                    Command="{Binding ViewTopHighscoreCommand}" 
+                    Command="{Binding HighscoreViewCommand}" 
                     Style="{StaticResource RoundButtonTemplate}" 
                     FontSize="25"
                     Width="300"/>

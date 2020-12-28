@@ -12,18 +12,11 @@ namespace Angel
     {
         public MainWindow Main = (MainWindow)Application.Current.MainWindow;
         #region Commands
-        public ICommand MainMenuCommand { get; set; }
+        public ICommand MainMenuViewCommand { get; set; }
         public ICommand NewGameCommand { get; set; }
         public ICommand ExitGameCommand { get; set; }
-
-
-
-
-
-
-
-        //public ICommand ViewTopHighscoreCommand { get; set; }
-        //public ICommand ViewTopFrequentPlayersCommand { get; set; }
+        public ICommand HighscoreViewCommand { get; set; }
+        
         //public ICommand MuteCommand { get; set; }
         #endregion
 
@@ -36,12 +29,10 @@ namespace Angel
         {
             Main.Close();
         }
-        
-
-        //public void GetHighscorePage(object parameter)
-        //{
-        //    Main.Content = new HighscorePage();
-        //}
+        public void GetHighscoreView(object parameter)
+        {
+            Main.Content = new HighscoreView();
+        }
         #endregion
 
         #region MediaMethods

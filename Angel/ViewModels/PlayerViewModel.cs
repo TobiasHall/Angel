@@ -17,7 +17,7 @@ namespace Angel
         public PlayerViewModel()
         {
             NewGameCommand = new RelayCommand(GetGameView, CanExecute);
-            MainMenuCommand = new RelayCommand(GetMainMenuView, CanExecute);
+            MainMenuViewCommand = new RelayCommand(GetMainMenuView, CanExecute);
 
             SetGameTimeOptions();
         }
@@ -29,9 +29,7 @@ namespace Angel
             one = String.Format("{0:D2}t:{1:D2}m:{2:D2}s", 0, 30, 0 );
             two = String.Format("{0:D2}t:{1:D2}m:{2:D2}s", 1, 0, 0 );
             three = String.Format("{0:D2}t:{1:D2}m:{2:D2}s", 2, 0, 0 );
-            //SelectedGameTime = startValue;
-
-            //GameTimeOptions.Add(startValue);
+            
             GameTimeOptions.Add(one);
             GameTimeOptions.Add(two);
             GameTimeOptions.Add(three);

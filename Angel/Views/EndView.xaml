@@ -8,6 +8,72 @@
              d:DesignHeight="640" d:DesignWidth="1000"             
              Background="{DynamicResource BackgroundIMG}">
     <Grid>
-        <Label FontSize="36" Content="{Binding PlayerScore, FallbackValue=1000}"></Label>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel VerticalAlignment="Center" Margin="10" Grid.Column="0">
+            <Image Source="/Resources/images/fish-bucket.png"></Image>
+            <WrapPanel HorizontalAlignment="Center" Margin="0,10,0,0">
+                <Label Content="Antal:" FontWeight="Bold" FontSize="48"></Label>
+                <Label Content="{Binding TotalFishes, FallbackValue=0}" FontWeight="Bold" FontSize="48"></Label>
+                <Label Content="st" FontWeight="Bold" FontSize="48"></Label>
+            </WrapPanel>
+            <WrapPanel HorizontalAlignment="Center">
+                <Label Content="Vikt:" FontWeight="Bold"  FontSize="48"></Label>
+                <Label Content="{Binding TotalWeight, FallbackValue=0}" FontWeight="Bold"  FontSize="48"></Label>
+                <Label Content="kg" FontWeight="Bold" FontSize="48"></Label>
+            </WrapPanel>
+        </StackPanel>
+
+        <StackPanel VerticalAlignment="Top" Margin="10" Grid.Column="1">
+            <Label HorizontalAlignment="Center" Content="{Binding player.Nickname, FallbackValue=Inget valt}" FontSize="68" FontWeight="Bold"></Label>
+            <WrapPanel Grid.Column="1" Margin="20" HorizontalAlignment="Center">
+                <Label HorizontalAlignment="Center" Content="Poäng:" FontSize="58" FontWeight="Bold"></Label>
+                <Label HorizontalAlignment="Center" Content="{Binding player.Score, FallbackValue=15000}" FontSize="58" FontWeight="Bold"></Label>
+            </WrapPanel>
+            <WrapPanel Grid.Column="1" Margin="20" HorizontalAlignment="Center">
+                <Button Margin="5" Content="Nytt spel" Style="{StaticResource RoundButtonTemplate}" Command="{Binding NewGameCommand}"></Button>
+                <Button Margin="5" Content="Topplistan" Style="{StaticResource RoundButtonTemplate}" Command="{Binding HighscoreViewCommand}"></Button>
+                <Button Margin="5" Content="Huvudmeny" Style="{StaticResource RoundButtonTemplate}" Command="{Binding MainMenuViewCommand}"></Button>
+                <Button Margin="5" Content="Stäng av" Style="{StaticResource RoundButtonTemplate}" Command="{Binding ExitGameCommand}"></Button>
+            </WrapPanel>
+        </StackPanel>
+
+        <StackPanel VerticalAlignment="Center" Margin="10" Grid.Column="1">            
+            
+        </StackPanel>
+
+        <StackPanel VerticalAlignment="center" Margin="10" Grid.Column="2">
+            <WrapPanel HorizontalAlignment="Center">
+                <Label Content="Öring:" FontSize="48" FontWeight="Bold"></Label>
+                <Label Content="{Binding NrOfTrout, FallbackValue=0}" FontSize="48" FontWeight="Bold"></Label>
+                <Label Content="st" FontSize="48" FontWeight="Bold"></Label>
+            </WrapPanel>
+            <WrapPanel HorizontalAlignment="Center">
+                <Label Content="Röding:" FontSize="48" FontWeight="Bold"></Label>
+                <Label Content="{Binding NrOfChar, FallbackValue=0}" FontSize="48" FontWeight="Bold"></Label>
+                <Label Content="st" FontSize="48" FontWeight="Bold"></Label>
+            </WrapPanel>
+            <WrapPanel HorizontalAlignment="Center">
+                <Label Content="Abbore:" FontSize="48" FontWeight="Bold"></Label>
+                <Label Content="{Binding NrOfPerc, FallbackValue=0}" FontSize="48" FontWeight="Bold"></Label>
+                <Label Content="st" FontSize="48" FontWeight="Bold"></Label>
+            </WrapPanel>
+            <WrapPanel HorizontalAlignment="Center">
+                <Label Content="Gädda:" FontSize="48" FontWeight="Bold"></Label>
+                <Label Content="{Binding NrOfPike, FallbackValue=0}" FontSize="48" FontWeight="Bold"></Label>
+                <Label Content="st" FontSize="48" FontWeight="Bold"></Label>
+            </WrapPanel>
+            <WrapPanel HorizontalAlignment="Center">
+                <Label Content="Mört:" FontSize="48" FontWeight="Bold"></Label>
+                <Label Content="{Binding NrOfDace, FallbackValue=0}" FontSize="48" FontWeight="Bold"></Label>
+                <Label Content="st" FontSize="48" FontWeight="Bold"></Label>
+            </WrapPanel>
+            
+        </StackPanel>
     </Grid>
+    
 </UserControl>

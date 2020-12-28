@@ -53,7 +53,7 @@
                     FontSize="25"/>
 
             <Button Content="Tillbaka"                
-                Command="{Binding MainMenuCommand}"
+                Command="{Binding MainMenuViewCommand}"
                 Style="{StaticResource RoundButtonTemplate}"
                 FontSize="20" 
                 Width="120"

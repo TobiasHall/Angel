@@ -14,14 +14,14 @@ using System.Windows.Shapes;
 namespace Angel
 {
     /// <summary>
-    /// Interaction logic for EndView.xaml
+    /// Interaction logic for HighscoreView.xaml
     /// </summary>
-    public partial class EndView : UserControl
-    {        
-        public EndView(Player player, int gameTimer)
-        {            
+    public partial class HighscoreView : UserControl
+    {
+        public HighscoreView()
+        {
             InitializeComponent();
-            DataContext = new EndViewModel(player, gameTimer);
+            DataContext = new HighscoreViewModel();
         }
     }
 }

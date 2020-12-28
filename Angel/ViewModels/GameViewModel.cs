@@ -29,6 +29,7 @@ namespace Angel
         public int LuckySnuffLabel { get; set; }
         public bool CupOfCoffeBtnEnabled { get; set; } = true;
         public int CupOfCoffeLabel { get; set; }
+        //Behövs egentligen inte
         public int NrOfDace { get; set; }
         public int NrOfPike { get; set; }
         public int NrOfPerc { get; set; }
@@ -37,6 +38,7 @@ namespace Angel
         public int TotalFishes { get; set; }
         public decimal TotalWeight { get; set; } = 0;
         public int TotalScore { get; set; }
+        //Fram hit
         public Player player { get; set; }
         public string GameTimer { get; set; } = "TT:MM:SS";
         public bool IceHolesIsEnabled { get; set; } = true;
@@ -52,8 +54,9 @@ namespace Angel
 
         public GameViewModel(Player player, int gameTimer)
         {
-            MainMenuCommand = new RelayCommand(GetMainMenuView, CanExecute);
-            NewGameCommand = new RelayCommand(GetGameView, CanExecute);            
+            MainMenuViewCommand = new RelayCommand(GetMainMenuView, CanExecute);
+            NewGameCommand = new RelayCommand(GetGameView, CanExecute);
+            ExitGameCommand = new RelayCommand(CloseApplication, CanExecute);
 
             LuckySnuffBtn = new RelayCommand(UseLuckySnuff, CanExecute);
             CupOfCoffeBtn = new RelayCommand(UseCupOfCoffe, CanExecute);
@@ -139,7 +142,7 @@ namespace Angel
 
         private void GetEndView(Player player)
         {
-            Main.Content = new EndView(player);
+            Main.Content = new EndView(player, gameTimer);
         }
 
         private void DeleteFish()

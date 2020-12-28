@@ -29,19 +29,8 @@
                 
                 <StackPanel HorizontalAlignment="Center" Margin="10" Grid.Column="0" VerticalAlignment="Top">
                     <Button Margin="5" Content="Nytt spel" Style="{StaticResource RoundButtonTemplate}" Command="{Binding NewGameCommand}"></Button>
-                    <Button Margin="5" Content="Huvudmenyn" Style="{StaticResource RoundButtonTemplate}" Command="{Binding MainMenuCommand}"></Button>
-                    <StackPanel>
-                        <WrapPanel HorizontalAlignment="Center">
-                            <Label FontSize="24" Content="Tursnus kvar: "></Label>
-                            <Label FontSize="24" Content="{Binding LuckySnuffLabel, FallbackValue=3}"></Label>
-                        </WrapPanel>
-                        <WrapPanel HorizontalAlignment="Center">
-                            <Label FontSize="24" Content="Kaffe kvar: "></Label>
-                            <Label FontSize="24" Content="{Binding CupOfCoffeLabel, FallbackValue=5}"></Label>
-                        </WrapPanel>
-                            <Button Margin="5" Content="Tursnus" Style="{StaticResource RoundButtonTemplate}" Command="{Binding LuckySnuffBtn}" IsEnabled="{Binding LuckySnuffBtnEnabled}"></Button>
-                            <Button Margin="5" Content="Ta en kaffe" Style="{StaticResource RoundButtonTemplate}" Command="{Binding CupOfCoffeBtn}" IsEnabled="{Binding CupOfCoffeBtnEnabled}"></Button>
-                    </StackPanel>
+                    <Button Margin="5" Content="Huvudmenyn" Style="{StaticResource RoundButtonTemplate}" Command="{Binding MainMenuViewCommand}"></Button>
+                    <Button Margin="5" Content="Stäng av" Style="{StaticResource RoundButtonTemplate}" Command="{Binding ExitGameCommand}"></Button>                    
                 </StackPanel>
                                 
                 <StackPanel HorizontalAlignment="Center" Margin="10" Grid.Column="1" VerticalAlignment="Top">
@@ -62,40 +51,15 @@
                 </WrapPanel>
                 
                 <StackPanel VerticalAlignment="Top" Margin="10" Grid.Column="2">
+                    <Button Margin="5" Content="Tursnus" Style="{StaticResource RoundButtonTemplate}" Command="{Binding LuckySnuffBtn}" IsEnabled="{Binding LuckySnuffBtnEnabled}"></Button>
+                    <Button Margin="5" Content="Ta en kaffe" Style="{StaticResource RoundButtonTemplate}" Command="{Binding CupOfCoffeBtn}" IsEnabled="{Binding CupOfCoffeBtnEnabled}"></Button>
                     <WrapPanel HorizontalAlignment="Center">
-                        <Label Content="Öring:" FontSize="24"></Label>
-                        <Label Content="{Binding NrOfTrout, FallbackValue=0}" FontSize="24"></Label>
-                        <Label Content="st" FontSize="24"></Label>
+                        <Label FontSize="24" Content="Tursnus kvar: "></Label>
+                        <Label FontSize="24" Content="{Binding LuckySnuffLabel, FallbackValue=3}"></Label>
                     </WrapPanel>
                     <WrapPanel HorizontalAlignment="Center">
-                        <Label Content="Röding:" FontSize="24"></Label>
-                        <Label Content="{Binding NrOfChar, FallbackValue=0}" FontSize="24"></Label>
-                        <Label Content="st" FontSize="24"></Label>
-                    </WrapPanel>
-                    <WrapPanel HorizontalAlignment="Center">
-                        <Label Content="Abbore:" FontSize="24"></Label>
-                        <Label Content="{Binding NrOfPerc, FallbackValue=0}" FontSize="24"></Label>
-                        <Label Content="st" FontSize="24"></Label>
-                    </WrapPanel>
-                    <WrapPanel HorizontalAlignment="Center">
-                        <Label Content="Gädda:" FontSize="24"></Label>
-                        <Label Content="{Binding NrOfPike, FallbackValue=0}" FontSize="24"></Label>
-                        <Label Content="st" FontSize="24"></Label>
-                    </WrapPanel>
-                    <WrapPanel HorizontalAlignment="Center">
-                        <Label Content="Mört:" FontSize="24"></Label>
-                        <Label Content="{Binding NrOfDace, FallbackValue=0}" FontSize="24"></Label>
-                        <Label Content="st" FontSize="24"></Label>
-                    </WrapPanel>
-                    <WrapPanel HorizontalAlignment="Center" Margin="0,10,0,0">
-                        <Label Content="Antal:" FontWeight="Bold" FontSize="24"></Label>
-                        <Label Content="{Binding TotalFishes, FallbackValue=0}" FontWeight="Bold" FontSize="24"></Label>
-                        <Label Content="st" FontWeight="Bold" FontSize="24"></Label>
-                    </WrapPanel>
-                    <WrapPanel HorizontalAlignment="Center">
-                        <Label Content="Vikt:" FontWeight="Bold"  FontSize="24"></Label>
-                        <Label Content="{Binding TotalWeight, FallbackValue=0}" FontWeight="Bold"  FontSize="24"></Label>
-                        <Label Content="kg" FontWeight="Bold" FontSize="24"></Label>
+                        <Label FontSize="24" Content="Kaffe kvar: "></Label>
+                        <Label FontSize="24" Content="{Binding CupOfCoffeLabel, FallbackValue=5}"></Label>
                     </WrapPanel>
                 </StackPanel>
             </Grid>
