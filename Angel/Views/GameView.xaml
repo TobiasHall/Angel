@@ -71,8 +71,8 @@
                     </WrapPanel>
                 </StackPanel>
 
-                <WrapPanel Uid="0" Name="FishAndHookDropZone" Grid.Column="1" VerticalAlignment="Bottom" Drop="PanelDrop">
-                    <Image Margin="0,0,0,0" Source="/Resources/Images/fish-and-worm.png"></Image>                    
+                <WrapPanel Uid="0" Height="150" Name="FishAndHookDropZone" Grid.Column="1" VerticalAlignment="Bottom" Drop="PanelDrop">
+                    <Image Source="/Resources/Images/fish-and-worm.png"></Image>                    
                 </WrapPanel>
                 
                 
