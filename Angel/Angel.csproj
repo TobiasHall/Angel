@@ -17,6 +17,8 @@
     <None Remove="Resources\Images\hole.png" />
     <None Remove="Resources\Images\hook.png" />
     <None Remove="Resources\Images\logo.gif" />
+    <None Remove="Resources\Images\snus.png" />
+    <None Remove="Resources\Images\thermos.png" />
     <None Remove="Resources\Images\worm.png" />
   </ItemGroup>
 
@@ -37,6 +39,8 @@
     <Resource Include="Resources\Images\hole.png" />
     <Resource Include="Resources\Images\hook.png" />
     <Resource Include="Resources\Images\logo.gif" />
+    <Resource Include="Resources\Images\snus.png" />
+    <Resource Include="Resources\Images\thermos.png" />
     <Resource Include="Resources\Images\worm.png" />
   </ItemGroup>
 

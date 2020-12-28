@@ -11,7 +11,7 @@
 
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="325"/>
+                <RowDefinition Height="330"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
@@ -22,30 +22,47 @@
                     <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Column="0" VerticalAlignment="center">
+                <StackPanel Grid.Column="0" VerticalAlignment="Top">
                     <StackPanel HorizontalAlignment="Center">
-                        <Label HorizontalAlignment="Center" Content="Din poäng:" FontSize="28"></Label>
-                        <Label HorizontalAlignment="Center" Content="{Binding TotalScore, FallbackValue=0}" FontSize="28"></Label>
+                        <Button Margin="5" Content="Nytt spel" Style="{StaticResource RoundButtonTemplate}" Command="{Binding NewGameCommand}"></Button>
+                        <Button Margin="5" Content="Huvudmenyn" Style="{StaticResource RoundButtonTemplate}" Command="{Binding MainMenuCommand}"></Button>
+                        <StackPanel>
+                        <WrapPanel Margin="0,25,0,0" HorizontalAlignment="Center">
+                            <Label FontSize="24" Content="Tursnus kvar: "></Label>
+                            <Label FontSize="24" Content="{Binding LuckySnuffLabel, FallbackValue=3}"></Label>
+                        </WrapPanel>
+                            <WrapPanel HorizontalAlignment="Center">
+                                <Label FontSize="24" Content="Kaffe kvar: "></Label>
+                                <Label FontSize="24" Content="{Binding CupOfCoffeLabel, FallbackValue=5}"></Label>
+                            </WrapPanel>
+                            <Button Margin="5" Content="Tursnus" Style="{StaticResource RoundButtonTemplate}" Command="{Binding LuckySnuffBtn}" IsEnabled="{Binding LuckySnuffBtnEnabled}"></Button>
+                        <Button Margin="5" Content="Ta en kaffe" Style="{StaticResource RoundButtonTemplate}" Command="{Binding CupOfCoffeBtn}" IsEnabled="{Binding CupOfCoffeBtnEnabled}"></Button>
+
+                        </StackPanel>
                     </StackPanel>
-                    <Button Margin="5" Content="Tursnus" Style="{StaticResource RoundButtonTemplate}" Command="{Binding LuckySnuffBtn}" IsEnabled="{Binding LuckySnuffBtnEnabled}"></Button>
-                    <Button Margin="5" Content="Ta en kaffe" Style="{StaticResource RoundButtonTemplate}" Command="{Binding CupOfCoffeBtn}" IsEnabled="{Binding CupOfCoffeBtnEnabled}"></Button>
-                    <WrapPanel HorizontalAlignment="Center">
-                        <Label FontSize="24" Content="Tursnus kvar: "></Label>
-                        <Label FontSize="24" Content="{Binding LuckySnuffLabel, FallbackValue=3}"></Label>
-                    </WrapPanel>
-                    <WrapPanel HorizontalAlignment="Center">
-                        <Label FontSize="24" Content="Kaffe kvar: "></Label>
-                        <Label FontSize="24" Content="{Binding CupOfCoffeLabel, FallbackValue=5}"></Label>
-                    </WrapPanel>
                 </StackPanel>
 
-                    <WrapPanel Grid.Column="1" Margin="20" HorizontalAlignment="Center">
-                        <Button Content="Nytt spel" Style="{StaticResource RoundButtonTemplate}" Command="{Binding NewGameCommand}"></Button>
-                        <Button Content="Huvudmenyn" Style="{StaticResource RoundButtonTemplate}" Command="{Binding MainMenuCommand}"></Button>
-                    </WrapPanel>
                 
-                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+
+                <!--<StackPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Grid Height="150">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.RowSpan="5" Source="/Resources/Images/thermos.png" Height="150"></Image>                        
+                    </Grid>                    
+                </StackPanel>-->
+                                
+                <StackPanel Grid.Column="1" VerticalAlignment="Top">
                     <Label HorizontalAlignment="Center" Content="{Binding player.Nickname, FallbackValue=Inget valt}" FontSize="38"></Label>
+                    <WrapPanel Grid.Column="1" Margin="20" HorizontalAlignment="Center">
+                        <Label HorizontalAlignment="Center" Content="Poäng:" FontSize="28"></Label>
+                        <Label HorizontalAlignment="Center" Content="{Binding TotalScore, FallbackValue=0}" FontSize="28"></Label>
+                    </WrapPanel>
                     <Label HorizontalAlignment="Center" Content="{Binding GameTimer, FallbackValue=00:00:00}" FontSize="28"></Label>
                     <WrapPanel HorizontalAlignment="Center">
                         <Label HorizontalAlignment="Center" Content="{Binding CollectedFishSpeciesLbl, FallbackValue=Öring:}" FontSize="28"></Label>

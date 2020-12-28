@@ -32,7 +32,7 @@ namespace Angel
         public int NrOfChar { get; set; }
         public int NrOfTrout { get; set; }
         public int TotalFishes { get; set; }
-        public double TotalWeight { get; set; } = 0;
+        public decimal TotalWeight { get; set; } = 0;
         public int TotalScore { get; set; }
         public Player player { get; set; }
         public string GameTimer { get; set; } = "TT:MM:SS";
@@ -168,7 +168,7 @@ namespace Angel
                 NrOfTrout++;
             }
             TotalFishes++;            
-            TotalWeight += Math.Round((double)fish.Weight / 1000, 2);            
+            TotalWeight += Math.Round((decimal)fish.Weight / 1000, 2);            
             CollectedFishSpeciesLbl = fish.Species;
             CollectedFishWeightLbl = fish.Weight;
             TotalScore = Score;
