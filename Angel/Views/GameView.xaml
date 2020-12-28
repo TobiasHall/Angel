@@ -7,7 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="640" d:DesignWidth="1000"
              Background="{DynamicResource BackgroundIMG}">
+
     <Grid>
+
+    
 
         <Grid>
             <Grid.RowDefinitions>
@@ -15,49 +18,33 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
+
             <Grid Grid.Row="0" Name="TopGrid" AllowDrop="True">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
-
-                <StackPanel Grid.Column="0" VerticalAlignment="Top">
-                    <StackPanel HorizontalAlignment="Center">
-                        <Button Margin="5" Content="Nytt spel" Style="{StaticResource RoundButtonTemplate}" Command="{Binding NewGameCommand}"></Button>
-                        <Button Margin="5" Content="Huvudmenyn" Style="{StaticResource RoundButtonTemplate}" Command="{Binding MainMenuCommand}"></Button>
-                        <StackPanel>
-                        <WrapPanel Margin="0,25,0,0" HorizontalAlignment="Center">
+                
+                
+                <StackPanel HorizontalAlignment="Center" Margin="10" Grid.Column="0" VerticalAlignment="Top">
+                    <Button Margin="5" Content="Nytt spel" Style="{StaticResource RoundButtonTemplate}" Command="{Binding NewGameCommand}"></Button>
+                    <Button Margin="5" Content="Huvudmenyn" Style="{StaticResource RoundButtonTemplate}" Command="{Binding MainMenuCommand}"></Button>
+                    <StackPanel>
+                        <WrapPanel HorizontalAlignment="Center">
                             <Label FontSize="24" Content="Tursnus kvar: "></Label>
                             <Label FontSize="24" Content="{Binding LuckySnuffLabel, FallbackValue=3}"></Label>
                         </WrapPanel>
-                            <WrapPanel HorizontalAlignment="Center">
-                                <Label FontSize="24" Content="Kaffe kvar: "></Label>
-                                <Label FontSize="24" Content="{Binding CupOfCoffeLabel, FallbackValue=5}"></Label>
-                            </WrapPanel>
+                        <WrapPanel HorizontalAlignment="Center">
+                            <Label FontSize="24" Content="Kaffe kvar: "></Label>
+                            <Label FontSize="24" Content="{Binding CupOfCoffeLabel, FallbackValue=5}"></Label>
+                        </WrapPanel>
                             <Button Margin="5" Content="Tursnus" Style="{StaticResource RoundButtonTemplate}" Command="{Binding LuckySnuffBtn}" IsEnabled="{Binding LuckySnuffBtnEnabled}"></Button>
-                        <Button Margin="5" Content="Ta en kaffe" Style="{StaticResource RoundButtonTemplate}" Command="{Binding CupOfCoffeBtn}" IsEnabled="{Binding CupOfCoffeBtnEnabled}"></Button>
-
-                        </StackPanel>
+                            <Button Margin="5" Content="Ta en kaffe" Style="{StaticResource RoundButtonTemplate}" Command="{Binding CupOfCoffeBtn}" IsEnabled="{Binding CupOfCoffeBtnEnabled}"></Button>
                     </StackPanel>
                 </StackPanel>
-
-                
-
-                <!--<StackPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <Grid Height="150">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Image Grid.RowSpan="5" Source="/Resources/Images/thermos.png" Height="150"></Image>                        
-                    </Grid>                    
-                </StackPanel>-->
                                 
-                <StackPanel Grid.Column="1" VerticalAlignment="Top">
+                <StackPanel HorizontalAlignment="Center" Margin="10" Grid.Column="1" VerticalAlignment="Top">
                     <Label HorizontalAlignment="Center" Content="{Binding player.Nickname, FallbackValue=Inget valt}" FontSize="38"></Label>
                     <WrapPanel Grid.Column="1" Margin="20" HorizontalAlignment="Center">
                         <Label HorizontalAlignment="Center" Content="Poäng:" FontSize="28"></Label>
@@ -70,16 +57,11 @@
                         <Label HorizontalAlignment="Center" Content="g" FontSize="28"></Label>
                     </WrapPanel>
                 </StackPanel>
-
                 <WrapPanel Uid="0" Height="150" Name="FishAndHookDropZone" Grid.Column="1" VerticalAlignment="Bottom" Drop="PanelDrop">
                     <Image Source="/Resources/Images/fish-and-worm.png"></Image>                    
                 </WrapPanel>
                 
-                
-
-
-                <StackPanel VerticalAlignment="Center" Grid.Column="2">
-                    
+                <StackPanel VerticalAlignment="Top" Margin="10" Grid.Column="2">
                     <WrapPanel HorizontalAlignment="Center">
                         <Label Content="Öring:" FontSize="24"></Label>
                         <Label Content="{Binding NrOfTrout, FallbackValue=0}" FontSize="24"></Label>
@@ -119,7 +101,7 @@
             </Grid>
 
             <StackPanel Grid.Row="1" IsEnabled="{Binding IceHolesIsEnabled}">
-                <WrapPanel HorizontalAlignment="Center">
+            <WrapPanel HorizontalAlignment="Center">
                     
                     <Grid AllowDrop="True" Uid="1" Height="50" Width="80" Margin="9" Drop="PanelDrop">
                         <Grid.Background>
@@ -330,5 +312,7 @@
                 </WrapPanel>
             </StackPanel>
         </Grid>
+        <Label Visibility="{Binding EndLblVisibility, FallbackValue=Hidden}" Margin="0,100,0,0" Grid.RowSpan="1" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Slut" FontWeight="Bold" FontSize="128"></Label>
+
     </Grid>
 </UserControl>

@@ -8,6 +8,7 @@ namespace Angel
     {
         public string Nickname { get; set; }
         public int Score { get; private set; }
+        public List<Fish> FishBucket { get; set; }
 
         public Player()
         {
@@ -25,6 +26,10 @@ namespace Angel
                 Nickname = nickname;
                 return Nickname;
             }
+        }
+        public void SetPlayerScore(int score)
+        {
+            Score = score;
         }
     }
 }

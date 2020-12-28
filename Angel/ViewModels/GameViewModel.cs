@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -16,6 +17,8 @@ namespace Angel
 {
     public class GameViewModel : BaseViewModel
     {
+        public Visibility EndLblVisibility { get; set; } = Visibility.Hidden;
+
         public List<Hook> Hooks { get; set; } = new List<Hook>();        
         public List<Fish> CollectedFishes { get; private set; } = new List<Fish>();
         public string CollectedFishSpeciesLbl { get; set; }
@@ -50,7 +53,8 @@ namespace Angel
         public GameViewModel(Player player, int gameTimer)
         {
             MainMenuCommand = new RelayCommand(GetMainMenuView, CanExecute);
-            NewGameCommand = new RelayCommand(GetGameView, CanExecute);
+            NewGameCommand = new RelayCommand(GetGameView, CanExecute);            
+
             LuckySnuffBtn = new RelayCommand(UseLuckySnuff, CanExecute);
             CupOfCoffeBtn = new RelayCommand(UseCupOfCoffe, CanExecute);
             StartNewGame();
@@ -123,8 +127,19 @@ namespace Angel
                 //Metod för att sluta spelet
                 timer.Stop();
                 IceHolesIsEnabled = false;
+                EndLblVisibility = Visibility.Visible;
+
+                player.FishBucket = CollectedFishes;
+                player.SetPlayerScore(TotalScore);
+                GetEndView(player);
+
             }
 
+        }
+
+        private void GetEndView(Player player)
+        {
+            Main.Content = new EndView(player);
         }
 
         private void DeleteFish()

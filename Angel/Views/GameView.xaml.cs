@@ -39,6 +39,12 @@ namespace Angel
                 Hook hook = new Hook();
                 hook.Uid = counter.ToString();
                 hook.HookId = counter;
+
+                Thickness margin = hook.Margin;
+                margin.Right = 6;
+                margin.Left = 6;
+                hook.Margin = margin;
+
                 FishAndHookDropZone.Children.Add(hook);
                 counter++;
             }

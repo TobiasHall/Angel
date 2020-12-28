@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Angel"
              xmlns:gif="http://wpfanimatedgif.codeplex.com"             
              mc:Ignorable="d" 
-             d:DesignHeight="740" d:DesignWidth="1000"
+             d:DesignHeight="640" d:DesignWidth="1000"
              Background="{DynamicResource BackgroundIMG}">    
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="600">
