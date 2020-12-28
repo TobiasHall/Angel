@@ -14,14 +14,14 @@ using System.Windows.Shapes;
 namespace Angel
 {
     /// <summary>
-    /// Interaction logic for ChoosePlayerView.xaml
+    /// Interaction logic for PlayerView.xaml
     /// </summary>
-    public partial class ChoosePlayerView : UserControl
+    public partial class PlayerView : UserControl
     {
-        public ChoosePlayerView()
+        public PlayerView()
         {
             InitializeComponent();
-            DataContext = new ChoosePlayerViewModel();
+            DataContext = new PlayerViewModel();
 
         }
     }

@@ -21,7 +21,7 @@ namespace Angel
 
         private void GetChoosePlayerPage(object parameter)
         {
-            Main.Content = new ChoosePlayerView();
+            Main.Content = new PlayerView();
         }
 
         //private void StartDBConnection()

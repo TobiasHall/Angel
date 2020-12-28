@@ -8,13 +8,13 @@ using static Angel.MockData;
 
 namespace Angel
 {
-    public class ChoosePlayerViewModel : BaseViewModel
+    public class PlayerViewModel : BaseViewModel
     {
         public string Nickname { get; set; }
         public string SelectedGameTime { get; set; }
         public List<string> GameTimeOptions { get; set; }
 
-        public ChoosePlayerViewModel()
+        public PlayerViewModel()
         {
             NewGameCommand = new RelayCommand(GetGameView, CanExecute);
             MainMenuCommand = new RelayCommand(GetMainMenuView, CanExecute);
