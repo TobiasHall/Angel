@@ -83,7 +83,7 @@ namespace Angel
         }
         public override string ToString()
         {
-            return $"{Species} {Weight}";
+            return $"{Species} {Weight}g";
         }
     }
 }

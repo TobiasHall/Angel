@@ -111,7 +111,12 @@ namespace Angel
                     GameTimer = String.Format("{0:D2}:{1:D2}:{2:D2}", countdownTimer/3600, countdownTimer/120, countdownTimer % 60);
                 }
                 CatchFishTrigger++;
-                CheckIfCatchFishTrigger();
+
+                if (CatchFishTrigger == (gameTimer / 10))
+                {
+                    DeleteFish();
+                    CheckIfCatchFishTrigger();
+                }
             }
             else
             {
@@ -122,10 +127,22 @@ namespace Angel
 
         }
 
+        private void DeleteFish()
+        {
+            for (int i = 0; i < Hooks.Count; i++)
+            {
+                if (Hooks[i].Fish != null)
+                {
+                    Hooks[i].Fish = null;
+                    Hooks[i].imgDynamic.Source = new BitmapImage(new Uri(imagePathHook, UriKind.Relative));
+                    Hooks.Remove(Hooks[i]);
+                }
+            }
+        }
+
         private void CheckIfCatchFishTrigger()
         {
-            if (CatchFishTrigger == (gameTimer / 10))
-            {
+            
                 CatchFish(Hooks);
                 for (int i = 0; i < Hooks.Count; i++)
                 {
@@ -133,9 +150,8 @@ namespace Angel
                     {
                         Hooks[i].imgDynamic.Source = new BitmapImage(new Uri(imagePathFish, UriKind.Relative));
                         Hooks[i].HasWorm = false;
-                        Hooks.Remove(Hooks[i]);
                     }
-                    else if (Hooks[i].HasWorm == false)
+                else if (Hooks[i].HasWorm == false)
                     {
                         Hooks[i].imgDynamic.Source = new BitmapImage(new Uri(imagePathHook, UriKind.Relative));
                         Hooks.Remove(Hooks[i]);
@@ -143,7 +159,7 @@ namespace Angel
                 }
                 CatchFishTrigger = 0;
                 GetBasketOfFish();
-            }
+            
         }
         private void UpdateLabelsInView(Fish fish)
         {            

@@ -68,13 +68,14 @@ namespace Angel
             else if (panel.Name == "FishAndHookDropZone")
             {
                 //TODO: Ändra så att den kollar om kroken har en fisk. På så vis kan jag göra som innan att en fisk kan slita sig med EraseFishFromHook
-                if (model.Hooks.Contains(element))
-                {
-                    model.Hooks.Remove(element);
-                }
-                else
+                if (element.Fish != null)
                 {
                     model.CollectFish(element.Fish);
+                    model.Hooks.Remove(element);
+                }
+                else if (model.Hooks.Contains(element))
+                {
+                    model.Hooks.Remove(element);
                 }
 
                 element.SetBaseValue(int.Parse(panel.Uid));                
