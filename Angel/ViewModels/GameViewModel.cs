@@ -153,7 +153,7 @@ namespace Angel
                 {
                     Hooks[i].Fish = null;
                     Hooks[i].imgDynamic.Source = new BitmapImage(new Uri(imagePathHook, UriKind.Relative));
-                    Hooks.Remove(Hooks[i]);
+                    Hooks.Remove(Hooks[i]);                    
                 }
             }
         }

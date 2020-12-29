@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using System.Text;
+using static Angel.DataSaverExtension;
 
 namespace Angel
 {
@@ -18,6 +21,28 @@ namespace Angel
         private Player player;
         private int gameTimer;
 
+        //test av spara och öppna
+        private Player returnPlayer;
+        private List<Player> players = new List<Player>();
+        private string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Resources\Data\highscore.txt");
+
+
+        //string pdfFolder;        
+
+        //#if DEBUG
+        //    DirectoryInfo directoryInfo = Directory.GetParent(Directory.GetParent(Environment.CurrentDirectory).FullName);
+        //    pdfFolder = directoryInfo.FullName + @"\PdfFile\Auto Refill Reminder List.pdf";
+        //    System.Diagnostics.Process.Start(pdfFolder);
+        //#endif
+
+        //#if (!DEBUG)
+        //    pdfFolder = Environment.CurrentDirectory + @"\PdfFile\Auto Refill Reminder List.pdf";
+        //    Process.Start(pdfFolder);
+        //#endif
+
+
+
+
         public EndViewModel(Player player, int gameTimer)
         {
             NewGameCommand = new RelayCommand(GetGameView, CanExecute);
@@ -28,7 +53,43 @@ namespace Angel
             this.player = player;
             this.gameTimer = gameTimer;
             SetLabels();
+
+            SavePlayerToFile();
+            GetListOfPlayers();
         }
+
+        private void SavePlayerToFile()
+        {
+            try
+             {
+                // Write the contents of the variable someClass to a file.
+                WriteToBinaryFile<Player>("test.bin", player);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void GetListOfPlayers()
+        {
+            try
+            {
+                //Read the file contents back into a variable.
+                //Player object1 = ReadFromBinaryFile<Player>(path);
+                //players.Add(object1);
+
+                returnPlayer = (Player)ReadFromBinaryFile("test.bin");
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         private void GetGameView(object parameter)
         {
             Main.Content = new GameView(player, gameTimer);

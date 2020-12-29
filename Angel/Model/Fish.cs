@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Angel
 {
+    [Serializable]
     public class Fish
     {
         public int FishId { get; set; }

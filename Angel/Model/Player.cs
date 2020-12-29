@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Angel
 {
+    [Serializable]
     public class Player
     {
         public string Nickname { get; set; }
