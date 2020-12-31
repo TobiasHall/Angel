@@ -26,23 +26,6 @@ namespace Angel
         private List<Player> players = new List<Player>();
         private string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Resources\Data\highscore.txt");
 
-
-        //string pdfFolder;        
-
-        //#if DEBUG
-        //    DirectoryInfo directoryInfo = Directory.GetParent(Directory.GetParent(Environment.CurrentDirectory).FullName);
-        //    pdfFolder = directoryInfo.FullName + @"\PdfFile\Auto Refill Reminder List.pdf";
-        //    System.Diagnostics.Process.Start(pdfFolder);
-        //#endif
-
-        //#if (!DEBUG)
-        //    pdfFolder = Environment.CurrentDirectory + @"\PdfFile\Auto Refill Reminder List.pdf";
-        //    Process.Start(pdfFolder);
-        //#endif
-
-
-
-
         public EndViewModel(Player player, int gameTimer)
         {
             NewGameCommand = new RelayCommand(GetGameView, CanExecute);
@@ -52,7 +35,7 @@ namespace Angel
 
             this.player = player;
             this.gameTimer = gameTimer;
-            SetLabels();
+            //SetLabels();
 
             SavePlayerToFile();
             GetListOfPlayers();
@@ -60,6 +43,7 @@ namespace Angel
 
         private void SavePlayerToFile()
         {
+            //DeleteBinaryFile<Player>("test.bin");
             try
              {
                 // Write the contents of the variable someClass to a file.
@@ -80,7 +64,7 @@ namespace Angel
                 //Player object1 = ReadFromBinaryFile<Player>(path);
                 //players.Add(object1);
 
-                returnPlayer = (Player)ReadFromBinaryFile("test.bin");
+                returnPlayer = ReadFromBinaryFile<Player>("test.bin");
 
             }
             catch (Exception)

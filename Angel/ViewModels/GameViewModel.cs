@@ -84,8 +84,9 @@ namespace Angel
         }
         private void UseLuckySnuff(object parameter)
         {
-            LuckySnuffBtnEnabled = ExtraChanseOnTrout();
-            LuckySnuffLabel = numbersOfExtraChansOnTrout;
+            //LuckySnuffBtnEnabled = ExtraChanseOnTrout();
+            //LuckySnuffLabel = numbersOfExtraChansOnTrout;
+            GetEndView(player);
         }
         private void UseCupOfCoffe(object parameter)
         {
