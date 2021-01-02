@@ -4,6 +4,8 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using static Angel.DataSaverExtension;
+using System.Linq;
+using System.Windows;
 
 namespace Angel
 {
@@ -17,14 +19,15 @@ namespace Angel
         public int TotalFishes { get; set; }
         public decimal TotalWeight { get; set; } = 0;
         public int TotalScore { get; set; }
+        public string Nickname { get; set; }
 
         private Player player;
         private int gameTimer;
+        private Highscore highscore;
+        private bool addPlayerToHighscore;
 
-        //test av spara och öppna
-        private Player returnPlayer;
-        private List<Player> players = new List<Player>();
-        private string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Resources\Data\highscore.txt");
+        //Test av att spara List<Player>players
+        
 
         public EndViewModel(Player player, int gameTimer)
         {
@@ -32,48 +35,23 @@ namespace Angel
             HighscoreViewCommand = new RelayCommand(GetHighscoreView, CanExecute);
             MainMenuViewCommand = new RelayCommand(GetMainMenuView, CanExecute);
             ExitGameCommand = new RelayCommand(CloseApplication, CanExecute);
-
             this.player = player;
+            this.highscore = new Highscore() {LatestRoundPlayer = player};
             this.gameTimer = gameTimer;
-            //SetLabels();
+            
+            SetLabels();
 
-            SavePlayerToFile();
-            GetListOfPlayers();
+            CheckForHighscore();
         }
 
-        private void SavePlayerToFile()
+        private void CheckForHighscore()
         {
-            //DeleteBinaryFile<Player>("test.bin");
-            try
-             {
-                // Write the contents of the variable someClass to a file.
-                WriteToBinaryFile<Player>("test.bin", player);
-            }
-            catch (Exception)
+            addPlayerToHighscore =  highscore.AddtoHighscore(player);
+            if (addPlayerToHighscore)
             {
-
-                throw;
+                highscore.SaveNewHigscoreList();
             }
         }
-
-        private void GetListOfPlayers()
-        {
-            try
-            {
-                //Read the file contents back into a variable.
-                //Player object1 = ReadFromBinaryFile<Player>(path);
-                //players.Add(object1);
-
-                returnPlayer = ReadFromBinaryFile<Player>("test.bin");
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
         private void GetGameView(object parameter)
         {
             Main.Content = new GameView(player, gameTimer);
@@ -81,31 +59,36 @@ namespace Angel
 
         private void SetLabels()
         {
-            foreach (Fish fish in player.FishBucket)
+            if (player.FishBucket != null)
             {
-                switch (fish.FishId)
+                foreach (Fish fish in player.FishBucket)
                 {
-                    case (int)FishEnum.Dace:
-                        NrOfDace++;
-                        break;
-                    case (int)FishEnum.Pike:
-                        NrOfPike++;
-                        break;
-                    case (int)FishEnum.Perch:
-                        NrOfPerc++;
-                        break;
-                    case (int)FishEnum.Char:
-                        NrOfChar++;
-                        break;
-                    case (int)FishEnum.Trout:
-                        NrOfTrout++;
-                        break;
-                    default:
-                        break;
+                    switch (fish.FishId)
+                    {
+                        case (int)FishEnum.Dace:
+                            NrOfDace++;
+                            break;
+                        case (int)FishEnum.Pike:
+                            NrOfPike++;
+                            break;
+                        case (int)FishEnum.Perch:
+                            NrOfPerc++;
+                            break;
+                        case (int)FishEnum.Char:
+                            NrOfChar++;
+                            break;
+                        case (int)FishEnum.Trout:
+                            NrOfTrout++;
+                            break;
+                        default:
+                            break;
+                    }
+                    TotalFishes++;
+                    TotalWeight += fish.Weight;
                 }
-                TotalFishes++;
-                TotalWeight += fish.Weight;
             }
+            Nickname = player.Nickname;
+            TotalScore = player.Score;
         }
     }
 }

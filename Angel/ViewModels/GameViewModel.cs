@@ -86,6 +86,9 @@ namespace Angel
         {
             //LuckySnuffBtnEnabled = ExtraChanseOnTrout();
             //LuckySnuffLabel = numbersOfExtraChansOnTrout;
+            player.FishBucket = CollectedFishes;
+            Random rand = new Random();
+            player.SetPlayerScore(rand.Next(1000,2000));
             GetEndView(player);
         }
         private void UseCupOfCoffe(object parameter)

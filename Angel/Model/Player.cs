@@ -32,5 +32,9 @@ namespace Angel
         {
             Score = score;
         }
+        public override string ToString()
+        {
+            return $"{Nickname} {Score}";
+        }
     }
 }

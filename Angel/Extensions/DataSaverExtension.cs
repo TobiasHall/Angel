@@ -16,7 +16,7 @@ namespace Angel
         /// <para>To prevent a variable from being serialized, decorate it with the [NonSerialized] attribute; cannot be applied to properties.</para>
         /// </summary>
         /// <typeparam name="T">The type of object being written to the binary file.</typeparam>
-        /// <param name="fileName">The file path to write the object instance to.</param>
+        /// <param name="fileName">The file name to write the object instance to.</param>
         /// <param name="objectToWrite">The object instance to write to the binary file.</param>        
         public static void WriteToBinaryFile<T>(string fileName, T objectToWrite)
         {
@@ -30,7 +30,7 @@ namespace Angel
         /// Reads an object instance from a binary file.
         /// </summary>
         /// <typeparam name="T">The type of object to read from the binary file.</typeparam>
-        /// <param name="fileName">The file path to read the object instance from.</param>
+        /// <param name="fileName">The file name to read the object instance from.</param>
         /// <returns>Returns a new instance of the object read from the binary file.</returns>
         public static T ReadFromBinaryFile<T>(string fileName)
         {
@@ -41,14 +41,14 @@ namespace Angel
             }
         }
         /// <summary>
-        /// Deletes a file from rootfolder.
+        /// Deletes a file from rootfolder of application.
         /// </summary>
         /// <typeparam name="T">The type of object to read from the binary file.</typeparam>
-        /// <param name="fileName">The file path to read the object instance from.</param>
-        public static void DeleteBinaryFile<T>(string filePath)
+        /// <param name="fileName">The file name to read the object instance from.</param>
+        public static void DeleteBinaryFile<T>(string fileName)
         {
             string rootFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\";            
-            var fullPath = rootFolder + filePath;
+            var fullPath = rootFolder + fileName;
             File.Delete(fullPath);            
         }
     }

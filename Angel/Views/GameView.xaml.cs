@@ -90,6 +90,7 @@ namespace Angel
             }
             else
             {
+                element.PositionOnIce = int.Parse(panel.Uid);
                 parent.Children.Remove(element);
                 panel.Children.Add(element);
             }
