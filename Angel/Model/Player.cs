@@ -34,7 +34,7 @@ namespace Angel
         }
         public override string ToString()
         {
-            return $"{Nickname} {Score}";
+            return $"{Nickname}.....{Score}p";
         }
     }
 }

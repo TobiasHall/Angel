@@ -22,8 +22,8 @@ namespace Angel
         private static int luckyHolePercentBonus = 20;
         private static List<Fish> fishes;
 
-        private static int minChanseForFish = 3;
-        private static int maxChanseForFish = 6;
+        private static int minHooksToTrigger = 3;
+        private static int maxHooksToTrigger = 6;
         
         public static void StartNewGame()
         {
@@ -70,7 +70,7 @@ namespace Angel
             numbersOfExtraChansToCatchFish--;
             if (numbersOfExtraChansToCatchFish != 0)
             {
-                bonusPercentOnFish += 20;
+                bonusPercentOnFish += 15;
                 return true;
             }
             return false;
@@ -78,6 +78,9 @@ namespace Angel
                 
         public static void CatchFish(List<Hook> hooks)
         {
+            //Gör om så att metod returnar denna och ViewModel ändrar sen
+            var tempHooks = hooks;
+
             hooks.Shuffle();
             //Kolla turhål
             foreach (Hook hook in hooks)
@@ -88,7 +91,7 @@ namespace Angel
                 }
             }
             //Slumpar antal krokar med chans
-            int hooksWithChanse = random.Next(minChanseForFish, maxChanseForFish + 1);
+            int hooksWithChanse = random.Next(minHooksToTrigger, maxHooksToTrigger + 1);
             if (hooks.Count < hooksWithChanse)
             {
                 hooksWithChanse = hooks.Count;

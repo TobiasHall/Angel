@@ -8,6 +8,24 @@
              d:DesignHeight="640" d:DesignWidth="1000"
              Background="{DynamicResource BackgroundIMG}">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Margin="20" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <Button Width="300" FontSize="25" Margin="5" Content="Huvudmenyn" Style="{StaticResource RoundButtonTemplate}" Command="{Binding MainMenuViewCommand}"></Button>
+            <Button Width="300" FontSize="25" Margin="5" Content="Stäng av" Style="{StaticResource RoundButtonTemplate}" Command="{Binding ExitGameCommand}"></Button>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Margin="20,20,20,60" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <Label HorizontalAlignment="Center" Content="Senaste fisketur:" FontSize="38" FontWeight="Bold"></Label>
+            <Label HorizontalAlignment="Center" Content="{Binding Nickname, FallbackValue=Inget valt}" FontSize="30" FontWeight="Bold"></Label>
+            <Label HorizontalAlignment="Center" Content="Poäng:" FontSize="30" FontWeight="Bold"></Label>
+            <Label HorizontalAlignment="Center" Content="{Binding TotalScore, FallbackValue=15000}" FontSize="30" FontWeight="Bold"></Label>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Label HorizontalAlignment="Center" Content="Topplista" FontSize="38" FontWeight="Bold"></Label>
+            <ListBox Width="auto" Height="500" FontSize="34" ItemsSource="{Binding HighscoreList}" ScrollViewer.VerticalScrollBarVisibility="Hidden" Opacity="0.9"></ListBox>
+        </StackPanel>
     </Grid>
 </UserControl>

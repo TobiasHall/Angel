@@ -49,7 +49,7 @@ namespace Angel
             addPlayerToHighscore =  highscore.AddtoHighscore(player);
             if (addPlayerToHighscore)
             {
-                highscore.SaveNewHigscoreList();
+                
             }
         }
         private void GetGameView(object parameter)

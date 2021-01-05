@@ -26,6 +26,7 @@ namespace Angel
             try
             {
                 Players = ReadFromBinaryFile<List<Player>>(fileName);
+                LatestRoundPlayer = Players[Players.Count - 1];
                 Players.OrderByDescending(x => x.Score);
                 HighestScore = FindMaxValue(Players, x => x.Score);
                 LowestScore = FindMinValue(Players, x => x.Score);
@@ -64,19 +65,30 @@ namespace Angel
             if (Players.Count < 10)
             {
                 Players.Add(player);
-                Players = (List<Player>)Players.OrderByDescending(x => x.Score);
+                //Players = (List<Player>)Players.OrderByDescending(x => x.Score);
+                LatestRoundPlayer = player;
+                SaveNewHigscoreList();
                 return true;
             }
             else if (player.Score >= LowestScore)
             {
                 Players.RemoveAt(Players.Count - 1);
                 Players.Add(player);
-                Players = Players.OrderByDescending(x => x.Score).ToList();
+                //Players = Players.OrderByDescending(x => x.Score).ToList();
+                LatestRoundPlayer = player;
                 LowestScore = FindMinValue(Players, x => x.Score);
+                SaveNewHigscoreList();
                 return true;
             }
             return false;
         }
+        //Använd och sätt proppen till private get
+        public List<Player> GetPlayers()
+        {
+            var returnPlayers = (List<Player>)Players.OrderByDescending(x => x.Score);
+            return returnPlayers;
+        }
+
         public int FindMaxValue<T>(List<T> list, Converter<T, int> projection)
         {
             if (list.Count == 0)
