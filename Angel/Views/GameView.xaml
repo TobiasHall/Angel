@@ -30,7 +30,8 @@
                 <StackPanel HorizontalAlignment="Center" Margin="10" Grid.Column="0" VerticalAlignment="Top">
                     <Button Margin="5" Content="Nytt spel" Style="{StaticResource RoundButtonTemplate}" Command="{Binding NewGameCommand}"></Button>
                     <Button Margin="5" Content="Huvudmenyn" Style="{StaticResource RoundButtonTemplate}" Command="{Binding MainMenuViewCommand}"></Button>
-                    <Button Margin="5" Content="Stäng av" Style="{StaticResource RoundButtonTemplate}" Command="{Binding ExitGameCommand}"></Button>                    
+                    <Button Margin="5" Content="Avsluta runda" Style="{StaticResource RoundButtonTemplate}" Command="{Binding EndViewCommand}"></Button>
+                    <Button Margin="5" Content="Stäng av" Style="{StaticResource RoundButtonTemplate}" Command="{Binding ExitGameCommand}"></Button>
                 </StackPanel>
                                 
                 <StackPanel HorizontalAlignment="Center" Margin="10" Grid.Column="1" VerticalAlignment="Top">

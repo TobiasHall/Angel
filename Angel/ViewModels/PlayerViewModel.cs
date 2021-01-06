@@ -39,7 +39,10 @@ namespace Angel
             player.SetPlayerNickname(Nickname);
             int gameTimer = SetGameTimer();
             
-            Main.Content = new GameView(MockPlayer, MockGameTime);
+            MockData mockData = new MockData();
+            player = MockPlayer;
+            gameTimer = MockGameTime;
+            Main.Content = new GameView(player, gameTimer);
         }
         private int SetGameTimer()
         {

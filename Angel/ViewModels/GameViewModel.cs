@@ -25,6 +25,7 @@ namespace Angel
         public int CollectedFishWeightLbl { get; set; }
         public ICommand LuckySnuffBtn { get; set; }
         public ICommand CupOfCoffeBtn { get; set; }
+        public ICommand EndViewCommand { get; set; }
         public bool LuckySnuffBtnEnabled { get; set; } = true;
         public int LuckySnuffLabel { get; set; }
         public bool CupOfCoffeBtnEnabled { get; set; } = true;
@@ -57,6 +58,7 @@ namespace Angel
             MainMenuViewCommand = new RelayCommand(GetMainMenuView, CanExecute);
             NewGameCommand = new RelayCommand(GetGameView, CanExecute);
             ExitGameCommand = new RelayCommand(CloseApplication, CanExecute);
+            EndViewCommand = new RelayCommand(GetEndView, CanExecute);
 
             LuckySnuffBtn = new RelayCommand(UseLuckySnuff, CanExecute);
             CupOfCoffeBtn = new RelayCommand(UseCupOfCoffe, CanExecute);
@@ -72,6 +74,18 @@ namespace Angel
         {
             Main.Content = new GameView(player, gameTimer);
         }
+        private void GetEndView(object parameter)
+        {
+            FishingRoundEnded();
+            Main.Content = new EndView(player, gameTimer);
+        }
+        private void FishingRoundEnded()
+        {
+            timer.Stop();
+            player.FishBucket = CollectedFishes;
+            player.SetPlayerScore(TotalScore);
+
+        }
         public void CollectFish(Fish fish)
         {
             if (fish != null)
@@ -79,17 +93,12 @@ namespace Angel
                 CollectedFishes.Add(fish);
                 AddToScore(fish);
                 UpdateLabelsInView(fish);
-                fish = null;
             }
         }
         private void UseLuckySnuff(object parameter)
         {
-            //LuckySnuffBtnEnabled = ExtraChanseOnTrout();
-            //LuckySnuffLabel = numbersOfExtraChansOnTrout;
-            player.FishBucket = CollectedFishes;
-            Random rand = new Random();
-            player.SetPlayerScore(rand.Next(1000,2000));
-            GetEndView(player);
+            LuckySnuffBtnEnabled = ExtraChanseOnTrout();
+            LuckySnuffLabel = numbersOfExtraChansOnTrout;           
         }
         private void UseCupOfCoffe(object parameter)
         {
@@ -143,12 +152,6 @@ namespace Angel
             }
 
         }
-
-        private void GetEndView(Player player)
-        {
-            Main.Content = new EndView(player, gameTimer);
-        }
-
         private void DeleteFish()
         {
             for (int i = 0; i < Hooks.Count; i++)
@@ -165,13 +168,12 @@ namespace Angel
         private void CheckIfCatchFishTrigger()
         {
             
-                CatchFish(Hooks);
+                Hooks = CatchFish(Hooks);
                 for (int i = 0; i < Hooks.Count; i++)
                 {
                     if (Hooks[i].Fish != null)
                     {
-                        Hooks[i].imgDynamic.Source = new BitmapImage(new Uri(imagePathFish, UriKind.Relative));
-                        Hooks[i].HasWorm = false;
+                        Hooks[i].imgDynamic.Source = new BitmapImage(new Uri(imagePathFish, UriKind.Relative));                        
                     }
                 else if (Hooks[i].HasWorm == false)
                     {
@@ -180,7 +182,7 @@ namespace Angel
                     }
                 }
                 CatchFishTrigger = 0;
-                GetBasketOfFish();
+                
             
         }
         private void UpdateLabelsInView(Fish fish)

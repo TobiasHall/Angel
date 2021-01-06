@@ -19,7 +19,7 @@ namespace Angel
         public int TotalFishes { get; set; }
         public decimal TotalWeight { get; set; } = 0;
         public int TotalScore { get; set; }
-        public string Nickname { get; set; }
+        public string HighscorePlacement { get; set; }
 
         private Player player;
         private int gameTimer;
@@ -49,7 +49,12 @@ namespace Angel
             addPlayerToHighscore =  highscore.AddtoHighscore(player);
             if (addPlayerToHighscore)
             {
-                
+                int index = highscore.GetHighscorePlacement(player);
+                HighscorePlacement = index.ToString();
+            }
+            else
+            {
+                HighscorePlacement = "-";
             }
         }
         private void GetGameView(object parameter)
@@ -86,8 +91,7 @@ namespace Angel
                     TotalFishes++;
                     TotalWeight += fish.Weight;
                 }
-            }
-            Nickname = player.Nickname;
+            }            
             TotalScore = player.Score;
         }
     }

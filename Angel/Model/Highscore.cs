@@ -27,7 +27,7 @@ namespace Angel
             {
                 Players = ReadFromBinaryFile<List<Player>>(fileName);
                 LatestRoundPlayer = Players[Players.Count - 1];
-                Players.OrderByDescending(x => x.Score);
+                Players.Sort((a, b) => b.Score.CompareTo(a.Score));                
                 HighestScore = FindMaxValue(Players, x => x.Score);
                 LowestScore = FindMinValue(Players, x => x.Score);
             }
@@ -48,7 +48,7 @@ namespace Angel
                 //MessageBox.Show(message);
             }
         }
-        private void DeletePlayersFile()
+        public void DeletePlayersFile()
         {
             try
             {
@@ -64,8 +64,7 @@ namespace Angel
         {
             if (Players.Count < 10)
             {
-                Players.Add(player);
-                //Players = (List<Player>)Players.OrderByDescending(x => x.Score);
+                Players.Add(player);                
                 LatestRoundPlayer = player;
                 SaveNewHigscoreList();
                 return true;
@@ -73,8 +72,7 @@ namespace Angel
             else if (player.Score >= LowestScore)
             {
                 Players.RemoveAt(Players.Count - 1);
-                Players.Add(player);
-                //Players = Players.OrderByDescending(x => x.Score).ToList();
+                Players.Add(player);                
                 LatestRoundPlayer = player;
                 LowestScore = FindMinValue(Players, x => x.Score);
                 SaveNewHigscoreList();
@@ -83,11 +81,24 @@ namespace Angel
             return false;
         }
         //Använd och sätt proppen till private get
-        public List<Player> GetPlayers()
+
+
+
+        public int GetHighscorePlacement(Player player)
         {
-            var returnPlayers = (List<Player>)Players.OrderByDescending(x => x.Score);
-            return returnPlayers;
+            if (Players.Contains(player))
+            {
+                Players.Sort((a, b) => b.Score.CompareTo(a.Score));
+                int index = Players.IndexOf(player) + 1;
+                return index;
+            }
+            else
+            {
+                return 0;
+            }
         }
+
+
 
         public int FindMaxValue<T>(List<T> list, Converter<T, int> projection)
         {

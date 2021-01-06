@@ -76,49 +76,46 @@ namespace Angel
             return false;
         }
                 
-        public static void CatchFish(List<Hook> hooks)
+        public static List<Hook> CatchFish(List<Hook> hooks)
         {
-            //Gör om så att metod returnar denna och ViewModel ändrar sen
             var tempHooks = hooks;
+            tempHooks.Shuffle();
 
-            hooks.Shuffle();
             //Kolla turhål
-            foreach (Hook hook in hooks)
+            foreach (Hook hook in tempHooks)
             {
                 if (luckyHoles.Contains(hook.PositionOnIce))
                 {
                     hook.PlacedOnLucyHole = true;
                 }
             }
-            //Slumpar antal krokar med chans
+            //Slumpar antal krokar med chans till fisk
             int hooksWithChanse = random.Next(minHooksToTrigger, maxHooksToTrigger + 1);
-            if (hooks.Count < hooksWithChanse)
+            if (tempHooks.Count < hooksWithChanse)
             {
-                hooksWithChanse = hooks.Count;
+                hooksWithChanse = tempHooks.Count;
             }
-            //Slumpar fram fiskar            
+            //Slumpar fram om krok får fisk, blir av med mask, eller inget
             for (int i = 0; i < hooksWithChanse; i++)
             {
                 int hit = random.Next(1, 101);
                 hit += bonusPercentOnFish;                
-                if (hooks[i].PlacedOnLucyHole)
+                if (tempHooks[i].PlacedOnLucyHole)
                 {
                     hit += luckyHolePercentBonus;
                 }                
-                if (hit > 85)
+                if (hit > 90)
                 {
-                    Fish fish = new Fish(bonusPercentOnTrout);
-                    //Behövs nog inte. Ev om jag vill att den ska kika på hur många fiskar som slet sig
-                    fishes.Add(fish);
-                    hooks[i].Fish = fish;                
-                    //AddtoScore(fish);
+                    tempHooks[i].Fish = new Fish(bonusPercentOnTrout);
+                    tempHooks[i].HasWorm = false;                    
                 }
-                else if (hit > 75 && hit <=85)
+                else if (hit > 80 && hit <= 90)
                 {
-                    hooks[i].HasWorm = false;
+                    tempHooks[i].HasWorm = false;
                 }
             }
-            ClearBonus();            
+            ClearBonus();
+            return tempHooks;
         }
 
         public static void AddToScore(Fish fish)
@@ -150,20 +147,5 @@ namespace Angel
             bonusPercentOnFish = 0;
             bonusPercentOnTrout = 0;
         }
-        public static List<Fish> GetBasketOfFish()
-        {
-            return fishes;
-        }
-
-
-
-
-
-
-
-
-
-
-
     }
 }

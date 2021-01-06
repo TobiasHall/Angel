@@ -11,7 +11,6 @@
     <None Remove="Resources\Cursors\hook.cur" />
     <None Remove="Resources\Cursors\worm.cur" />
     <None Remove="Resources\Images\bg-lake.jpg" />
-    <None Remove="Resources\Images\collection-bag.png" />
     <None Remove="Resources\Images\fish-and-worm.png" />
     <None Remove="Resources\Images\fish-bucket.png" />
     <None Remove="Resources\Images\fish.png" />
@@ -20,6 +19,7 @@
     <None Remove="Resources\Images\logo.gif" />
     <None Remove="Resources\Images\snus.png" />
     <None Remove="Resources\Images\thermos.png" />
+    <None Remove="Resources\Images\trophy.png" />
     <None Remove="Resources\Images\worm.png" />
   </ItemGroup>
 
@@ -33,7 +33,6 @@
     <Resource Include="Resources\Cursors\hook.cur" />
     <Resource Include="Resources\Cursors\worm.cur" />
     <Resource Include="Resources\Images\bg-lake.jpg" />
-    <Resource Include="Resources\Images\collection-bag.png" />
     <Resource Include="Resources\Images\fish-and-worm.png" />
     <Resource Include="Resources\Images\fish-bucket.png" />
     <Resource Include="Resources\Images\fish.png" />
@@ -42,6 +41,7 @@
     <Resource Include="Resources\Images\logo.gif" />
     <Resource Include="Resources\Images\snus.png" />
     <Resource Include="Resources\Images\thermos.png" />
+    <Resource Include="Resources\Images\trophy.png" />
     <Resource Include="Resources\Images\worm.png" />
   </ItemGroup>
 

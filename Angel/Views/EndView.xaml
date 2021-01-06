@@ -13,6 +13,8 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <Image Source="/Resources/Images/trophy.png" Grid.ColumnSpan="3" Height="120" VerticalAlignment="Top"></Image>
+        <Label Grid.ColumnSpan="3" HorizontalAlignment="Center" Content="{Binding HighscorePlacement, FallbackValue=10}" FontSize="38" FontWeight="Bold"></Label>
 
         <StackPanel VerticalAlignment="Center" Margin="10" Grid.Column="0">
             <Image Width="280" Source="/Resources/images/fish-bucket.png"></Image>
@@ -28,11 +30,10 @@
             </WrapPanel>
         </StackPanel>
 
-        <StackPanel VerticalAlignment="Top" Margin="10" Grid.Column="1">
-            <Label HorizontalAlignment="Center" Content="{Binding Nickname, FallbackValue=Inget valt}" FontSize="58" FontWeight="Bold"></Label>
+        <StackPanel VerticalAlignment="center" Margin="10" Grid.Column="1">
             <WrapPanel Grid.Column="1" Margin="20" HorizontalAlignment="Center">
-                <Label HorizontalAlignment="Center" Content="Poäng:" FontSize="48" FontWeight="Bold"></Label>
-                <Label HorizontalAlignment="Center" Content="{Binding TotalScore, FallbackValue=15000}" FontSize="48" FontWeight="Bold"></Label>
+                <Label HorizontalAlignment="Center" Content="Poäng:" FontSize="38" FontWeight="Bold"></Label>
+                <Label HorizontalAlignment="Center" Content="{Binding TotalScore, FallbackValue=15000}" FontSize="38" FontWeight="Bold"></Label>
             </WrapPanel>
             <WrapPanel Grid.Column="1" Margin="20" HorizontalAlignment="Center">
                 <Button Margin="5" Content="Nytt spel" Style="{StaticResource RoundButtonTemplate}" Command="{Binding NewGameCommand}"></Button>
