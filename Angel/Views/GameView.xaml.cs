@@ -58,18 +58,21 @@ namespace Angel
             Panel parent = (Panel)VisualTreeHelper.GetParent(element);
             if (panel.Name != "TopGrid" && panel.Name != "FishAndHookDropZone" && element.HasWorm == true)
             {
-                parent.Children.Remove(element);
-                panel.Children.Add(element);
+                if (parent.Children.Count == 0)
+                {
+                    parent.Children.Remove(element);
+                    panel.Children.Add(element);
                 
-                if (model.Hooks.Contains(element))
-                {
-                    element.PositionOnIce = int.Parse(panel.Uid);
+                    if (model.Hooks.Contains(element))
+                    {
+                        element.PositionOnIce = int.Parse(panel.Uid);
+                    }
+                    else
+                    {
+                        element.PositionOnIce = int.Parse(panel.Uid);
+                        model.Hooks.Add(element);
+                    }
                 }
-                else
-                {
-                    element.PositionOnIce = int.Parse(panel.Uid);
-                    model.Hooks.Add(element);
-                }               
             }
             else if (panel.Name == "FishAndHookDropZone")
             {
