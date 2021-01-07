@@ -36,9 +36,10 @@ namespace Angel
         public int TotalFishes { get; set; }
         public decimal TotalWeight { get; set; } = 0;
         public string TotalScoreLabel { get; set; } = "Poäng: 0";
+        public string Nickname { get; set; }
         //Fram hit
-        public Player player { get; set; }
-        public string GameTimer { get; set; } = "TT:MM:SS";
+        private Player player { get; set; }
+        public string GameTimer { get; set; } = "Kör!";
         public bool IceHolesIsEnabled { get; set; } = true;
 
         DispatcherTimer timer;
@@ -66,8 +67,9 @@ namespace Angel
             this.gameTimer = gameTimer;
             countdownTimer = gameTimer;
             this.player = player;
+            Nickname = player.Nickname;
             LuckySnuffLabel = $"{snuffString} {numbersOfExtraChansOnTrout}";
-            CupOfCoffeLabel = $"{snuffString} {numbersOfExtraChansToCatchFish}";
+            CupOfCoffeLabel = $"{coffeString} {numbersOfExtraChansToCatchFish}";
             StartCountdown();
         }
         private void GetGameView(object parameter)
@@ -134,7 +136,7 @@ namespace Angel
         private void UseCupOfCoffe(object parameter)
         {
             CupOfCoffeBtnEnabled = ExtraChanseToCatchFish();
-            CupOfCoffeLabel = $"{snuffString} {numbersOfExtraChansToCatchFish}";
+            CupOfCoffeLabel = $"{coffeString} {numbersOfExtraChansToCatchFish}";
         }
 
 

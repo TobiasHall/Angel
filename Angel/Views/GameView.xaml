@@ -35,7 +35,7 @@
                 </StackPanel>
                                 
                 <StackPanel HorizontalAlignment="Center" Margin="10" Grid.Column="1" VerticalAlignment="Top">
-                    <Label HorizontalAlignment="Center" Content="{Binding player.Nickname, FallbackValue=Inget valt}" FontSize="38"></Label>
+                    <Label HorizontalAlignment="Center" Content="{Binding Nickname, FallbackValue=Inget valt}" FontSize="38"></Label>
                     <Label HorizontalAlignment="Center" Content="{Binding TotalScoreLabel, FallbackValue=Poäng: 0}" FontSize="28"></Label>                    
                     <Label HorizontalAlignment="Center" Content="{Binding GameTimer, FallbackValue=00:00:00}" FontSize="28"></Label>
                     <Label HorizontalAlignment="Center" Content="{Binding CollectedFishLabel, FallbackValue=Öring: 5000g}" FontSize="28" FontWeight="Bold"></Label>                        
