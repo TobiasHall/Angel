@@ -26,8 +26,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Resources\Sounds\whiplash.mp3" />
-    <Content Include="Resources\Sounds\wind.mp3" />
+    <Content Include="Resources\Sounds\whiplash.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sounds\wind.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
