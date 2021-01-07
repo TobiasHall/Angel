@@ -58,7 +58,7 @@ namespace Angel
             Panel parent = (Panel)VisualTreeHelper.GetParent(element);
             if (panel.Name != "TopGrid" && panel.Name != "FishAndHookDropZone" && element.HasWorm == true)
             {
-                if (parent.Children.Count == 0)
+                if (panel.Children.Count == 0)
                 {
                     parent.Children.Remove(element);
                     panel.Children.Add(element);
