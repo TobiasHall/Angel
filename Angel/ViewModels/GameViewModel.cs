@@ -70,12 +70,32 @@ namespace Angel
         }
         private void GetGameView(object parameter)
         {
-            Main.Content = new GameView(player, gameTimer);
+            timer.Stop();
+            MessageBoxResult result = MessageBox.Show($"Vill du starta om fisketur?", "Varning", MessageBoxButton.YesNo);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    Main.Content = new  GameView(player, gameTimer);
+                    break;
+                case MessageBoxResult.No:
+                    timer.Start();
+                    break;
+            }            
         }
         private void GetEndView(object parameter)
         {
-            FishingRoundEnded();
-            Main.Content = new EndView(player, gameTimer);
+            timer.Stop();
+            MessageBoxResult result = MessageBox.Show($"Vill du avsluta fisketur?", "Varning", MessageBoxButton.YesNo);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    FishingRoundEnded();
+                    Main.Content = new EndView(player, gameTimer);
+                    break;
+                case MessageBoxResult.No:
+                    timer.Start();
+                    break;
+            }            
         }
         private void PlaySoundEffect()
         {
