@@ -19,15 +19,14 @@ namespace Angel
     {
         public List<Hook> Hooks { get; set; } = new List<Hook>();        
         public List<Fish> CollectedFishes { get; private set; } = new List<Fish>();
-        public string CollectedFishSpeciesLbl { get; set; }
-        public int CollectedFishWeightLbl { get; set; }
+        public string CollectedFishLabel { get; set; }
         public ICommand LuckySnuffBtn { get; set; }
         public ICommand CupOfCoffeBtn { get; set; }
         public ICommand EndViewCommand { get; set; }
         public bool LuckySnuffBtnEnabled { get; set; } = true;
-        public int LuckySnuffLabel { get; set; }
+        public string LuckySnuffLabel { get; set; } = "Tursnus kvar: ";
         public bool CupOfCoffeBtnEnabled { get; set; } = true;
-        public int CupOfCoffeLabel { get; set; }
+        public string CupOfCoffeLabel { get; set; }
         //Behövs egentligen inte
         public int NrOfDace { get; set; }
         public int NrOfPike { get; set; }
@@ -36,7 +35,7 @@ namespace Angel
         public int NrOfTrout { get; set; }
         public int TotalFishes { get; set; }
         public decimal TotalWeight { get; set; } = 0;
-        public int TotalScore { get; set; }
+        public string TotalScoreLabel { get; set; } = "Poäng: 0";
         //Fram hit
         public Player player { get; set; }
         public string GameTimer { get; set; } = "TT:MM:SS";
@@ -51,6 +50,9 @@ namespace Angel
         string imagePathFish = "\\Resources\\Images\\fish.png";
         string imagePathHook = "\\Resources\\Images\\hook.png";
 
+        string snuffString = "Tursnus kvar:";
+        string coffeString = "Kaffe kvar:";
+
         public GameViewModel(Player player, int gameTimer)
         {
             MainMenuViewCommand = new RelayCommand(GetMainMenuView, CanExecute);
@@ -64,8 +66,8 @@ namespace Angel
             this.gameTimer = gameTimer;
             countdownTimer = gameTimer;
             this.player = player;
-            LuckySnuffLabel = numbersOfExtraChansOnTrout;
-            CupOfCoffeLabel = numbersOfExtraChansToCatchFish;
+            LuckySnuffLabel = $"{snuffString} {numbersOfExtraChansOnTrout}";
+            CupOfCoffeLabel = $"{snuffString} {numbersOfExtraChansToCatchFish}";
             StartCountdown();
         }
         private void GetGameView(object parameter)
@@ -112,7 +114,7 @@ namespace Angel
         {
             timer.Stop();
             player.FishBucket = CollectedFishes;
-            player.SetPlayerScore(TotalScore);
+            player.SetPlayerScore(Score);
 
         }
         public void CollectFish(Fish fish)
@@ -127,12 +129,12 @@ namespace Angel
         private void UseLuckySnuff(object parameter)
         {
             LuckySnuffBtnEnabled = ExtraChanseOnTrout();
-            LuckySnuffLabel = numbersOfExtraChansOnTrout;           
+            LuckySnuffLabel = $"{snuffString} {numbersOfExtraChansOnTrout}";
         }
         private void UseCupOfCoffe(object parameter)
         {
             CupOfCoffeBtnEnabled = ExtraChanseToCatchFish();
-            CupOfCoffeLabel = numbersOfExtraChansToCatchFish;
+            CupOfCoffeLabel = $"{snuffString} {numbersOfExtraChansToCatchFish}";
         }
 
 
@@ -174,7 +176,7 @@ namespace Angel
                 IceHolesIsEnabled = false;
 
                 player.FishBucket = CollectedFishes;
-                player.SetPlayerScore(TotalScore);
+                player.SetPlayerScore(Score);
                 GetEndView(player);
 
             }
@@ -238,9 +240,8 @@ namespace Angel
             }
             TotalFishes++;            
             TotalWeight += Math.Round((decimal)fish.Weight / 1000, 2);            
-            CollectedFishSpeciesLbl = fish.Species;
-            CollectedFishWeightLbl = fish.Weight;
-            TotalScore = Score;
+            CollectedFishLabel = $"{fish.Species}: {fish.Weight}g";            
+            TotalScoreLabel = $"Poäng: {Score}";
         }
     }
 }

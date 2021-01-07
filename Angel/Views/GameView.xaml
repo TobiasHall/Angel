@@ -36,16 +36,9 @@
                                 
                 <StackPanel HorizontalAlignment="Center" Margin="10" Grid.Column="1" VerticalAlignment="Top">
                     <Label HorizontalAlignment="Center" Content="{Binding player.Nickname, FallbackValue=Inget valt}" FontSize="38"></Label>
-                    <WrapPanel Grid.Column="1" Margin="20" HorizontalAlignment="Center">
-                        <Label HorizontalAlignment="Center" Content="Poäng:" FontSize="28"></Label>
-                        <Label HorizontalAlignment="Center" Content="{Binding TotalScore, FallbackValue=0}" FontSize="28"></Label>
-                    </WrapPanel>
+                    <Label HorizontalAlignment="Center" Content="{Binding TotalScoreLabel, FallbackValue=Poäng: 0}" FontSize="28"></Label>                    
                     <Label HorizontalAlignment="Center" Content="{Binding GameTimer, FallbackValue=00:00:00}" FontSize="28"></Label>
-                    <WrapPanel HorizontalAlignment="Center">
-                        <Label HorizontalAlignment="Center" Content="{Binding CollectedFishSpeciesLbl, FallbackValue=Öring:}" FontSize="28"></Label>
-                        <Label HorizontalAlignment="Center" Content="{Binding CollectedFishWeightLbl, FallbackValue=1000}" FontSize="28"></Label>
-                        <Label HorizontalAlignment="Center" Content="g" FontSize="28"></Label>
-                    </WrapPanel>
+                    <Label HorizontalAlignment="Center" Content="{Binding CollectedFishLabel, FallbackValue=Öring: 5000g}" FontSize="28" FontWeight="Bold"></Label>                        
                 </StackPanel>
                 <WrapPanel Uid="0" Height="150" Name="FishAndHookDropZone" Grid.Column="1" VerticalAlignment="Bottom" Drop="PanelDrop">
                     <Image Source="/Resources/Images/fish-and-worm.png"></Image>                    
@@ -54,14 +47,8 @@
                 <StackPanel VerticalAlignment="Top" Margin="10" Grid.Column="2">
                     <Button Margin="5" Content="Tursnus" Style="{StaticResource RoundButtonTemplate}" Command="{Binding LuckySnuffBtn}" IsEnabled="{Binding LuckySnuffBtnEnabled}"></Button>
                     <Button Margin="5" Content="Ta en kaffe" Style="{StaticResource RoundButtonTemplate}" Command="{Binding CupOfCoffeBtn}" IsEnabled="{Binding CupOfCoffeBtnEnabled}"></Button>
-                    <WrapPanel HorizontalAlignment="Center">
-                        <Label FontSize="24" Content="Tursnus kvar: "></Label>
-                        <Label FontSize="24" Content="{Binding LuckySnuffLabel, FallbackValue=3}"></Label>
-                    </WrapPanel>
-                    <WrapPanel HorizontalAlignment="Center">
-                        <Label FontSize="24" Content="Kaffe kvar: "></Label>
-                        <Label FontSize="24" Content="{Binding CupOfCoffeLabel, FallbackValue=5}"></Label>
-                    </WrapPanel>
+                    <Label HorizontalAlignment="Center" FontSize="24" Content="{Binding LuckySnuffLabel, FallbackValue=Tursnus kvar: 3}"></Label>
+                    <Label HorizontalAlignment="Center" FontSize="24" Content="{Binding CupOfCoffeLabel, FallbackValue=Kaffe kvar: 5}"></Label>                    
                 </StackPanel>
             </Grid>
 

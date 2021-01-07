@@ -84,6 +84,7 @@ namespace Angel
                 }
                 else if (model.Hooks.Contains(element))
                 {
+                    model.CollectedFishLabel = "";
                     model.Hooks.Remove(element);
                 }
 
