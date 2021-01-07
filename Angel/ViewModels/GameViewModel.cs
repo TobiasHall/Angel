@@ -17,8 +17,6 @@ namespace Angel
 {
     public class GameViewModel : BaseViewModel
     {
-        public Visibility EndLblVisibility { get; set; } = Visibility.Hidden;
-
         public List<Hook> Hooks { get; set; } = new List<Hook>();        
         public List<Fish> CollectedFishes { get; private set; } = new List<Fish>();
         public string CollectedFishSpeciesLbl { get; set; }
@@ -78,6 +76,17 @@ namespace Angel
         {
             FishingRoundEnded();
             Main.Content = new EndView(player, gameTimer);
+        }
+        private void PlaySoundEffect()
+        {
+            foreach (var hook in Hooks)
+            {
+                if (hook.Fish != null)
+                {
+                    MediaHelper.PlayMedia(MediaHelper.soundEffectPlayer, new Uri(@"Resources/Sounds/whiplash.mp3", UriKind.Relative));
+                    break;
+                }
+            }
         }
         private void FishingRoundEnded()
         {
@@ -143,7 +152,6 @@ namespace Angel
                 //Metod för att sluta spelet
                 timer.Stop();
                 IceHolesIsEnabled = false;
-                EndLblVisibility = Visibility.Visible;
 
                 player.FishBucket = CollectedFishes;
                 player.SetPlayerScore(TotalScore);
@@ -167,23 +175,24 @@ namespace Angel
 
         private void CheckIfCatchFishTrigger()
         {
-            
-                Hooks = CatchFish(Hooks);
-                for (int i = 0; i < Hooks.Count; i++)
+
+            Hooks = CatchFish(Hooks);
+            PlaySoundEffect();
+            for (int i = 0; i < Hooks.Count; i++)
+            {
+                if (Hooks[i].Fish != null)
                 {
-                    if (Hooks[i].Fish != null)
-                    {
-                        Hooks[i].imgDynamic.Source = new BitmapImage(new Uri(imagePathFish, UriKind.Relative));                        
-                    }
-                else if (Hooks[i].HasWorm == false)
-                    {
-                        Hooks[i].imgDynamic.Source = new BitmapImage(new Uri(imagePathHook, UriKind.Relative));
-                        Hooks.Remove(Hooks[i]);
-                    }
+                    Hooks[i].imgDynamic.Source = new BitmapImage(new Uri(imagePathFish, UriKind.Relative));
                 }
-                CatchFishTrigger = 0;
-                
-            
+                else if (Hooks[i].HasWorm == false)
+                {
+                    Hooks[i].imgDynamic.Source = new BitmapImage(new Uri(imagePathHook, UriKind.Relative));
+                    Hooks.Remove(Hooks[i]);
+                }
+            }
+            CatchFishTrigger = 0;
+
+
         }
         private void UpdateLabelsInView(Fish fish)
         {            

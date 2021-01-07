@@ -70,7 +70,7 @@ namespace Angel
             numbersOfExtraChansToCatchFish--;
             if (numbersOfExtraChansToCatchFish != 0)
             {
-                bonusPercentOnFish += 15;
+                bonusPercentOnFish += 10;
                 return true;
             }
             return false;
@@ -104,12 +104,12 @@ namespace Angel
                 {
                     hit += luckyHolePercentBonus;
                 }                
-                if (hit > 90)
+                if (hit > 85)
                 {
                     tempHooks[i].Fish = new Fish(bonusPercentOnTrout);
                     tempHooks[i].HasWorm = false;                    
                 }
-                else if (hit > 80 && hit <= 90)
+                else if (hit > 75 && hit <= 85)
                 {
                     tempHooks[i].HasWorm = false;
                 }

@@ -52,7 +52,7 @@ namespace Angel
         
         private void PanelDrop(object sender, DragEventArgs e)
         {
-
+            //ContentControl cont = (ContentControl)sender;
             Panel panel = (Panel)sender;
             Hook element = (Hook)e.Data.GetData("Object");
             Panel parent = (Panel)VisualTreeHelper.GetParent(element);

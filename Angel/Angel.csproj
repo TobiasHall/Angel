@@ -21,6 +21,13 @@
     <None Remove="Resources\Images\thermos.png" />
     <None Remove="Resources\Images\trophy.png" />
     <None Remove="Resources\Images\worm.png" />
+    <None Remove="Resources\Sounds\whiplash.mp3" />
+    <None Remove="Resources\Sounds\wind.mp3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Sounds\whiplash.mp3" />
+    <Content Include="Resources\Sounds\wind.mp3" />
   </ItemGroup>
 
   <ItemGroup>

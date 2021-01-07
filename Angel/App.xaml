@@ -64,5 +64,13 @@
             </Setter>
         </Style>
 
+        <ControlTemplate x:Key="HoleInIce">
+            <Grid Height="50" Width="80" Margin="9" AllowDrop="True">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/Resources/Images/hole.png"></ImageBrush>
+                </Grid.Background>
+            </Grid>
+        </ControlTemplate>
+
     </Application.Resources>
 </Application>
