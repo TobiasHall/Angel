@@ -89,7 +89,7 @@ namespace Angel
                             break;
                     }
                     TotalFishes++;
-                    TotalWeight += fish.Weight;
+                    TotalWeight += Math.Round((decimal)fish.Weight / 1000, 2);
                 }
             }            
             TotalScore = player.Score;
