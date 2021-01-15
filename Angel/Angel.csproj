@@ -14,6 +14,11 @@
     <None Remove="Resources\Images\fish-and-worm.png" />
     <None Remove="Resources\Images\fish-bucket.png" />
     <None Remove="Resources\Images\fish.png" />
+    <None Remove="Resources\Images\Fishes\char.png" />
+    <None Remove="Resources\Images\Fishes\dace.png" />
+    <None Remove="Resources\Images\Fishes\perch.png" />
+    <None Remove="Resources\Images\Fishes\pike.png" />
+    <None Remove="Resources\Images\Fishes\trout.png" />
     <None Remove="Resources\Images\hole.png" />
     <None Remove="Resources\Images\hook.png" />
     <None Remove="Resources\Images\logo.gif" />
@@ -47,6 +52,11 @@
     <Resource Include="Resources\Images\fish-and-worm.png" />
     <Resource Include="Resources\Images\fish-bucket.png" />
     <Resource Include="Resources\Images\fish.png" />
+    <Resource Include="Resources\Images\Fishes\char.png" />
+    <Resource Include="Resources\Images\Fishes\dace.png" />
+    <Resource Include="Resources\Images\Fishes\perch.png" />
+    <Resource Include="Resources\Images\Fishes\pike.png" />
+    <Resource Include="Resources\Images\Fishes\trout.png" />
     <Resource Include="Resources\Images\hole.png" />
     <Resource Include="Resources\Images\hook.png" />
     <Resource Include="Resources\Images\logo.gif" />

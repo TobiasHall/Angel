@@ -27,25 +27,18 @@ namespace Angel
         public string LuckySnuffLabel { get; set; } = "Tursnus kvar: ";
         public bool CupOfCoffeBtnEnabled { get; set; } = true;
         public string CupOfCoffeLabel { get; set; }
-        //Behövs egentligen inte
-        public int NrOfDace { get; set; }
-        public int NrOfPike { get; set; }
-        public int NrOfPerc { get; set; }
-        public int NrOfChar { get; set; }
-        public int NrOfTrout { get; set; }
-        public int TotalFishes { get; set; }
-        public decimal TotalWeight { get; set; } = 0;
         public string TotalScoreLabel { get; set; } = "Poäng: 0";
         public string Nickname { get; set; }
-        //Fram hit
         private Player player { get; set; }
         public string GameTimer { get; set; } = "Kör!";
         public bool IceHolesIsEnabled { get; set; } = true;
+        public Uri imgSourceOfFish { get; set; }
+        public Visibility imgOfFishIsVisible { get; set; }
 
         DispatcherTimer timer;
         int gameTimer = 1800;
         int countdownTimer = 1800;
-        int CatchFishTrigger;
+        int catchFishTrigger;
 
         string imagePathWorm = "\\Resources\\Images\\worm.png";
         string imagePathFish = "\\Resources\\Images\\fish.png";
@@ -121,8 +114,10 @@ namespace Angel
         }
         public void CollectFish(Fish fish)
         {
+            //TODO: Fixa en tom bild till bild av fisk som en fallback
             if (fish != null)
-            {
+            {         
+                imgSourceOfFish = fish.imagePathFish;
                 CollectedFishes.Add(fish);
                 AddToScore(fish);
                 UpdateLabelsInView(fish);
@@ -149,23 +144,14 @@ namespace Angel
         }
 
         private void timer_Tick(object sender, EventArgs e)
-        {
-            //TODO: Fixa så att den inte slår ut på noll
+        {            
             if (countdownTimer != 0)
             {
                 countdownTimer--;
-                GameTimer = countdownTimer.ToString();
-                if (countdownTimer < 3600)
-                {
-                    GameTimer = String.Format("{0:D2}:{1:D2}:{2:D2}", countdownTimer / 3600, countdownTimer / 60, countdownTimer % 60);
-                }
-                else
-                {
-                    GameTimer = String.Format("{0:D2}:{1:D2}:{2:D2}", countdownTimer/3600, countdownTimer/120, countdownTimer % 60);
-                }
-                CatchFishTrigger++;
+                catchFishTrigger++;
+                SetGameTimerLabel();
 
-                if (CatchFishTrigger == (gameTimer / 10))
+                if (catchFishTrigger == (gameTimer / 10))
                 {
                     DeleteFish();
                     CheckIfCatchFishTrigger();
@@ -184,6 +170,20 @@ namespace Angel
             }
 
         }
+
+        private void SetGameTimerLabel()
+        {
+            GameTimer = countdownTimer.ToString();
+            if (countdownTimer < 3600)
+            {
+                GameTimer = String.Format("{0:D2}:{1:D2}:{2:D2}", countdownTimer / 3600, countdownTimer / 60, countdownTimer % 60);
+            }
+            else
+            {
+                GameTimer = String.Format("{0:D2}:{1:D2}:{2:D2}", countdownTimer / 3600, countdownTimer / 120, countdownTimer % 60);
+            }
+        }
+
         private void DeleteFish()
         {
             for (int i = 0; i < Hooks.Count; i++)
@@ -214,36 +214,13 @@ namespace Angel
                     Hooks.Remove(Hooks[i]);
                 }
             }
-            CatchFishTrigger = 0;
+            catchFishTrigger = 0;
 
 
         }
         private void UpdateLabelsInView(Fish fish)
-        {            
-            if (fish.FishId == (int)FishEnum.Dace)
-            {
-                NrOfDace++;
-            }
-            else if (fish.FishId == (int)FishEnum.Pike)
-            {
-                NrOfPike++;
-            }
-            else if (fish.FishId == (int)FishEnum.Perch)
-            {
-                NrOfPerc++;
-            }
-            else if (fish.FishId == (int)FishEnum.Char)
-            {
-                NrOfChar++;
-            }
-            else
-            {
-                NrOfTrout++;
-            }
-            TotalFishes++;            
-            TotalWeight += Math.Round((decimal)fish.Weight / 1000, 2);            
-            CollectedFishLabel = $"{fish.Species}: {fish.Weight}g";            
-            TotalScoreLabel = $"Poäng: {Score}";
+        {
+            CollectedFishLabel = $"{fish.Species}: {fish.Weight}g";
         }
     }
 }

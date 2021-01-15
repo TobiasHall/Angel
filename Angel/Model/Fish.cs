@@ -10,76 +10,52 @@ namespace Angel
         public int FishId { get; set; }
         public string Species { get; set; }
         public int Weight { get; set; }
+        public Uri imagePathFish { get; set; }
 
-        private static readonly Random random = new Random();
+        private static readonly Random random = new Random();        
 
         public Fish(int troutBonus)
         {
-            CreateNewFish(troutBonus);
+            CreateFish(troutBonus);            
         }
-        private void CreateNewFish(int troutBonus)
-        {
-            FishId = RandomizeSpecies(troutBonus);
-            Species = SetFishSpecies(FishId);
-            Weight = SetWeightOfFish(FishId);
-        }
-        private int RandomizeSpecies(int troutBonus)
+        private void CreateFish(int troutBonus)
         {
             int randomNumber = random.Next(1, 101);
             randomNumber += troutBonus;
             if (randomNumber < 31)
             {
-                return (int)FishEnum.Dace;
+                FishId = (int)FishEnum.Dace;
+                Species = "Mört";
+                Weight = random.Next(300, 701);
+                imagePathFish = new Uri(@"/Resources/Images/Fishes/dace.png", UriKind.Relative);
             }
-            else if (randomNumber >= 31 && randomNumber <41)
+            else if (randomNumber >= 31 && randomNumber < 41)
             {
-                return (int)FishEnum.Pike;
+                FishId = (int)FishEnum.Pike;
+                Species = "Gädda";
+                Weight = random.Next(1000, 3001);
+                imagePathFish = new Uri(@"/Resources/Images/Fishes/pike.png", UriKind.Relative);
             }
             else if (randomNumber >= 41 && randomNumber < 71)
             {
-                return (int)FishEnum.Perch;
+                FishId = (int)FishEnum.Perch;
+                Species = "Abbore";
+                Weight = random.Next(300, 801);
+                imagePathFish = new Uri(@"/Resources/Images/Fishes/perch.png", UriKind.Relative);
             }
             else if (randomNumber >= 71 && randomNumber < 91)
             {
-                return (int)FishEnum.Char;
+                FishId = (int)FishEnum.Char;
+                Species = "Röding";
+                Weight = random.Next(500, 1001);
+                imagePathFish = new Uri(@"/Resources/Images/Fishes/char.png", UriKind.Relative);
             }
             else
             {
-                return (int)FishEnum.Trout;
-            }            
-        }
-        private string SetFishSpecies(int fishId)
-        {
-            switch (fishId)
-            {
-                case (int)FishEnum.Dace:
-                    return "Mört";                    
-                case (int)FishEnum.Pike:
-                    return "Gädda";                    
-                case (int)FishEnum.Perch:
-                    return "Abbore";                    
-                case (int)FishEnum.Char:
-                    return "Röding";
-                case (int)FishEnum.Trout:
-                    return "Öring";
-                default: throw new ArgumentOutOfRangeException();
-            }
-        }
-        private int SetWeightOfFish(int fishId)
-        {
-            switch (fishId)
-            {
-                case (int)FishEnum.Dace:
-                    return random.Next(300, 701);
-                case (int)FishEnum.Pike:
-                    return random.Next(1000, 3001);
-                case (int)FishEnum.Perch:
-                    return random.Next(300, 801);
-                case (int)FishEnum.Char:
-                    return random.Next(500, 1001);
-                case (int)FishEnum.Trout:
-                    return random.Next(900, 2201);
-                default: throw new ArgumentOutOfRangeException();
+                FishId = (int)FishEnum.Trout;
+                Species = "Öring";
+                Weight = random.Next(900, 2000);
+                imagePathFish = new Uri(@"/Resources/Images/Fishes/trout.png", UriKind.Relative);
             }
         }
         public override string ToString()

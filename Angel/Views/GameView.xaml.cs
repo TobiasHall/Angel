@@ -79,13 +79,20 @@ namespace Angel
                 //TODO: Ändra så att den kollar om kroken har en fisk. På så vis kan jag göra som innan att en fisk kan slita sig med EraseFishFromHook
                 if (element.Fish != null)
                 {
+                    model.imgOfFishIsVisible = Visibility.Visible;
                     model.CollectFish(element.Fish);
                     model.Hooks.Remove(element);
                 }
                 else if (model.Hooks.Contains(element))
                 {
+                    model.imgOfFishIsVisible = Visibility.Hidden;
                     model.CollectedFishLabel = "";
                     model.Hooks.Remove(element);
+                }
+                else
+                {
+                    model.imgOfFishIsVisible = Visibility.Hidden;
+                    model.CollectedFishLabel = "";
                 }
 
                 element.SetBaseValue(int.Parse(panel.Uid));                
