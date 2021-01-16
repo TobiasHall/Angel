@@ -60,7 +60,7 @@ namespace Angel
             numbersOfExtraChansOnTrout--;
             if (numbersOfExtraChansOnTrout != 0)
             {
-                bonusPercentOnTrout += 33;
+                bonusPercentOnTrout += 20;
                 return true;
             }
             return false;
@@ -123,19 +123,19 @@ namespace Angel
             switch (fish.FishId)
             {
                 case (int)FishEnum.Dace:
-                    Score += (int)(fish.Weight * 0.57);
+                    Score += (int)(fish.Weight * 0.87);
                     break;
                 case (int)FishEnum.Pike:
-                    Score += (int)(fish.Weight * 0.57);
+                    Score += (int)(fish.Weight * 0.87);
                     break;
                 case (int)FishEnum.Perch:
                     Score += (int)(fish.Weight * 1.07);
                     break;
                 case (int)FishEnum.Char:
-                    Score += (int)(fish.Weight * 1.57);
+                    Score += (int)(fish.Weight * 1.27);
                     break;
                 case (int)FishEnum.Trout:
-                    Score += (int)(fish.Weight * 2.07);
+                    Score += (int)(fish.Weight * 1.47);
                     break;
                 default: 
                     throw new ArgumentOutOfRangeException();

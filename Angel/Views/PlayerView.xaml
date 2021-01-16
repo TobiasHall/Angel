@@ -50,14 +50,14 @@
                     Style="{StaticResource RoundButtonTemplate}" 
                     Margin="0,10,0,0" 
                     Width="270"
-                    FontSize="25"/>
+                    FontSize="26"/>
 
             <Button Content="Tillbaka"                
                 Command="{Binding MainMenuViewCommand}"
                 Style="{StaticResource RoundButtonTemplate}"
-                FontSize="20" 
+                FontSize="22" 
                 Width="120"
-                Height="35"
+                Height="45"
                 Margin="0,10,0,0"/>
 
         </StackPanel>

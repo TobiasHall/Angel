@@ -32,8 +32,8 @@ namespace Angel
         private Player player { get; set; }
         public string GameTimer { get; set; } = "Kör!";
         public bool IceHolesIsEnabled { get; set; } = true;
-        public Uri imgSourceOfFish { get; set; }
-        public Visibility imgOfFishIsVisible { get; set; }
+        public Uri imgSourceOfFish { get; set; } = new Uri(@"/Resources/Images/Fishes/pike.png", UriKind.Relative);
+        public Visibility imgOfFishIsVisible { get; set; } = Visibility.Hidden;
 
         DispatcherTimer timer;
         int gameTimer = 1800;
@@ -220,6 +220,7 @@ namespace Angel
         }
         private void UpdateLabelsInView(Fish fish)
         {
+            TotalScoreLabel = $"Poäng: {Score}";
             CollectedFishLabel = $"{fish.Species}: {fish.Weight}g";
         }
     }
