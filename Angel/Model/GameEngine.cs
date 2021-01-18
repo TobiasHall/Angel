@@ -109,7 +109,7 @@ namespace Angel
                     tempHooks[i].Fish = new Fish(bonusPercentOnTrout);
                     tempHooks[i].HasWorm = false;                    
                 }
-                else if (hit > 75 && hit <= 85)
+                else if (hit > 80 && hit <= 85)
                 {
                     tempHooks[i].HasWorm = false;
                 }

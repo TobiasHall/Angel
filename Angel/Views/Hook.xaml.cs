@@ -87,7 +87,7 @@ namespace Angel
 
         public override string ToString()
         {
-            return $"ID: {HookId}, Pos: {PositionOnIce}, Fish: {Fish}";
+            return $"ID: {HookId}, Pos: {PositionOnIce}, Fish: {Fish}, HasWorm:{HasWorm}";
         }        
     }
 }
