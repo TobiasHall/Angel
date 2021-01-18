@@ -7,7 +7,7 @@ namespace Angel
 {
     public static class ShuffleExtension
     {
-        private static Random rng = new Random();
+        private static readonly Random random = new Random();
 
         public static void Shuffle<T>(this IList<T> list)
         {
@@ -15,7 +15,7 @@ namespace Angel
             while (n > 1)
             {
                 n--;
-                int k = rng.Next(n + 1);
+                int k = random.Next(n + 1);
                 T value = list[k];
                 list[k] = list[n];
                 list[n] = value;
@@ -23,9 +23,8 @@ namespace Angel
         }
         public static Dictionary<TKey, TValue> Shuffle<TKey, TValue>(
         this Dictionary<TKey, TValue> source)
-        {
-            Random r = new Random();
-            return source.OrderBy(x => r.Next())
+        {            
+            return source.OrderBy(x => random.Next())
                .ToDictionary(item => item.Key, item => item.Value);
         }
     }

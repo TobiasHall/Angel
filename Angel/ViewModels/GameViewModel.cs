@@ -40,9 +40,6 @@ namespace Angel
         int countdownTimer;
         int catchFishTrigger;
 
-        string imagePathFish = "\\Resources\\Images\\fish.png";
-        string imagePathHook = "\\Resources\\Images\\hook.png";
-
         string snuffString = "Tursnus kvar:";
         string coffeString = "Kaffe kvar:";
 
@@ -69,15 +66,6 @@ namespace Angel
         {
             timer.Stop();
             Main.Content = new  GameView(player, gameTimer);
-            //MessageBoxResult result = MessageBox.Show($"Vill du starta om fisketur?", "Varning", MessageBoxButton.YesNo);
-            //switch (result)
-            //{
-            //    case MessageBoxResult.Yes:
-            //        break;
-            //    case MessageBoxResult.No:
-            //        timer.Start();
-            //        break;
-            //}            
         }
         private void GetEndView(object parameter)
         {
@@ -86,15 +74,6 @@ namespace Angel
                 FishingRoundEnded();
             }
             Main.Content = new EndView(player, gameTimer);
-            //MessageBoxResult result = MessageBox.Show($"Vill du avsluta fisketur?", "Varning", MessageBoxButton.YesNo);
-            //switch (result)
-            //{
-            //    case MessageBoxResult.Yes:
-            //        break;
-            //    case MessageBoxResult.No:
-            //        timer.Start();
-            //        break;
-            //}            
         }
         private void PlaySoundEffect()
         {
@@ -178,7 +157,7 @@ namespace Angel
                 if (Hooks[i].Fish != null)
                 {
                     Hooks[i].Fish = null;
-                    Hooks[i].imgDynamic.Source = new BitmapImage(new Uri(imagePathHook, UriKind.Relative));
+                    Hooks[i].imgDynamic.Source = new BitmapImage(new Uri(Hooks[i].imgPathHook, UriKind.Relative));
                     Hooks.Remove(Hooks[i]);                    
                 }
             }
@@ -192,11 +171,11 @@ namespace Angel
             {
                 if (Hooks[i].Fish != null)
                 {
-                    Hooks[i].imgDynamic.Source = new BitmapImage(new Uri(imagePathFish, UriKind.Relative));
+                    Hooks[i].imgDynamic.Source = new BitmapImage(new Uri(Hooks[i].imgPathFish, UriKind.Relative));
                 }
                 else if (Hooks[i].HasWorm == false)
                 {
-                    Hooks[i].imgDynamic.Source = new BitmapImage(new Uri(imagePathHook, UriKind.Relative));
+                    Hooks[i].imgDynamic.Source = new BitmapImage(new Uri(Hooks[i].imgPathHook, UriKind.Relative));
                     Hooks.Remove(Hooks[i]);
                 }
             }

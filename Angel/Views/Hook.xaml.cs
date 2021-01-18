@@ -25,11 +25,14 @@ namespace Angel
         public bool PlacedOnLucyHole { get; set; }
         public bool HasWorm { get; set; } = true;        
         public Fish Fish { get; set; }
-        
+        public string imgPathWorm { get; set; } = "\\Resources\\Images\\worm.png";
+        public string imgPathFish { get; set; } = "\\Resources\\Images\\fish.png";
+        public string imgPathHook { get; set; } = "\\Resources\\Images\\hook.png";
+
         public Hook()
         {
             InitializeComponent();            
-            imgDynamic.Source = new BitmapImage(new Uri("\\Resources\\Images\\worm.png", UriKind.Relative));
+            imgDynamic.Source = new BitmapImage(new Uri(imgPathWorm, UriKind.Relative));
         }
 
         public void SetBaseValue(int positionOnIce)
@@ -38,7 +41,7 @@ namespace Angel
             PlacedOnLucyHole = false;
             HasWorm = true;
             Fish = null;
-            imgDynamic.Source = new BitmapImage(new Uri("\\Resources\\Images\\worm.png", UriKind.Relative));
+            imgDynamic.Source = new BitmapImage(new Uri(imgPathWorm, UriKind.Relative));
         }
 
 

@@ -25,8 +25,7 @@ namespace Angel
             if (randomNumber < 31)
             {
                 FishId = (int)FishEnum.Dace;
-                Species = "Mört";
-                //Weight = random.Next(300, 701);
+                Species = "Mört";                
                 Weight = RandomizeWeight(FishId);
                 imagePathFish = new Uri(@"/Resources/Images/Fishes/dace.png", UriKind.Relative);
             }
@@ -34,7 +33,6 @@ namespace Angel
             {
                 FishId = (int)FishEnum.Pike;
                 Species = "Gädda";
-                //Weight = random.Next(1000, 3001);
                 Weight = RandomizeWeight(FishId);
                 imagePathFish = new Uri(@"/Resources/Images/Fishes/pike.png", UriKind.Relative);
             }
@@ -42,7 +40,6 @@ namespace Angel
             {
                 FishId = (int)FishEnum.Perch;
                 Species = "Abbore";
-                //Weight = random.Next(300, 801);
                 Weight = RandomizeWeight(FishId);
                 imagePathFish = new Uri(@"/Resources/Images/Fishes/perch.png", UriKind.Relative);
             }
@@ -50,7 +47,6 @@ namespace Angel
             {
                 FishId = (int)FishEnum.Char;
                 Species = "Röding";
-                //Weight = random.Next(500, 1001);
                 Weight = RandomizeWeight(FishId);
                 imagePathFish = new Uri(@"/Resources/Images/Fishes/char.png", UriKind.Relative);
             }
@@ -58,7 +54,6 @@ namespace Angel
             {
                 FishId = (int)FishEnum.Trout;
                 Species = "Öring";
-                //Weight = random.Next(900, 2000);
                 Weight = RandomizeWeight(FishId);
                 imagePathFish = new Uri(@"/Resources/Images/Fishes/trout.png", UriKind.Relative);
             }

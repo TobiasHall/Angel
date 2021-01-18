@@ -28,8 +28,8 @@ namespace Angel
                 Players = ReadFromBinaryFile<List<Player>>(fileName);
                 LatestRoundPlayer = Players[Players.Count - 1];
                 Players.Sort((a, b) => b.Score.CompareTo(a.Score));                
-                HighestScore = FindMaxValue(Players, x => x.Score);
-                LowestScore = FindMinValue(Players, x => x.Score);
+                HighestScore = Players.Max(x => x.Score);                
+                LowestScore = Players.Min(x => x.Score);
             }
             catch (Exception e)
             {
@@ -74,15 +74,12 @@ namespace Angel
                 Players.RemoveAt(Players.Count - 1);
                 Players.Add(player);                
                 LatestRoundPlayer = player;
-                LowestScore = FindMinValue(Players, x => x.Score);
+                LowestScore = Players.Min(x => x.Score);
                 SaveNewHigscoreList();
                 return true;
             }
             return false;
         }
-        //Använd och sätt proppen till private get
-
-
 
         public int GetHighscorePlacement(Player player)
         {
@@ -96,43 +93,6 @@ namespace Angel
             {
                 return 0;
             }
-        }
-
-
-
-        public int FindMaxValue<T>(List<T> list, Converter<T, int> projection)
-        {
-            if (list.Count == 0)
-            {
-                throw new InvalidOperationException("Empty list");
-            }
-            int maxValue = int.MinValue;
-            foreach (T item in list)
-            {
-                int value = projection(item);
-                if (value > maxValue)
-                {
-                    maxValue = value;
-                }
-            }
-            return maxValue;
-        }
-        public int FindMinValue<T>(List<T> list, Converter<T, int> projection)
-        {
-            if (list.Count == 0)
-            {
-                throw new InvalidOperationException("Empty list");
-            }
-            int minValue = int.MaxValue;
-            foreach (T item in list)
-            {
-                int value = projection(item);
-                if (value < minValue)
-                {
-                    minValue = value;
-                }
-            }
-            return minValue;
         }
     }
 }

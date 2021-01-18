@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Resources;
-using System.Windows.Shapes;
 
 namespace Angel
 {
@@ -21,9 +10,6 @@ namespace Angel
     public partial class GameView : UserControl
     {
         private GameViewModel model;
-        string imagePathWorm = "\\Resources\\Images\\worm.png";
-        string imagePathFish = "\\Resources\\Images\\fish.png";
-        string imagePathHook = "\\Resources\\Images\\hook.png";
         public GameView(Player player, int gameTimer)
         {
             InitializeComponent();

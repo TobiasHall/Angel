@@ -7,14 +7,10 @@ namespace Angel
     [Serializable]
     public class Player
     {
-        public string Nickname { get; set; }
+        public string Nickname { get; private set; }
         public int Score { get; private set; }
         public List<Fish> FishBucket { get; set; }
 
-        public Player()
-        {
-
-        }
         public string SetPlayerNickname(string nickname)
         {
             if (nickname == null)

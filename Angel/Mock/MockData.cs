@@ -13,7 +13,8 @@ namespace Angel
 
         public MockData()
         {
-            MockPlayer = new Player() { Nickname = RandomizeName() };
+            MockPlayer = new Player();
+            MockPlayer.SetPlayerNickname(RandomizeName());
             MockPlayer.SetPlayerScore(RandomizeScore());
         }
         private string RandomizeName()
