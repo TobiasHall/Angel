@@ -11,8 +11,10 @@ namespace Angel
     {
         public string Nickname { get; set; }
         public string SelectedGameTime { get; set; }
-        public List<string> GameTimeOptions { get; set; }
+        public List<TimeSpan> GameTimeOptions { get; set; }
 
+        Player player;
+        int gameTimer;
         public PlayerViewModel()
         {
             NewGameCommand = new RelayCommand(GetGameView, CanExecute);
@@ -22,43 +24,56 @@ namespace Angel
         }
         private void SetGameTimeOptions()
         {
-            GameTimeOptions = new List<string>();
+            GameTimeOptions = new List<TimeSpan>();
             
-            string one, two, three;            
-            one = String.Format("{0:D2}t:{1:D2}m:{2:D2}s", 0, 30, 0 );
-            two = String.Format("{0:D2}t:{1:D2}m:{2:D2}s", 1, 0, 0 );
-            three = String.Format("{0:D2}t:{1:D2}m:{2:D2}s", 2, 0, 0 );
-            
-            GameTimeOptions.Add(one);
-            GameTimeOptions.Add(two);
-            GameTimeOptions.Add(three);
+            TimeSpan optOne, optTwo, optThree, optFour, optFive;
+            GameTimeOptions.Add(optOne = TimeSpan.FromHours(0.5));
+            GameTimeOptions.Add(optTwo = TimeSpan.FromHours(1));
+            GameTimeOptions.Add(optThree = TimeSpan.FromHours(2));
+            GameTimeOptions.Add(optFour = TimeSpan.FromHours(4));
+            GameTimeOptions.Add(optFive = TimeSpan.FromHours(8));
         }
         private void GetGameView(object parameter)
         {
-            Player player = new Player();
+            player = new Player();
             player.SetPlayerNickname(Nickname);
-            int gameTimer = SetGameTimer();
+            gameTimer = SetGameTimer();
             
-            MockData mockData = new MockData();
-            player = MockPlayer;
-            gameTimer = MockGameTime;
+            UseMockData(true);
+            
             Main.Content = new GameView(player, gameTimer);
         }
         private int SetGameTimer()
         {
-            if (SelectedGameTime == "02t:00m:00s")
+            if (SelectedGameTime == "02:00:00")
             {
-                return 120 *60;
+                return 2 * 60 * 60;
             }
-            else if (SelectedGameTime == "01t:00m:00s")
+            else if (SelectedGameTime == "01:00:00")
             {
                 return 60 * 60;
+            }
+            else if (SelectedGameTime == "04:00:00")
+            {
+                return 4 * 60 * 60;
+            }
+            else if (SelectedGameTime == "08:00:00")
+            {
+                return 8 * 60 * 60;
             }
             else
             {
                 return 30 * 60;
             }
         }
-        
+        private void UseMockData(bool useMock)
+        {
+            if (useMock)
+            {
+                MockData mockData = new MockData();
+                player = MockPlayer;
+                gameTimer = MockGameTime;
+            }
+        }
     }
 }

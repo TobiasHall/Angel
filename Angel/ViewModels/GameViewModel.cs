@@ -17,30 +17,29 @@ namespace Angel
 {
     public class GameViewModel : BaseViewModel
     {
-        public List<Hook> Hooks { get; set; } = new List<Hook>();        
-        public List<Fish> CollectedFishes { get; private set; } = new List<Fish>();
-        public string CollectedFishLabel { get; set; }
         public ICommand LuckySnuffBtn { get; set; }
         public ICommand CupOfCoffeBtn { get; set; }
         public ICommand EndViewCommand { get; set; }
+        public List<Hook> Hooks { get; set; } = new List<Hook>();        
+        public List<Fish> CollectedFishes { get; private set; } = new List<Fish>();
+        public string CollectedFishLabel { get; set; }
         public bool LuckySnuffBtnEnabled { get; set; } = true;
         public string LuckySnuffLabel { get; set; } = "Tursnus kvar: ";
         public bool CupOfCoffeBtnEnabled { get; set; } = true;
         public string CupOfCoffeLabel { get; set; }
         public string TotalScoreLabel { get; set; } = "Poäng: 0";
-        public string Nickname { get; set; }
-        private Player player { get; set; }
-        public string GameTimer { get; set; } = "Kör!";
+        public string NicknameLabel { get; set; }
+        public string GameTimerLabel { get; set; } = "Kör!";
         public bool IceHolesIsEnabled { get; set; } = true;
         public Uri imgSourceOfFish { get; set; } = new Uri(@"/Resources/Images/Fishes/pike.png", UriKind.Relative);
         public Visibility imgOfFishIsVisible { get; set; } = Visibility.Hidden;
 
+        private Player player { get; set; }
         DispatcherTimer timer;
-        int gameTimer = 1800;
-        int countdownTimer = 1800;
+        int gameTimer;
+        int countdownTimer;
         int catchFishTrigger;
 
-        string imagePathWorm = "\\Resources\\Images\\worm.png";
         string imagePathFish = "\\Resources\\Images\\fish.png";
         string imagePathHook = "\\Resources\\Images\\hook.png";
 
@@ -59,8 +58,9 @@ namespace Angel
             StartNewGame();
             this.gameTimer = gameTimer;
             countdownTimer = gameTimer;
+            //GameTimerLabel = TimeSpan.FromSeconds((double)countdownTimer).ToString();
             this.player = player;
-            Nickname = player.Nickname;
+            NicknameLabel = player.Nickname;
             LuckySnuffLabel = $"{snuffString} {numbersOfExtraChansOnTrout}";
             CupOfCoffeLabel = $"{coffeString} {numbersOfExtraChansToCatchFish}";
             StartCountdown();
@@ -81,8 +81,10 @@ namespace Angel
         }
         private void GetEndView(object parameter)
         {
-            timer.Stop();
-            FishingRoundEnded();
+            if (timer.IsEnabled)
+            {
+                FishingRoundEnded();
+            }
             Main.Content = new EndView(player, gameTimer);
             //MessageBoxResult result = MessageBox.Show($"Vill du avsluta fisketur?", "Varning", MessageBoxButton.YesNo);
             //switch (result)
@@ -147,9 +149,9 @@ namespace Angel
         {            
             if (countdownTimer != 0)
             {
+                GameTimerLabel = TimeSpan.FromSeconds((double)countdownTimer).ToString();
                 countdownTimer--;
                 catchFishTrigger++;
-                SetGameTimerLabel();
 
                 if (catchFishTrigger == (gameTimer / 10))
                 {
@@ -159,28 +161,10 @@ namespace Angel
             }
             else
             {
-                //Metod för att sluta spelet
-                timer.Stop();
+                GameTimerLabel = "Slut!";
                 IceHolesIsEnabled = false;
-
-                player.FishBucket = CollectedFishes;
-                player.SetPlayerScore(Score);
+                FishingRoundEnded();
                 GetEndView(player);
-
-            }
-
-        }
-
-        private void SetGameTimerLabel()
-        {
-            GameTimer = countdownTimer.ToString();
-            if (countdownTimer < 3600)
-            {
-                GameTimer = String.Format("{0:D2}:{1:D2}:{2:D2}", countdownTimer / 3600, countdownTimer / 60, countdownTimer % 60);
-            }
-            else
-            {
-                GameTimer = String.Format("{0:D2}:{1:D2}:{2:D2}", countdownTimer / 3600, countdownTimer / 120, countdownTimer % 60);
             }
         }
 
@@ -199,7 +183,6 @@ namespace Angel
 
         private void CheckIfCatchFishTrigger()
         {
-
             Hooks = CatchFish(Hooks);
             PlaySoundEffect();
             for (int i = 0; i < Hooks.Count; i++)
@@ -215,8 +198,6 @@ namespace Angel
                 }
             }
             catchFishTrigger = 0;
-
-
         }
         private void UpdateLabelsInView(Fish fish)
         {
