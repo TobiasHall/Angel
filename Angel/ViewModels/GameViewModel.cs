@@ -147,11 +147,11 @@ namespace Angel
 
         private void timer_Tick(object sender, EventArgs e)
         {            
-            if (countdownTimer != 0)
+            countdownTimer--;
+            catchFishTrigger++;
+            if (countdownTimer > 0)
             {
                 GameTimerLabel = TimeSpan.FromSeconds((double)countdownTimer).ToString();
-                countdownTimer--;
-                catchFishTrigger++;
 
                 if (catchFishTrigger == (gameTimer / 10))
                 {
@@ -159,10 +159,13 @@ namespace Angel
                     CheckIfCatchFishTrigger();
                 }
             }
-            else
+            else if (countdownTimer == 0)
             {
                 GameTimerLabel = "Slut!";
                 IceHolesIsEnabled = false;
+            }
+            else
+            {
                 FishingRoundEnded();
                 GetEndView(player);
             }
