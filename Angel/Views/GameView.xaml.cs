@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -10,7 +11,7 @@ namespace Angel
     public partial class GameView : UserControl
     {
         private GameViewModel model;
-        public GameView(Player player, int gameTimer)
+        public GameView(Player player, TimeSpan gameTimer)
         {
             InitializeComponent();
             model = new GameViewModel(player, gameTimer);

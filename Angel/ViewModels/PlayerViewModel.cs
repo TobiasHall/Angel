@@ -10,11 +10,11 @@ namespace Angel
     public class PlayerViewModel : BaseViewModel
     {
         public string Nickname { get; set; }
-        public string SelectedGameTime { get; set; }
+        public TimeSpan SelectedGameTime { get; set; }
         public List<TimeSpan> GameTimeOptions { get; set; }
 
         Player player;
-        int gameTimer;
+        
         public PlayerViewModel()
         {
             NewGameCommand = new RelayCommand(GetGameView, CanExecute);
@@ -36,35 +36,11 @@ namespace Angel
         private void GetGameView(object parameter)
         {
             player = new Player();
-            player.SetPlayerNickname(Nickname);
-            gameTimer = SetGameTimer();
+            player.SetPlayerNickname(Nickname);           
             
             UseMockData(true);
             
-            Main.Content = new GameView(player, gameTimer);
-        }
-        private int SetGameTimer()
-        {
-            if (SelectedGameTime == "02:00:00")
-            {
-                return 2 * 60 * 60;
-            }
-            else if (SelectedGameTime == "01:00:00")
-            {
-                return 60 * 60;
-            }
-            else if (SelectedGameTime == "04:00:00")
-            {
-                return 4 * 60 * 60;
-            }
-            else if (SelectedGameTime == "08:00:00")
-            {
-                return 8 * 60 * 60;
-            }
-            else
-            {
-                return 30 * 60;
-            }
+            Main.Content = new GameView(player, SelectedGameTime);
         }
         private void UseMockData(bool useMock)
         {
@@ -72,7 +48,7 @@ namespace Angel
             {
                 MockData mockData = new MockData();
                 player = MockPlayer;
-                gameTimer = MockGameTime;
+                SelectedGameTime = MockGameTime;
             }
         }
     }

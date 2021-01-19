@@ -7,7 +7,7 @@ namespace Angel
     public class MockData
     {
         public static Player MockPlayer { get; set; }
-        public static int MockGameTime { get; set; } = 150;
+        public static TimeSpan MockGameTime { get; set; } = TimeSpan.FromMinutes(2.5);
 
         private static readonly Random random = new Random();
 

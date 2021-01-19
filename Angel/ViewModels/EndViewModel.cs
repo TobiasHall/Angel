@@ -22,14 +22,11 @@ namespace Angel
         public string HighscorePlacement { get; set; }
 
         private Player player;
-        private int gameTimer;
+        private TimeSpan gameTimer;
         private Highscore highscore;
         private bool addPlayerToHighscore;
 
-        //Test av att spara List<Player>players
-        
-
-        public EndViewModel(Player player, int gameTimer)
+        public EndViewModel(Player player, TimeSpan gameTimer)
         {
             NewGameCommand = new RelayCommand(GetGameView, CanExecute);
             HighscoreViewCommand = new RelayCommand(GetHighscoreView, CanExecute);

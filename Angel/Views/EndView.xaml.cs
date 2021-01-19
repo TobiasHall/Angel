@@ -18,7 +18,7 @@ namespace Angel
     /// </summary>
     public partial class EndView : UserControl
     {        
-        public EndView(Player player, int gameTimer)
+        public EndView(Player player, TimeSpan gameTimer)
         {            
             InitializeComponent();
             DataContext = new EndViewModel(player, gameTimer);

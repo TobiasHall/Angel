@@ -34,16 +34,16 @@ namespace Angel
         public Uri imgSourceOfFish { get; set; } = new Uri(@"/Resources/Images/Fishes/pike.png", UriKind.Relative);
         public Visibility imgOfFishIsVisible { get; set; } = Visibility.Hidden;
 
-        private Player player { get; set; }
-        DispatcherTimer timer;
-        int gameTimer;
-        int countdownTimer;
-        int catchFishTrigger;
+        Player player;
+        DispatcherTimer timer;        
+        TimeSpan gameTime;
+        int trigger;
+        int triggerCounter;
 
         string snuffString = "Tursnus kvar:";
         string coffeString = "Kaffe kvar:";
 
-        public GameViewModel(Player player, int gameTimer)
+        public GameViewModel(Player player, TimeSpan timeSpan)
         {
             MainMenuViewCommand = new RelayCommand(GetMainMenuView, CanExecute);
             NewGameCommand = new RelayCommand(GetGameView, CanExecute);
@@ -53,9 +53,8 @@ namespace Angel
             LuckySnuffBtn = new RelayCommand(UseLuckySnuff, CanExecute);
             CupOfCoffeBtn = new RelayCommand(UseCupOfCoffe, CanExecute);
             StartNewGame();
-            this.gameTimer = gameTimer;
-            countdownTimer = gameTimer;
-            //GameTimerLabel = TimeSpan.FromSeconds((double)countdownTimer).ToString();
+            this.gameTime = timeSpan;
+            trigger = (int)timeSpan.TotalSeconds/10;
             this.player = player;
             NicknameLabel = player.Nickname;
             LuckySnuffLabel = $"{snuffString} {numbersOfExtraChansOnTrout}";
@@ -65,7 +64,7 @@ namespace Angel
         private void GetGameView(object parameter)
         {
             timer.Stop();
-            Main.Content = new  GameView(player, gameTimer);
+            Main.Content = new  GameView(player, gameTime);
         }
         private void GetEndView(object parameter)
         {
@@ -73,25 +72,13 @@ namespace Angel
             {
                 FishingRoundEnded();
             }
-            Main.Content = new EndView(player, gameTimer);
-        }
-        private void PlaySoundEffect()
-        {
-            foreach (var hook in Hooks)
-            {
-                if (hook.Fish != null)
-                {
-                    MediaHelper.PlayMedia(MediaHelper.soundEffectPlayer, new Uri(@"Resources/Sounds/whiplash.mp3", UriKind.Relative));
-                    break;
-                }
-            }
-        }
+            Main.Content = new EndView(player, gameTime);
+        }        
         private void FishingRoundEnded()
         {
             timer.Stop();
             player.FishBucket = CollectedFishes;
             player.SetPlayerScore(Score);
-
         }
         public void CollectFish(Fish fish)
         {
@@ -115,7 +102,6 @@ namespace Angel
             CupOfCoffeLabel = $"{coffeString} {numbersOfExtraChansToCatchFish}";
         }
 
-
         private void StartCountdown()
         {
             timer = new DispatcherTimer();
@@ -125,20 +111,21 @@ namespace Angel
         }
 
         private void timer_Tick(object sender, EventArgs e)
-        {            
-            countdownTimer--;
-            catchFishTrigger++;
-            if (countdownTimer > 0)
+        {
+            gameTime = gameTime.Subtract(TimeSpan.FromSeconds(1));
+            triggerCounter++;
+            if ((int)gameTime.TotalSeconds > 0)
             {
-                GameTimerLabel = TimeSpan.FromSeconds((double)countdownTimer).ToString();
+                GameTimerLabel = gameTime.ToString();
 
-                if (catchFishTrigger == (gameTimer / 10))
+                if (triggerCounter == trigger)
                 {
-                    DeleteFish();
-                    CheckIfCatchFishTrigger();
+                    RemoveFishAndHook();
+                    CatchFishTrigger();
+                    triggerCounter = 0;
                 }
             }
-            else if (countdownTimer == 0)
+            else if ((int)gameTime.TotalSeconds == 0)
             {
                 GameTimerLabel = "Slut!";
                 IceHolesIsEnabled = false;
@@ -150,7 +137,7 @@ namespace Angel
             }
         }
 
-        private void DeleteFish()
+        private void RemoveFishAndHook()
         {
             List<Hook> tempHooks = new List<Hook>(Hooks);
             foreach (var hook in tempHooks)
@@ -169,13 +156,22 @@ namespace Angel
             }
         }
 
-        private void CheckIfCatchFishTrigger()
+        private void CatchFishTrigger()
         {
             var tempHooks = CatchFish(Hooks);
-            PlaySoundEffect();
+            PlaySoundEffect(tempHooks);
             ChangeImageSourceOfHook(tempHooks);
-            
-            catchFishTrigger = 0;
+        }
+        private void PlaySoundEffect(List<Hook> tempHooks)
+        {
+            foreach (var hook in tempHooks)
+            {
+                if (hook.Fish != null)
+                {
+                    MediaHelper.PlayMedia(MediaHelper.soundEffectPlayer, new Uri(@"Resources/Sounds/whiplash.mp3", UriKind.Relative));
+                    break;
+                }
+            }
         }
         private void ChangeImageSourceOfHook(List<Hook> tempHooks)
         {
@@ -188,8 +184,7 @@ namespace Angel
                 }
                 else if (hook.HasWorm == false)
                 {
-                    Hooks[index].imgDynamic.Source = new BitmapImage(new Uri(Hooks[index].imgPathHook, UriKind.Relative));
-                    //Hooks.RemoveAt(index);
+                    Hooks[index].imgDynamic.Source = new BitmapImage(new Uri(Hooks[index].imgPathHook, UriKind.Relative));                    
                 }
             }
         }
