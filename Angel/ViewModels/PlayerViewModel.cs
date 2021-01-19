@@ -32,6 +32,8 @@ namespace Angel
             GameTimeOptions.Add(optThree = TimeSpan.FromHours(2));
             GameTimeOptions.Add(optFour = TimeSpan.FromHours(4));
             GameTimeOptions.Add(optFive = TimeSpan.FromHours(8));
+
+            SelectedGameTime = GameTimeOptions[0];
         }
         private void GetGameView(object parameter)
         {
