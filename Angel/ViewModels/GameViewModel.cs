@@ -152,34 +152,46 @@ namespace Angel
 
         private void DeleteFish()
         {
-            for (int i = 0; i < Hooks.Count; i++)
+            List<Hook> tempHooks = new List<Hook>(Hooks);
+            foreach (var hook in tempHooks)
             {
-                if (Hooks[i].Fish != null)
+                int index = Hooks.IndexOf(hook);
+                if (hook.Fish != null)
                 {
-                    Hooks[i].Fish = null;
-                    Hooks[i].imgDynamic.Source = new BitmapImage(new Uri(Hooks[i].imgPathHook, UriKind.Relative));
-                    Hooks.Remove(Hooks[i]);                    
+                    Hooks[index].Fish = null;
+                    Hooks[index].imgDynamic.Source = new BitmapImage(new Uri(Hooks[index].imgPathHook, UriKind.Relative));
+                    Hooks.Remove(Hooks[index]);
+                }
+                else if (hook.HasWorm == false)
+                {
+                    Hooks.RemoveAt(index);
                 }
             }
         }
 
         private void CheckIfCatchFishTrigger()
         {
-            Hooks = CatchFish(Hooks);
+            var tempHooks = CatchFish(Hooks);
             PlaySoundEffect();
-            for (int i = 0; i < Hooks.Count; i++)
+            ChangeImageSourceOfHook(tempHooks);
+            
+            catchFishTrigger = 0;
+        }
+        private void ChangeImageSourceOfHook(List<Hook> tempHooks)
+        {
+            foreach (var hook in tempHooks)
             {
-                if (Hooks[i].Fish != null)
+                int index = Hooks.IndexOf(hook);
+                if (hook.Fish != null)
                 {
-                    Hooks[i].imgDynamic.Source = new BitmapImage(new Uri(Hooks[i].imgPathFish, UriKind.Relative));
+                    Hooks[index].imgDynamic.Source = new BitmapImage(new Uri(Hooks[index].imgPathFish, UriKind.Relative));
                 }
-                else if (Hooks[i].HasWorm == false)
+                else if (hook.HasWorm == false)
                 {
-                    Hooks[i].imgDynamic.Source = new BitmapImage(new Uri(Hooks[i].imgPathHook, UriKind.Relative));
-                    Hooks.Remove(Hooks[i]);
+                    Hooks[index].imgDynamic.Source = new BitmapImage(new Uri(Hooks[index].imgPathHook, UriKind.Relative));
+                    //Hooks.RemoveAt(index);
                 }
             }
-            catchFishTrigger = 0;
         }
         private void UpdateLabelsInView(Fish fish)
         {

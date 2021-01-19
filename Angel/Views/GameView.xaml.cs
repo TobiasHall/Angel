@@ -62,7 +62,7 @@ namespace Angel
             }
             else if (panel.Name == "FishAndHookDropZone")
             {
-                //TODO: Ändra så att den kollar om kroken har en fisk. På så vis kan jag göra som innan att en fisk kan slita sig med EraseFishFromHook
+                //TODO:Kolla över så att metoden DeleteFish inte förstör för tomma krokar
                 if (element.Fish != null)
                 {
                     model.imgOfFishIsVisible = Visibility.Visible;

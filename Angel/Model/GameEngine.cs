@@ -78,7 +78,7 @@ namespace Angel
                 
         public static List<Hook> CatchFish(List<Hook> hooks)
         {
-            var tempHooks = hooks;
+            List<Hook> tempHooks = new List<Hook>(hooks);
             tempHooks.Shuffle();
 
             //Kolla turhål
