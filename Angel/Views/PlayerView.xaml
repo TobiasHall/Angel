@@ -16,7 +16,7 @@
                    Foreground="#3B82A3" 
                    FontSize="45"/>
 
-            <TextBox Text="{Binding Nickname}"
+            <TextBox Text="{Binding Nickname, UpdateSourceTrigger=PropertyChanged}"
                      Background="White"
                      Foreground="Black" 
                      TextWrapping="Wrap" 
@@ -50,7 +50,8 @@
                     Style="{StaticResource RoundButtonTemplate}" 
                     Margin="0,10,0,0" 
                     Width="270"
-                    FontSize="26"/>
+                    FontSize="26"
+                    IsDefault="True"/>
 
             <Button Content="Tillbaka"                
                 Command="{Binding MainMenuViewCommand}"
