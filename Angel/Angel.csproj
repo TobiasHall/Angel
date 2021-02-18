@@ -5,6 +5,11 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Resources\Icons\worm.ico</ApplicationIcon>
+    <Authors>Tobias Hall</Authors>
+    <Company />
+    <PackageProjectUrl>https://github.com/TobiasHall/Angel/</PackageProjectUrl>
+    <Description>A simple fishing game created based on a friends memory from a game he playd dwhen he was a teenager.</Description>
+    <PackageIcon>worm.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,6 +34,10 @@
     <None Remove="Resources\Images\worm.png" />
     <None Remove="Resources\Sounds\whiplash.mp3" />
     <None Remove="Resources\Sounds\wind.mp3" />
+    <None Include="Resources\Images\worm.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
