@@ -9,8 +9,8 @@ namespace Angel
 {
     class GameEngine
     {
-        public static int numbersOfExtraChansOnTrout { get; private set; } = 3;
-        public static int numbersOfExtraChansToCatchFish { get; private set; } = 5;
+        public static int numbersOfExtraChansOnTrout { get; private set; }
+        public static int numbersOfExtraChansToCatchFish { get; private set; }
         public static int Score { get; private set; }
         
         private static readonly Random random = new Random();
@@ -20,7 +20,6 @@ namespace Angel
 
         private static List<int> luckyHoles;        
         private static int luckyHolePercentBonus = 20;
-        private static List<Fish> fishes;
 
         private static int minHooksToTrigger = 3;
         private static int maxHooksToTrigger = 6;
@@ -28,16 +27,17 @@ namespace Angel
         public static void StartNewGame()
         {
             luckyHoles = new List<int>();
-            fishes = new List<Fish>();
-
             numbersOfExtraChansOnTrout = 3;
             numbersOfExtraChansToCatchFish = 5;
             Score = 0;
-
+            SetLuckyHoles();
+        }
+        private static void SetLuckyHoles()
+        {
             for (int i = 0; i < 5; i++)
             {
                 luckyHoles.Add(UniqueRandomInt(1, 40));
-            }            
+            }
         }
         /// <summary>
         /// Randomizes and returns a unique int value
