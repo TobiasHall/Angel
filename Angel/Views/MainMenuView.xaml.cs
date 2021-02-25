@@ -24,12 +24,7 @@ namespace Angel
         {
             InitializeComponent();
             model = new MainMenuViewModel();
-            DataContext = model;
-            //PlayBackgroundMusic();
+            DataContext = model;            
         }
-        //private void PlayBackgroundMusic()
-        //{
-        //    MediaHelper.PlayMedia(MediaHelper.backgroundPlayer, new Uri(@"Resources/Sound/Spacemusic.mp3", UriKind.Relative));
-        //}
     }
 }
