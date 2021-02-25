@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:Angel"
         mc:Ignorable="d"
         Title="Angel" Height="640" Width="1000" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo x:Name="taskBarItem"/>
+    </Window.TaskbarItemInfo>
     <Grid>
         <Frame x:Name="Main" NavigationUIVisibility="Hidden"/>
     </Grid>

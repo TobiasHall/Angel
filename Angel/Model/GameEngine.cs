@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using static Angel.ShuffleExtension;
-using static Angel.Fish;
-using System.Linq;
 
 namespace Angel
 {

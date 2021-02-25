@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Media;
 
 namespace Angel
@@ -19,14 +17,12 @@ namespace Angel
         {
             if (mediaPlayer == backgroundPlayer)
             {
-                backgroundPlayer.Open(uri);
-                //backgroundPlayer.IsMuted = Muted;
+                backgroundPlayer.Open(uri);                
                 backgroundPlayer.Play();
             }
             else
             {
                 soundEffectPlayer.Open(uri);
-                //soundEffectPlayer.IsMuted = Muted;
                 soundEffectPlayer.Play();
             }
         }

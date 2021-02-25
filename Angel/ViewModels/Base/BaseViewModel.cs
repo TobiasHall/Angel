@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Windows.Input;
 using System.Windows;
 
@@ -15,9 +12,7 @@ namespace Angel
         public ICommand MainMenuViewCommand { get; set; }
         public ICommand NewGameCommand { get; set; }
         public ICommand ExitGameCommand { get; set; }
-        public ICommand HighscoreViewCommand { get; set; }
-        
-        //public ICommand MuteCommand { get; set; }
+        public ICommand HighscoreViewCommand { get; set; }       
         #endregion
 
         #region NavigationMethods
@@ -33,14 +28,6 @@ namespace Angel
         {
             Main.Content = new HighscoreView();
         }
-        #endregion
-
-        #region MediaMethods
-        //public void Mute(object parameter)
-        //{
-        //    MediaHelper.Mute();
-        //}
-
         #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;

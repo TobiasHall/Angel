@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace Angel
 {
@@ -14,8 +11,7 @@ namespace Angel
         {
             PlayerViewCommand = new RelayCommand(GetPlayerView, CanExecute);
             HighscoreViewCommand = new RelayCommand(GetHighscoreView, CanExecute);
-            ExitGameCommand = new RelayCommand(CloseApplication, CanExecute);
-            //MuteCommand = new RelayCommand(Mute, CanExecute);      
+            ExitGameCommand = new RelayCommand(CloseApplication, CanExecute);                
         }
 
         private void GetPlayerView(object parameter)

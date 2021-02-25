@@ -39,7 +39,6 @@ namespace Angel
         
         private void PanelDrop(object sender, DragEventArgs e)
         {
-            //ContentControl cont = (ContentControl)sender;
             Panel panel = (Panel)sender;
             Hook element = (Hook)e.Data.GetData("Object");
             Panel parent = (Panel)VisualTreeHelper.GetParent(element);
@@ -63,7 +62,6 @@ namespace Angel
             }
             else if (panel.Name == "FishAndHookDropZone")
             {
-                //TODO:Kolla över så att metoden DeleteFish inte förstör för tomma krokar
                 if (element.Fish != null)
                 {
                     model.imgOfFishIsVisible = Visibility.Visible;

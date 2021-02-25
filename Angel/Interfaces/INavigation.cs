@@ -6,15 +6,14 @@ using System.Windows.Input;
 namespace Angel
 {
     public interface INavigation
-    {        public interface INavigation
-        {
-            public ICommand MainMenuCommand { get; set; }
-            public ICommand ViewTopHighscoreCommand { get; set; }
-            public ICommand ViewTopFrequentPlayersCommand { get; set; }
+    {
+        public ICommand MainMenuViewCommand { get; set; }
+        public ICommand NewGameCommand { get; set; }
+        public ICommand ExitGameCommand { get; set; }
+        public ICommand HighscoreViewCommand { get; set; }
 
-            void GetMainMenuView(object parameter);
+        void GetMainMenuView(object parameter);
+        void GetHighscoreView(object parameter);
 
-            void GetHighscorePage(object parameter);
-        }
     }
 }
