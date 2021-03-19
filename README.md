@@ -11,12 +11,15 @@ fishes as possible in a certain time.
 
 ## General Info
 ![How the game page looks like!](/angel.png "Game page")
-This game was created based on a friends memory of a game he played as a teenager
+This game was created based on a friends memory of a game he played as a teenager.
+This project is developed in my spare time.
 
 ## Technologies
 The project is created with:
 * .NET Core version: 3.1
 * C# version: 8.0
+* Interface
+* Drag-and-drop
 
 ## License
 No Licence.
