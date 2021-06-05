@@ -7,9 +7,8 @@
 
         <ImageBrush x:Key="BackgroundIMG" 
                     ImageSource="Resources/Images/bg-lake.jpg"/>
+        
         <Style x:Key="RoundButtonTemplate" TargetType="Button">
-
-            <Setter Property="Background" Value="DodgerBlue" />
             <Setter Property="Foreground" Value="WhiteSmoke"/>
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -30,16 +29,6 @@
                                     </LinearGradientBrush.GradientStops>
                                 </LinearGradientBrush>
                             </Border.Background>
-
-                            <Border.BorderBrush>
-                                <LinearGradientBrush StartPoint="0.5,1" EndPoint="0.5,0">
-                                    <LinearGradientBrush.GradientStops>
-                                        <GradientStopCollection>
-                                            <GradientStop Color="DodgerBlue"/>
-                                        </GradientStopCollection>
-                                    </LinearGradientBrush.GradientStops>
-                                </LinearGradientBrush>
-                            </Border.BorderBrush>
 
                             <Grid>
                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
